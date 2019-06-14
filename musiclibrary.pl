@@ -20,7 +20,7 @@ clean1(Items, F2, F1).
 allnumbers([],Names,Names).
 allnumbers([Item|Items],Names1,Names2):-
 number(Item),note(Item,Name),append(Names1,[Name],Names3),allnumbers(Items,Names3,Names2).
-/**
+
 note0(0,'C').
 note0(1,'D').
 note0(2,'E').
@@ -28,7 +28,7 @@ note0(3,'F').
 note0(4,'G').
 note0(5,'A').
 note0(6,'B').
-**/
+
 note(0,'C').
 note(1,'C#').
 note(2,'D').

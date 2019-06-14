@@ -163,8 +163,8 @@ melodyharmony(Form1,CPT,Maxlength,Melody,Harmony) :-
 	Extra is Maxlength mod 3,
 	Total is Partlength+Extra,
 	_Parts=[Partlength,Partlength,Partlength,Total],
-	(CPT=1451->findall(A,note(_,A),Notes);
-	findall(A,note(_,A),Notes)),
+	(CPT=1451->findall(A,note0(_,A),Notes);
+	findall(A,note0(_,A),Notes)),
 	%% What note should the song start on?
 	trialy2(Notes,R1),
 	findbest(R1,R11),
@@ -180,8 +180,8 @@ melodyharmony(Form1,CPT,Parts,N1,N2,Melody1,Melody2,Harmony1,Harmony2) :-
 
 findmelody(Form,CPT,_Parts,N1,N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	CPT=1451,
-	(CPT=1451->findall(A,note(_,A),Notes);
-	findall(A,note(_,A),Notes)),
+	(CPT=1451->findall(A,note0(_,A),Notes);
+	findall(A,note0(_,A),Notes)),
 	%% What note should the phrase end on?
 	%%repeat,
 	trialy2(Notes,R1),
@@ -197,8 +197,8 @@ findmelody(Form,CPT,_Parts,N1,N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	harmony(Form,CPT,Progression4,Harmony1,Harmony2).	
 findmelody(Form,CPT,_Parts,N1,N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	CPT=1564,
-	(CPT=1451->findall(A,note(_,A),Notes);
-	findall(A,note(_,A),Notes)),
+	(CPT=1451->findall(A,note0(_,A),Notes);
+	findall(A,note0(_,A),Notes)),
 	%% What note should the phrase end on?
 	%%repeat,
 	trialy2(Notes,R1),
@@ -214,8 +214,8 @@ findmelody(Form,CPT,_Parts,N1,N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	harmony(Form,CPT,Progression4,Harmony1,Harmony2).
 findmelody(Form,CPT,_Parts,N1,N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	CPT=1645,
-	(CPT=1451->findall(A,note(_,A),Notes);
-	findall(A,note(_,A),Notes)),
+	(CPT=1451->findall(A,note0(_,A),Notes);
+	findall(A,note0(_,A),Notes)),
 	%% What note should the phrase end on?
 	%%repeat,
 	trialy2(Notes,R1),
@@ -231,8 +231,8 @@ findmelody(Form,CPT,_Parts,N1,N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	harmony(Form,CPT,Progression4,Harmony1,Harmony2).
 findmelody(Form,CPT,_Parts,N1,N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	CPT=classical,
-	(CPT=1451->findall(A,note(_,A),Notes);
-	findall(A,note(_,A),Notes)),
+	(CPT=1451->findall(A,note0(_,A),Notes);
+	findall(A,note0(_,A),Notes)),
 	%% What note should the phrase end on?
 	%%repeat,
 	trialy2(Notes,R1),
@@ -248,8 +248,8 @@ findmelody(Form,CPT,_Parts,N1,N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	harmony(Form,CPT,Progression4,Harmony1,Harmony2).
 findmelody(Form,CPT,_Parts,N1,N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	CPT=classicalpop,
-	(CPT=1451->findall(A,note(_,A),Notes);
-	findall(A,note(_,A),Notes)),
+	(CPT=1451->findall(A,note0(_,A),Notes);
+	findall(A,note0(_,A),Notes)),
 	%% What note should the phrase end on?
 	%%repeat,
 	trialy2(Notes,R1),
@@ -617,10 +617,11 @@ renderh22(Section1,Harmony1A,Track,Bar1,Bar2,Voice1,Voice2) :-
 	**/
 	findall(Harmony2,(member(Harmony2,Harmony1A1),
 	Harmony2=[Section1|_]),Harmony3),
+	(not(Harmony3=[])->
 		%%Lyrics3=[[_, Lyrics1A,Lyrics2A,Lyrics3A,Lyrics4A]],
 	%%Harmony3=[[_, Harmony1A], [_, Harmony2A]],
-	renderlines1h(Harmony3,Track,Bar1,Voice1,Voice3),
-	Bar3 is Bar1+1,
+	(renderlines1h(Harmony3,Track,Bar1,Voice1,Voice3),
+	Bar3 is Bar1+1);(Bar3 is Bar1,Voice3=Voice1)),
 	/**
 	Bar3 is Bar1+1,
 	renderline1h(Harmony2A,Track,Bar3,Voice3,Voice4),
