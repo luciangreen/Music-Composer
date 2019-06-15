@@ -9,26 +9,25 @@ Run with sectest0(Form1,Lyrics,Melody,Harmony,MelodyParts,HarmonyParts,Vocalstub
 
 Example output:
 
-Dix ey lifts the chec ker.
-All er forms the es sen tial.
-The wri ter moves to Don er.
-The chec ker finds Skye e.
+Black l loves the gram mar.
+Count er reads about Brae ard.
+Duk ie feels Brae ard.
+The tes ter is Skye ae.
 
-Count l goes to the tran sla tor.
-Count ye reads about one.
-The dra wer needs Don ur.
-Wilb an lifts Wilb an.
+Black ye forms the tran sla tor.
+Whistl ice makes the tes ter.
+The tran sla tor is Nei ey.
+The wri ter lifts Ac ur.
 
-Luc l nur tures the tran sla tor.
-Ac ae makes the coun ter.
-Duk ye reads about Duk er.
-Wilb an forms Wilb an.
+Adr ard nur tures the o ther.
+Le ard makes the tes ter.
+Luc an writes about Brae ard.
+One finds Brae ard.
 
-Black an forms Ac ald.
-Adr e finds Don ey.
-Duk ye lifts Whistl ur.
-Wilb an forms Don ey.
+Adr l has the com bi ner.
+Dix l is Don l.
+Brae ard makes Duk l.
+The spel ler goes to Brae ard.
 
-sectest0([n,v1,i1,v2,c,t2,s,s,s],[[v1,[Dix,ey,lifts,the,chec,ker],[All,er,forms,the,es,sen,tial],[the,wri,ter,moves,to,Don,er],[the,chec,ker,finds,Skye,e]],[v2,[Count,l,goes,to,the,tran,sla,tor],[Count,ye,reads,about,one],[the,dra,wer,needs,Don,ur],[Wilb,an,lifts,Wilb,an]],[c,[Luc,l,nur,tures,the,tran,sla,tor],[Ac,ae,makes,the,coun,ter],[Duk,ye,reads,about,Duk,er],[Wilb,an,forms,Wilb,an]],[s,[Black,an,forms,Ac,ald],[Adr,e,finds,Don,ey],[Duk,ye,lifts,Whistl,ur],[Wilb,an,forms,Don,ey]]],[[n,[E,D]],[n,[G,A#,A]],[v,[A,D,F]],[v,[A#,D#,F]],[i,[F,B,E]],[i,[A,D,E]],[c,[E,D#,A]],[c,[D]],[t,[D,G,C]],[t,[F,B,E]],[s,[E,B,F]],[s,[A#,C,F]]],[[[n,[E,G,B]],[n,[G,B,D]],[n,[D,F,A]]],[[n,[G,B,D]],[n,[A#,D,F]],[n,[A,C,E]]],[[v,[A,C,E]],[v,[G,B,D]],[v,[F,A,C]]],[[v,[A#,D,F]],[v,[D#,G,A]],[v,[F,A,C]]],[[i,[F,A,C]],[i,[A#,D,F]],[i,[E,G,B]]],[[i,[A,C,E]],[i,[E,G,B]]],[[c,[E,G,B]],[c,[A#,D,F]],[c,[A,C,E]]],[[c,[D,F,A]]],[[t,[D,F,A]],[t,[G,B,D]],[t,[C,E,G]]],[[t,[F,A,C]],[t,[E,G,B]]],[[s,[E,G,B]],[s,[D#,G,A]],[s,[F,A,C]]],[[s,[A#,D,F]],[s,[C,E,G]],[s,[F,A,C]]]],[[[n,[82,Lead 3 (calliope)],1],[v1,[82,Lead 3 (calliope)],0],[i1,[82,Lead 3 (calliope)],1],[v2,[82,Lead 3 (calliope)],0],[c,[82,Lead 3 (calliope)],0],[t2,[82,Lead 3 (calliope)],0],[s,[82,Lead 3 (calliope)],1],[s,[82,Lead 3 (calliope)],1],[s,[82,Lead 3 (calliope)],0]],[[n,[9,Glockenspiel],1],[v1,[9,Glockenspiel],1],[i1,[9,Glockenspiel],0],[v2,[9,Glockenspiel],0],[c,[9,Glockenspiel],0],[t2,[9,Glockenspiel],1],[s,[9,Glockenspiel],1],[s,[9,Glockenspiel],1],[s,[9,Glockenspiel],1]],[[n,[8,Celesta],0],[v1,[8,Celesta],0],[i1,[8,Celesta],0],[v2,[8,Celesta],1],[c,[8,Celesta],1],[t2,[8,Celesta],0],[s,[8,Celesta],0],[s,[8,Celesta],0],[s,[8,Celesta],1]]],[[[n,[75,Pan Flute],1],[v1,[75,Pan Flute],1],[i1,[75,Pan Flute],1],[v2,[75,Pan Flute],1],[c,[75,Pan Flute],0],[t2,[75,Pan Flute],1],[s,[75,Pan Flute],1],[s,[75,Pan Flute],1],[s,[75,Pan Flute],1]],[[n,[80,Lead 1 (square)],1],[v1,[80,Lead 1 (square)],0],[i1,[80,Lead 1 (square)],0],[v2,[80,Lead 1 (square)],0],[c,[80,Lead 1 (square)],0],[t2,[80,Lead 1 (square)],0],[s,[80,Lead 1 (square)],0],[s,[80,Lead 1 (square)],0],[s,[80,Lead 1 (square)],1]]],[0,Acoustic Grand Piano]
-
+sectest0([n,v1,i1,v2,c,t2,s,c,o],[[v1,[Black,l,loves,the,gram,mar],[Count,er,reads,about,Brae,ard],[Duk,ie,feels,Brae,ard],[the,tes,ter,is,Skye,ae]],[v2,[Black,ye,forms,the,tran,sla,tor],[Whistl,ice,makes,the,tes,ter],[the,tran,sla,tor,is,Nei,ey],[the,wri,ter,lifts,Ac,ur]],[c,[Adr,ard,nur,tures,the,o,ther],[Le,ard,makes,the,tes,ter],[Luc,an,writes,about,Brae,ard],[one,finds,Brae,ard]],[s,[Adr,l,has,the,com,bi,ner],[Dix,l,is,Don,l],[Brae,ard,makes,Duk,l],[the,spel,ler,goes,to,Brae,ard]]],[[n,[A,D,E]],[n,[A,G,C]],[v,[C,B]],[v,[E]],[i,[E,G,D]],[i,[G]],[c,[G]],[c,[C,D,E]],[t,[E,D,G]],[t,[C,G,F]],[s,[F,B,A]],[s,[D,A]],[o,[A,C,G]],[o,[C,D,F]]],[[[n,[A,C,E]],[n,[E,G,B]]],[[n,[A,C,E]],[n,[G,B,D]],[n,[C,E,G]]],[[v,[C,E,G]],[v,[F#,A,C]],[v,[B,D,F]]],[[v,[E,G,B]]],[[i,[E,G,B]],[i,[D#,G,A]],[i,[D,F,A]]],[[i,[G,B,D]]],[[c,[G,B,D]]],[[c,[C,E,G]],[c,[B,D,F]],[c,[E,G,B]]],[[t,[E,G,B]],[t,[A,C,E]],[t,[G,B,D]]],[[t,[C,E,G]],[t,[F,A,C]]],[[s,[F,A,C]],[s,[A#,D,F]],[s,[A,C,E]]],[[s,[D,F,A]],[s,[E,G,B]],[s,[A,C,E]]],[[o,[A,C,E]],[o,[C,E,G]],[o,[G,B,D]]],[[o,[C,E,G]],[o,[A#,D,F]],[o,[F,A,C]]]],[[[n,[78,Whistle],1],[v1,[78,Whistle],0],[i1,[78,Whistle],0],[v2,[78,Whistle],1],[c,[78,Whistle],0],[t2,[78,Whistle],1],[s,[78,Whistle],0],[c,[78,Whistle],0],[o,[78,Whistle],0]],[[n,[105,Banjo],0],[v1,[105,Banjo],1],[i1,[105,Banjo],1],[v2,[105,Banjo],1],[c,[105,Banjo],0],[t2,[105,Banjo],0],[s,[105,Banjo],1],[c,[105,Banjo],0],[o,[105,Banjo],0]],[[n,[113,Agogo],0],[v1,[113,Agogo],1],[i1,[113,Agogo],1],[v2,[113,Agogo],0],[c,[113,Agogo],0],[t2,[113,Agogo],1],[s,[113,Agogo],1],[c,[113,Agogo],0],[o,[113,Agogo],1]]],[[[n,[45,Pizzicato Strings],0],[v1,[45,Pizzicato Strings],0],[i1,[45,Pizzicato Strings],0],[v2,[45,Pizzicato Strings],0],[c,[45,Pizzicato Strings],1],[t2,[45,Pizzicato Strings],0],[s,[45,Pizzicato Strings],0],[c,[45,Pizzicato Strings],1],[o,[45,Pizzicato Strings],0]],[[n,[58,Tuba],1],[v1,[58,Tuba],0],[i1,[58,Tuba],1],[v2,[58,Tuba],0],[c,[58,Tuba],0],[t2,[58,Tuba],1],[s,[58,Tuba],1],[c,[58,Tuba],0],[o,[58,Tuba],0]],[[n,[38,Synth Bass 1],1],[v1,[38,Synth Bass 1],1],[i1,[38,Synth Bass 1],0],[v2,[38,Synth Bass 1],1],[c,[38,Synth Bass 1],1],[t2,[38,Synth Bass 1],0],[s,[38,Synth Bass 1],0],[c,[38,Synth Bass 1],1],[o,[38,Synth Bass 1],0]]],[0,Acoustic Grand Piano]
 Caution: follow instructions in https://github.com/luciangreen/listprologinterpreter/blob/master/Instructions_for_Using_texttobr(2).pl.txt when using texttobr, texttobr2 or mind reader to avoid medical problems.

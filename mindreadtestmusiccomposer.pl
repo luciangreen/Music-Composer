@@ -323,9 +323,10 @@ parts1(Form,Instruments1,Parts1,Parts2) :-
 parts2([],_Instrument,Part,Part) :- !.
 parts2(Form1,Instrument,Part1,Part2) :-
 	Form1=[Section|Form2],
+	(member([Section,Instrument,Playing],Part1)->true;
 	%% Is the instrument playing in the section?
-	trialy2([0,1],R1),
-	findbest(R1,Playing),
+	(trialy2([0,1],R1),
+	findbest(R1,Playing))),
 	append(Part1,[[Section,Instrument,Playing]],Part3),
 	parts2(Form2,Instrument,Part3,Part2),!.
 
@@ -514,7 +515,7 @@ renderm1(Form1,Melody,MelodyParts1,Track1,Track2,Song1,Song2) :-
 	%%length(Form1,FormLength),
 	MelodyParts1=[MelodyParts2|MelodyParts3],
 	MelodyParts2=[[_A,[InstrumentNumber1,_B],_C]|_D],
-	InstrumentNumber2 is InstrumentNumber1 + 1,
+	InstrumentNumber2 is InstrumentNumber1,%% + 1,
 	printheader(Track1,[InstrumentNumber2,_],Song1,Song3),
 	%%renderm21(Form1,Melody,MelodyParts1,Track1,1,_,Song3,Song4),
 	renderm21(Form1,Melody,MelodyParts2,Track1,1,_E,Song3,Song4),
@@ -595,7 +596,8 @@ renderh21(Form1,Harmony,HarmonyParts1,Track,Bar1,Bar2,Voice1,Voice2) :-
 		HarmonyPart2=[Section1,[_,_],1],
 	longtoshortform(Section1,Section2),
 	renderh22(Section2,Harmony,Track,Bar1,Bar3,Voice1,Voice3),
-	renderh21(Form1,Harmony,HarmonyParts3,Track,Bar3,Bar2,Voice3,Voice2),!.
+	renderh22(Section2,Harmony,Track,Bar3,Bar4,Voice3,Voice4),
+	renderh21(Form1,Harmony,HarmonyParts3,Track,Bar4,Bar2,Voice4,Voice2),!.
 
 renderh21(Form1,Harmony,HarmonyParts1,Track,Bar1,Bar2,Voice1,Voice2) :-
 	HarmonyParts1=[HarmonyPart2|HarmonyParts3],
