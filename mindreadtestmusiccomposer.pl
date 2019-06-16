@@ -14,8 +14,8 @@
 %%use_module(library(pio)).
 
 :- use_module(library(date)).
-:- include('texttobr2qb').
-:- include('mindreadtestshared').
+%%:- include('texttobr2qb').
+%%:- include('mindreadtestshared').
 
 :- include('musiclibrary').
 :- include('1451').
@@ -41,9 +41,9 @@ sectest0(Form1,Lyrics,Melody,Harmony,MelodyParts,HarmonyParts,Vocalstubinstrumen
 	%%writeln(melodyharmony(Form4,CPT,Maxlength,Melody,Harmony)), %% ***
 	instruments(Form1,MelodyInstruments,HarmonyInstruments,
 		MelodyParts,HarmonyParts,Vocalstubinstrument),
-	%%writeln(instruments(Form1,MelodyInstruments,HarmonyInstruments,
-	%%	MelodyParts,HarmonyParts,
-	%%	Vocalstubinstrument)),
+	writeln(instruments(Form1,MelodyInstruments,HarmonyInstruments,
+		MelodyParts,HarmonyParts,
+		Vocalstubinstrument)),
 	%%writeln(rendersong(Form1,Voiceparts2,Maxlength,Melody,Harmony,
 	%%	MelodyInstruments,HarmonyInstruments,MelodyParts,
 	%%	HarmonyParts,Lyrics,
@@ -56,6 +56,13 @@ sectest0(Form1,Lyrics,Melody,Harmony,MelodyParts,HarmonyParts,Vocalstubinstrumen
 	outputlyrics(Lyrics),!.
 	
 %% n intro, vn verse, c chorus, i1 instrumental1, t2, instrumental 2, s solo, o outro
+
+findall1(Form2,Form3) :-
+	findall(B,shorten(Form2,B),Form3).
+
+shorten(Form2,B) :-
+	member(A1,Form2),string_concat(B1,_C,A1),
+	string_length(B1,1),atom_string(B,B1).
 
 form(Form) :-
 	Form1=[n,v1],
@@ -320,12 +327,19 @@ parts1(Form,Instruments1,Parts1,Parts2) :-
 	
 parts2([],_Instrument,Part,Part) :- !.
 parts2(Form1,Instrument,Part1,Part2) :-
-	Form1=[Section|Form2],
-	(member([Section,Instrument,Playing],Part1)->true;
+	Form1=[Section1|Form2],
+	%% shorten
+	string_concat(B11,_C1,Section1),
+	string_length(B11,1),atom_string(Section,B11),
+	%% shorten
+	((findall([Section,Instrument,Playing],(member([Section2,Instrument,
+		Playing],Part1),string_concat(B1,_C,Section2),
+	string_length(B1,1),atom_string(Section,B1)),Form3),
+	[[Section,Instrument,Playing]|_]=Form3)->true;
 	%% Is the instrument playing in the section?
 	(trialy2([0,1],R1),
 	findbest(R1,Playing))),
-	append(Part1,[[Section,Instrument,Playing]],Part3),
+	append(Part1,[[Section1,Instrument,Playing]],Part3),
 	parts2(Form2,Instrument,Part3,Part2),!.
 
 /**
@@ -604,6 +618,8 @@ renderh21(Form1,Harmony,HarmonyParts1,Track,Bar1,Bar2,Voice1,Voice2) :-
 	renderh21(Form1,Harmony,HarmonyParts3,Track,Bar3,Bar2,Voice1,Voice2),!.
 
 renderh22(Section2,Harmony1,_Track,Bar,Bar,Voice,Voice) :- 
+	
+	%%longtoshortform(Section21,Section2),
 	findall(Harmony2,(member(Harmony3,Harmony1),member(Harmony2,Harmony3),
 		Harmony2=[Section1|_],longtoshortform(Section1,Section2)),List2),List2=[],!.
 renderh22(Section1,Harmony1A,Track,Bar1,Bar2,Voice1,Voice2) :-
@@ -615,8 +631,22 @@ renderh22(Section1,Harmony1A,Track,Bar1,Bar2,Voice1,Voice2) :-
 	string_length(Section2A,1),
 	atom_string(Section2,Section2A),
 	**/
+	
+		%% shorten
+	%%string_concat(B11,_C1,Section11),
+	%%string_length(B11,1),atom_string(Section1,B11),
+
+
+	
 	findall(Harmony2,(member(Harmony2,Harmony1A1),
-	Harmony2=[Section1|_]),Harmony3),
+	Harmony2=[Section1|_]
+	%%,string_concat(B1,_C,Section1A),
+	%%string_length(B1,1),atom_string(Section1,B1)
+	),Harmony3),
+		%% shorten
+
+
+	
 	(not(Harmony3=[])->
 		%%Lyrics3=[[_, Lyrics1A,Lyrics2A,Lyrics3A,Lyrics4A]],
 	%%Harmony3=[[_, Harmony1A], [_, Harmony2A]],
