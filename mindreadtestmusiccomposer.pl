@@ -79,20 +79,18 @@ form(Form) :-
 	)).
 
 makename(N3) :-
-	trialy2(["Ac","Luc","Adr","All","Brae","Skye","Whistl","Dix","Wilb","Duk","Le","Ven",
-	"Sydn","Don","Count","Black","Nei"],R1),
+	trialy2(["Ack","Luc","Ad","All","Brae","Skye","Whist","Dix","Wilb","Duk","Le","Ven",
+	"Syd","Don","Count","Black","Nei"],R1),
 	findbest(R1,N1),
-	trialy2(["an","ae","ye","er","ie","ur","e","ard","ice","ey","ald","ess",
-	"l"],R2),
+	trialy2(["an","ae","ye","ler","ie","ur","e","ard","ice","ney","ald","ess","l"],R2),
 	findbest(R2,N2),
 	append([N1],[N2],N3).
 
 makenames(0,Ns,Ns) :- !.
 makenames(Num1,N1,N2) :-
-	random_member(R1,["Ac","Luc","Adr","All","Brae","Skye","Whistl","Dix","Wilb","Duk","Le","Ven",
-	"Sydn","Don","Count","Black","Nei"]),
-	random_member(R2,["an","ae","ye","er","ie","ur","e","ard","ice","ey","ald","ess",
-	"l"]),
+	random_member(R1,["Ack","Luc","Ad","All","Brae","Skye","Whist","Dix","Wilb","Duk","Le","Ven",
+	"Syd","Don","Count","Black","Nei"]),
+	random_member(R2,["an","ae","ye","ler","ie","ur","e","ard","ice","ney","ald","ess","l"]),
 	append([R1],[R2],R3),
 	append(N1,[R3],N3),
 	Num2 is Num1-1,
@@ -794,11 +792,11 @@ append2(A,Item,C) :-
 	append_list(A,Item,C),!.
 
 readsc(7).
-readv([["loves"],["is"],["has"],["is","in"],["moves","to"],["nur","tures"],["needs"],["makes"],["lifts"],["finds"],["forms"],["goes","to"],["writes","about"],["reads","about"],["feels"],["is"]]).
+readv([["loves"],["is"],["has"],["is","in"],["moves","to"],["nur","tures"],["needs"],["makes"],["lifts"],["finds"],["forms"],["goes","to"],["writes","on"],["reads","on"],["feels"],["is"]]).
 
-reado([["one"],["the","o","ther"],["the","run","ner"],["the","dra","wer"],["the","coun","ter"],["the","gra","pher"],["the","tes","ter"],["the","breath","so","ner"],["the","wri","ter"],["the","spel","ler"],["the","upda","ter"],["the","chec","ker"],["the","se","lec","tor"],["the","es","sen","tial"],["the","com","bi","ner"],["the","mi","rac","le"],["the","tran","sla","tor"],["the","gram","mar"]]).
+reado([["one"],["the","oth","er"],["the","runn","er"],["the","draw","er"],["the","count","er"],["the","graph","er"],["the","test","er"],["the","breaths","on","er"],["the","writ","er"],["the","spell","er"],["the","updat","er"],["the","check","er"],["the","choos","er"],["the","ess","ence"],["the","comb","in","er"],["the","mir","ac","le"],["the","trans","lat","or"],["the","gramm","ar"]]).
 
-rhymes([["good","one","ther","ner","wer","ter","pher","ter","ter","ler","ker","tor","mar","an","ae","er","ur","ard","ey","ald","ess","l"],["tial","le","py","ye","ie","e","ice"]]).
+rhymes([["one","er","or","ar","an","ae","er","ler","ur","ard","ney","ald","ess","l"],["le","py","ye","ie","e","ice"]]).
 
 %%removetoolongandnotrhyming(Lyrics1,SyllableCount,[],Verbs,Verbs) :- !.
 /**removetoolongandnotrhyming(Lyrics0,Lyrics1,SyllableCount,Verbs1,Verbs2,Objects1,Objects2) :-
