@@ -7,7 +7,7 @@ Requires asc2mid (http://www.archduke.org/midi/, compile with a C compiler befor
 
 Run with sectest0(Form1,Lyrics,Melody,Harmony,MelodyParts,HarmonyParts,Vocalstubinstrument,Song1),writeln(sectest0(Form1,Lyrics,Melody,Harmony,MelodyParts,HarmonyParts,Vocalstubinstrument,Song1)).
 
-Takes no input and outputs text and MIDI music files.  Please don't close the window after running, to save the lyrics.  You may omit the writeln command above to print lyrics to the screen only, and not write the lengthy text file etc., to the screen.
+Takes no input and outputs text and MIDI music files.  Please don't close the window after running, to save the lyrics.
 
 Example output:
 
