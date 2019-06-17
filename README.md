@@ -5,6 +5,8 @@ Install and load by typing ['mindreadtestmusiccomposer'].
 
 Requires asc2mid (http://www.archduke.org/midi/, compile with a C compiler before running, call application "asc2mid").
 
+Optional: Search for and download backdated version 6.0.5 of GarageBand and AlterEgo singing voice synthesis plug-in for old GarageBand for Mac or on Windows (https://www.plogue.com/downloads.html).
+
 Run with sectest0(Form1,Lyrics,Melody,Harmony,MelodyParts,HarmonyParts,Vocalstubinstrument,Song1),writeln(sectest0(Form1,Lyrics,Melody,Harmony,MelodyParts,HarmonyParts,Vocalstubinstrument,Song1)).
 
 Takes no input and outputs text and MIDI music files.  Please don't close the window after running, to save the lyrics.
