@@ -429,6 +429,17 @@ rendersong(Form1,Voiceparts,_Maxlength,Melody,
  	texttobr2qb(32), %%Lyrics
  	texttobr2qb(36), %%Music
  	texttobr2qb(20), %%Updates
+ 	
+ 	texttobr2qb(2), %%Medicine
+ 	texttobr2qb(20), %%Updates
+ 	texttobr2qb(2), %%Sales
+ 	texttobr2qb(20), %%Updates
+ 	texttobr2qb(2), %%Marketing
+ 	texttobr2qb(20), %%Updates
+
+ 	texttobr2qb(2), %%Graciously give or blame listener for colour imagery
+ 	texttobr2qb(20), %%Updates
+
  	texttobr2qb(2), %%Play song
  	texttobr2qb(2), %%Like song
 !.
