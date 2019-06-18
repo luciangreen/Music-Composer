@@ -37,3 +37,4 @@ sectest0([n,v1,i1,v2,c,t2,s,c,o],[[v1,[Black,l,loves,the,gram,mar],[Count,er,rea
 
 Caution: follow instructions in https://github.com/luciangreen/listprologinterpreter/blob/master/Instructions_for_Using_texttobr(2).pl.txt when using texttobr, texttobr2 or mind reader to avoid medical problems.
 
+* ['mindreadtestmusiccomposer-unusual']. - run with sectest(2). for e.g 2 songs in unusual (not same parts for same sections).
