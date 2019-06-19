@@ -6,7 +6,7 @@ Counter=4
 versechorussoloprogression1645(Name1, Name2,Progression2) :-
 note(Note1, Name1),
 note(Note2, Name2),
-versechorussoloprogression11645(Note1, Note2, 0, _, [Note1], Progression1), notestonames(Progression1,Progression2).
+versechorussoloprogression11645(Note1, Note2, 0, _, [Note1], Progression1), notestonames(Progression1,Progression2),!.
 versechorussoloprogression11645(_, _, Counter, b, Progression, Progression) :-
 Counter = 3, !.
 versechorussoloprogression11645(Note, Note, _Counter, a, Progression, Progression) :- !.

@@ -193,7 +193,11 @@ melodyharmony(Form1,CPT,Parts,N1,N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	findmelody(Form2,CPT,Parts,N1,N3,Melody1,Melody3,Harmony1,Harmony3),
 	(CPT=1451->harmony1451(N3,3,N4);harmonyr(N3,5,N4)),
 	findmelody(Form2,CPT,Parts,N4,N5,Melody3,Melody4,Harmony3,Harmony4),
-	melodyharmony(Forms3,CPT,Parts,N5,N2,Melody4,Melody2,Harmony4,Harmony2).
+	reverse(Melody3,Melody3R),Melody3R=[Melody3RI|_],
+	reverse(Melody4,Melody4R),Melody4R=[Melody4RI|_],
+	not((length(Melody3RI,1),length(Melody4RI,1))),
+	melodyharmony(Forms3,CPT,Parts,N5,N2,Melody4,Melody2,
+		Harmony4,Harmony2).
 
 findmelody(Form,CPT,_Parts,N1,N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	CPT=1451,
@@ -308,7 +312,11 @@ instruments(Form1,MelodyInstruments,HarmonyInstruments,MelodyParts,HarmonyParts,
 	instrumentlist(HarmonyInstrumentNumber,HarmonyInstruments),
 	Vocalstubinstrument=[0,"Acoustic Grand Piano"],
 	parts(Form1,MelodyInstruments,MelodyParts),
-	parts(Form1,HarmonyInstruments,HarmonyParts).	
+	aggregate_all(count, (member(A,MelodyParts),not(A1=[_,_,0])), Count1),
+	Count1=0,
+	parts(Form1,HarmonyInstruments,HarmonyParts),
+	aggregate_all(count, (member(A,HarmonyParts),not(A2=[_,_,0])), Count2),
+	Count2=0.	
 	
 instrumentnumber(NumberofInstruments) :-
 	%% Number of melody instruments
@@ -416,7 +424,8 @@ rendersong(Form1,Voiceparts,_Maxlength,Melody,
  	close(Stream),
  	concat_list("./asc2mid ",[File2," > ",File3],Command),
  	shell1_s(Command),
- 	N is 4, M is 4000,  texttobr2(N,File2,u,M),texttobr(N,File2,u,M),
+ 	writeln([File2,"may be over memory limit, please use VPS or split and breason out.\n","N is 4, M is 4000,texttobr2(N",File2,"u,M),texttobr(N",File2,"u,M)."]),
+ 	%%N is 4, M is 4000,  texttobr2(N,File2,u,M),texttobr(N,File2,u,M),
  	texttobr2qb(3), %% give self breasonings
  	texttobr2qb(20), %%Feature 1
  	texttobr2qb(20), %%Updates
