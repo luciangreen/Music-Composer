@@ -424,7 +424,7 @@ rendersong(Form1,Voiceparts,_Maxlength,Melody,
  	close(Stream),
  	concat_list("./asc2mid ",[File2," > ",File3],Command),
  	shell1_s(Command),
- 	writeln(["Texxtobr, Texttobr2 not working.  Please manually breason out ",File2]),
+ 	writeln(["Texttobr, Texttobr2 not working.  Please manually breason out ",File2]),
  	%%N is 4, M is 4000,  texttobr2(N,File2,u,M),texttobr(N,File2,u,M),
 	outputlyrics(File1,Lyrics),
 
@@ -777,7 +777,7 @@ outputlyrics(File1,Lyrics1) :-
 	write(Stream,Lyrics8),
  	close(Stream),
 %%texttobr2(u,File2,u,u),texttobr(u,File2,u,u).
- 	writeln(["Texxtobr, Texttobr2 not working.  Please manually breason out ",File2]).
+ 	writeln(["Texttobr, Texttobr2 not working.  Please manually breason out ",File2]).
 
 outputlyrics1([],Lyrics,Lyrics) :- !.
 outputlyrics1(Lyrics1,Lyrics5,Lyrics6) :-
