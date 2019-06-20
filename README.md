@@ -41,3 +41,4 @@ Caution: follow instructions in https://github.com/luciangreen/listprologinterpr
 
 * ['mindreadtestmusiccomposer-unusual']. - run with sectest(2). for e.g 2 songs in unusual (not same parts for same sections).
 This version requires my List Prolog GitHub Repository.  This version is a more recent version than mindreadtestmusiccomposer.
+Includes texttobr2'ing out music notes and lyrics files, so you may need to comment this part out.

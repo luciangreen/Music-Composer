@@ -11,12 +11,13 @@
 
 **/
 
-%%use_module(library(pio)).
+use_module(library(pio)).
 
 :- use_module(library(date)).
 %%:- include('texttobr2qb').
 %%:- include('mindreadtestshared').
-:- include('meditationnoreplace').
+:- include('texttobr2').
+:- include('texttobr').
 :- include('texttobr2qbmusic').
 
 :- include('musiclibrary').
@@ -64,7 +65,6 @@ sectest0(Form1,Lyrics,Melody,Harmony,MelodyParts,HarmonyParts,Vocalstubinstrumen
 		MelodyInstruments,HarmonyInstruments,MelodyParts,
 		HarmonyParts,Lyrics,
 		Vocalstubinstrument,Song1), %%,
-	outputlyrics(Lyrics),
 	!.
 	
 %% n intro, vn verse, c chorus, i1 instrumental1, t2, instrumental 2, s solo, o outro
@@ -424,8 +424,10 @@ rendersong(Form1,Voiceparts,_Maxlength,Melody,
  	close(Stream),
  	concat_list("./asc2mid ",[File2," > ",File3],Command),
  	shell1_s(Command),
- 	writeln([File2,"may be over memory limit, please use VPS or split and breason out.\n","N is 4, M is 4000,texttobr2(N",File2,"u,M),texttobr(N",File2,"u,M)."]),
+ 	writeln(["Texxtobr, Texttobr2 not working.  Please manually breason out ",File2]),
  	%%N is 4, M is 4000,  texttobr2(N,File2,u,M),texttobr(N,File2,u,M),
+	outputlyrics(File1,Lyrics),
+
  	texttobr2qb(3), %% give self breasonings
  	texttobr2qb(20), %%Feature 1
  	texttobr2qb(20), %%Updates
@@ -763,20 +765,35 @@ renderlineh2(BarTimes1,BarTimes4,Melody1,Track,Bar,Voice1,Voice2) :-
 	concat_list(Voice1,[Song1,Song2,Song3],Voice3),
 	renderlineh2(BarTimes3,BarTimes4,Melody3,Track,Bar,Voice3,Voice2).
 
-outputlyrics([]) :- !.
-outputlyrics(Lyrics1) :-
+outputlyrics(File1,Lyrics1) :-
+	Lyrics1=[Lyrics2|_Lyrics3],
+	Lyrics2=[_|Lyrics4],
+	Lyrics4=[Lyrics5|_Lyrics6],
+	sentencewithspaces(Lyrics5,Lyrics7A),
+	string_concat(Lyrics7A,"\n\n",Lyrics7),
+	outputlyrics1(Lyrics1,Lyrics7,Lyrics8),
+	concat_list(File1,["lyrics.txt"],File2),
+	open_s(File2,write,Stream),
+	write(Stream,Lyrics8),
+ 	close(Stream),
+%%texttobr2(u,File2,u,u),texttobr(u,File2,u,u).
+ 	writeln(["Texxtobr, Texttobr2 not working.  Please manually breason out ",File2]).
+
+outputlyrics1([],Lyrics,Lyrics) :- !.
+outputlyrics1(Lyrics1,Lyrics5,Lyrics6) :-
 	Lyrics1=[Lyrics2|Lyrics3],
 	Lyrics2=[_|Lyrics4],
-	outputlyrics2(Lyrics4),
-	writeln(""),
-	outputlyrics(Lyrics3).
+	outputlyrics2(Lyrics4,Lyrics5,Lyrics7),
+	string_concat(Lyrics7,"\n",Lyrics8),
+	outputlyrics1(Lyrics3,Lyrics8,Lyrics6).
 
-outputlyrics2([]) :- !.
-outputlyrics2(Lyrics1) :-
+outputlyrics2([],Lyrics,Lyrics) :- !.
+outputlyrics2(Lyrics1,Lyrics5,Lyrics6) :-
 	Lyrics1=[Lyrics2|Lyrics3],
 	sentencewithspaces(Lyrics2,Lyrics4),
-	writeln(Lyrics4),
-	outputlyrics2(Lyrics3).
+	%%writeln(Lyrics4),
+	concat_list(Lyrics5,[Lyrics4,"\n"],Lyrics7),
+	outputlyrics2(Lyrics3,Lyrics7,Lyrics6).
 
 max([],M,M) :- !.
 max(List1,Max1,Max2) :-
