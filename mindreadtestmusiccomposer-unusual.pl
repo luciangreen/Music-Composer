@@ -638,7 +638,7 @@ renderh1(Form1,Harmony,HarmonyParts1,Track1,Track2,Song1,Song2) :-
 	%%length(Form1,FormLength),
 	HarmonyParts1=[HarmonyParts2|HarmonyParts3],
 	HarmonyParts2=[[_A,[InstrumentNumber1,_B],_C]|_D],
-	InstrumentNumber2 is InstrumentNumber1 + 1,
+	InstrumentNumber2 is InstrumentNumber1,%% + 1,
 	printheader(Track1,[InstrumentNumber2,_],Song1,Song3),
 	%%renderh21(Form1,Harmony,HarmonyParts1,Track1,1,_,Song3,Song4),
 	renderh21(Form1,Harmony,HarmonyParts2,Track1,1,_E,Song3,Song4),
