@@ -80,7 +80,7 @@ form(Form) :-
 	Form1=[n,v1],
 	find("Should a chorus or instrumental come after the first verse?",CorI),
 	(CorI=c->
-	(append(Form1,[i1,v2,c,t2,s],Form2),
+	(append(Form1,[c,v2,c,t2,s],Form2),
 	find(["Should a chorus and outro or two solos come after the first solo?",1],COorSS),
 		(COorSS=[c,o]->
 		(append(Form2,[c],Form3),
