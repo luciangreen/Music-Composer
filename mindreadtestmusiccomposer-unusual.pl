@@ -21,11 +21,6 @@ use_module(library(pio)).
 :- include('texttobr2qbmusic').
 
 :- include('musiclibrary').
-:- include('1451').
-:- include('1564').
-:- include('1645').
-:- include('popclassical').
-:- include('classical').
 :- include('la_strings').
 
 sectest(0) :- !.
@@ -183,8 +178,9 @@ melodyharmony(Form1,CPT,Maxlength,Melody,Harmony) :-
 	(CPT=1451->findall(A,note0(_,A),Notes);
 	findall(A,note0(_,A),Notes)),
 	%% What note should the song start on?
-	trialy2(Notes,R1),
-	findbest(R1,R11),
+	%%trialy2(Notes,R1),
+	%%findbest(R1,R11),
+	R11='A',
 	melodyharmony(Form1,CPT,_Parts2,R11,_R2,[],Melody,[],Harmony).
 	
 melodyharmony([],_CPT,_Parts,N,N,Melody,Melody,Harmony,Harmony) :- !.
@@ -833,7 +829,10 @@ find(["Should a chorus and outro or two solos come after the first solo?",2],COo
 %%	findbest(R,Character).
 
 find("Should the chord progression type be 1451, 1564, 1645, Classical or Classical Pop?",CPT) :-
-	trialy2([1451, 1564, 1645, classical, classicalpop],R),
+	trialy2([1451, 1564, 1645
+	%%
+	, classical, classicalpop
+	],R),
 	findbest(R,CPT).
 
 /**generatelyricslistsverse(Character,Lyrics1,Lyrics2):-
