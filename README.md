@@ -1,5 +1,5 @@
 # Music-Composer
-Music Composer can (optionally mind read to) create songs.  Currently set to generate song elements randomly, not mind read them, so doesn't require precautions to run.
+Music Composer can (optionally mind read to) create songs.  Currently set to generate song elements randomly, not mind read them.  Requires precautions to run because runs texttobr to give song elements As.
 
 Install and load by typing ['mindreadtestmusiccomposer-unusual-3']. for 3-note progressions and
 ['mindreadtestmusiccomposer-unusual-4']. for 4-note progressions.
