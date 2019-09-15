@@ -1,21 +1,58 @@
-# Music-Composer
-Music Composer can (optionally mind read to) create songs.  Currently set to generate song elements randomly, not mind read them.  Requires precautions to run because runs texttobr to give song elements As.
+# Music Composer
 
-Install and load by typing ['mindreadtestmusiccomposer-unusual-3']. for 3-note progressions and
-['mindreadtestmusiccomposer-unusual-4']. for 4-note progressions.
+Music Composer can help automate writing pop songs in three modes.  It outputs lyrics, asc2mid text file and MIDI music files.  Please don't close the window after running, to save the lyrics if randomly generated.
+
+1. In Mind Reading Mode (currently untested and switched off), because it can be done using option 2.
+
+2. By manually entering the creative choices.
+
+3. Randomly generating form, lyrics, melody, harmony, parts that melody plays in, parts that harmony plays in and vocal stub instrument.
+
+# Getting Started
+
+Please read the following instructions on how to install the project on your computer for writing code.
+
+# Prerequisites
+
+Please download and install SWI-Prolog for your machine at https://www.swi-prolog.org/build/.
+
+Please download Lucian Green's List Prolog Interpreter Repository at https://github.com/luciangreen/listprologinterpreter.
 
 Requires asc2mid (http://www.archduke.org/midi/, compile with a C compiler before running, call application "asc2mid").
 
 Optional: Search for and download backdated version 6.0.5 of GarageBand and AlterEgo singing voice synthesis plug-in for old GarageBand for Mac or on Windows (https://www.plogue.com/downloads.html).
 
-* Note: see bottom of page (new version's run command is there with install instructions).
+# Installing
 
-Run with sectest0(Form1,Lyrics,Melody,Harmony,MelodyParts,HarmonyParts,Vocalstubinstrument,Song1),writeln(sectest0(Form1,Lyrics,Melody,Harmony,MelodyParts,HarmonyParts,Vocalstubinstrument,Song1)).
+* Download the repository to your machine.
+In the SWI-Prolog environment, enter the following to manually enter creative choices:
+`['mindreadtestmusiccomposer-unusual-4-userinput'].`    
 
-Takes no input and outputs text and MIDI music files.  Please don't close the window after running, to save the lyrics.
+* Enter the following to randomly generate 3-note progressions:
+`['mindreadtestmusiccomposer-unusual-3'].`    
 
-Caution: follow instructions in https://github.com/luciangreen/listprologinterpreter/blob/master/Instructions_for_Using_texttobr(2).pl.txt when using texttobr, texttobr2 or mind reader to avoid medical problems.
+* Enter the following to randomly generate 4-note progressions:
+`['mindreadtestmusiccomposer-unusual-4'].`    
 
-* ['mindreadtestmusiccomposer-unusual']. - run with sectest(2). for e.g 2 songs in unusual (not same parts for same sections).
-This version requires my List Prolog GitHub Repository.  This version is a more recent version than mindreadtestmusiccomposer.
-Includes texttobr2'ing out music notes and lyrics files, so you may need to comment this part out.
+* Running the algorithm
+To generate the song:
+`sectest0(Form1,Lyrics,Melody,Harmony,MelodyParts,HarmonyParts,Vocalstubinstrument,Song1).`
+
+To output the possible chord progressions from one note to another:
+`versechorussoloprogression1451('C','D',Progression).`
+`versechorussoloprogression1564('C','D',Progression).`
+`versechorussoloprogression1645('C','D',Progression).`
+`classicalcomposition('C','D',Progression).`
+`popclassicalcomposition('C','D',Progression).`
+
+# Versioning
+
+We will use SemVer for versioning.
+
+# Authors
+
+Lucian Green - Initial programmer - <a href="https://www.lucianacademy.com/">Lucian Academy</a>
+
+# License
+
+I licensed this project under the BSD3 License - see the LICENSE.md file for details

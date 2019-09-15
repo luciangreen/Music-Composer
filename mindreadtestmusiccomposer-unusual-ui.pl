@@ -33,13 +33,27 @@ sectest(N1) :-
 
 sectest0(Form1,Lyrics,Melody,Harmony,MelodyParts,HarmonyParts,Vocalstubinstrument,Song1) :-
  	%%texttobr2qb(2), %%Imagine song
-	form(Form1),
+	%%form(Form1),
+	writeln("Please enter form in format e.g. [n,v1,i1,v2,c,t2,s,s,s]."),
+	read_string(user_input, "\n", "\r", _End2, Form1A),
+	atom_to_term(Form1A,Form1,_),
+	
 	%%Form1=[v2,o],
-	find("Should the chord progression type be 1451, 1564, 1645, Classical or Classical Pop?",CPT),
+	%%find("Should the chord progression type be 1451, 1564, 1645, Classical or Classical Pop?",CPT),
+	writeln("Should the chord progression type be 1451, 1564, 1645, classical or classicalpop?"),
+	read_string(user_input, "\n", "\r", _End2, CPT1),
+	atom_string(CPT,CPT1),
+
 	remove_dups(Form1,[],Form2),
 	Voiceparts1=[v1,v2,c,s],
 	intersection(Form1,[v1,v2,c,s],Voiceparts2),
-	lyrics(Voiceparts1,Lyrics,Maxlength),
+	%%lyrics(Voiceparts1,Lyrics,Maxlength),
+	writeln(["Please enter lyrics for parts",Voiceparts1,"in format e.g. [[v1, [\"All\", \"ney\", \"goes\", \"to\", \"the\"], [\"Le\", \"ice\", \"is\", \"in\"], [\"the\", \"mir\", \"ac\"], [\"the\", \"graph\"]], [v2, [\"Dix\", \"ard\"]]]."]),
+	read_string(user_input, "\n", "\r", _End2, LyricsA),
+	atom_to_term(LyricsA,Lyrics,_),
+
+findall(DH,(member(C1H,Lyrics),C1H=[_|C2H],member(CH,C2H),length(CH,DH)),EH),sort(EH,FH),reverse(FH,GH),GH=[Maxlength|_],
+ 
 	findall(B,(member(A1,Form2),string_concat(B1,_C,A1),
 	string_length(B1,1),atom_string(B,B1)),Form3),
 	remove_dups(Form3,[],Form4),
@@ -170,115 +184,123 @@ lyrics2(Form1,Lyrics1,Lyrics2,Names1,Names2,Maxlength1,Maxlength2) :-
 	max([Length1,Length2,Length3,Length4],Maxlength1,Maxlength3),
 	lyrics2(Forms3,Lyrics3,Lyrics2,Names6,Names2,Maxlength3,Maxlength2),!.
 
+
 melodyharmony(Form1,CPT,Maxlength,Melody,Harmony) :-
 	Partlength is Maxlength div 3,
 	Extra is Maxlength mod 3,
 	Total is Partlength+Extra,
 	_Parts=[Partlength,Partlength,Partlength,Total],
-	(CPT=1451->findall(A,note0(_,A),Notes);
-	findall(A,note0(_,A),Notes)),
+	%%(CPT=1451->findall(A,note0(_,A),Notes);
+	%%findall(A,note0(_,A),Notes)),
 	%% What note should the song start on?
 	%%trialy2(Notes,R1),
 	%%findbest(R1,R11),
-	R11='A',
-	melodyharmony(Form1,CPT,_Parts2,R11,_R2,[],Melody,[],Harmony).
+	%%R11='A',
+	melodyharmony(Form1,CPT,_Parts2,_R11,_R2,[],Melody,[],Harmony).
 	
 melodyharmony([],_CPT,_Parts,N,N,Melody,Melody,Harmony,Harmony) :- !.
 melodyharmony(Form1,CPT,Parts,N1,N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	Form1=[Form2|Forms3],
 	findmelody(Form2,CPT,Parts,N1,N3,Melody1,Melody3,Harmony1,Harmony3),
-	(CPT=1451->harmony1451(N3,3,N4);harmonyr(N3,5,N4)),
+
+	(CPT='1451'->harmony1451(N3,3,N4);harmonyr(N3,5,N4)),
 	findmelody(Form2,CPT,Parts,N4,N5,Melody3,Melody4,Harmony3,Harmony4),
-	reverse(Melody3,Melody3R),Melody3R=[[_,Melody3RI]|_], %% relies on repeat *1
-	reverse(Melody4,Melody4R),Melody4R=[[_,Melody4RI]|_],
-	not((length(Melody3RI,1),length(Melody4RI,1))),
+	%%reverse(Melody3,Melody3R),Melody3R=[[_,Melody3RI]|_], %% relies on repeat *1
+	%%reverse(Melody4,Melody4R),Melody4R=[[_,Melody4RI]|_],
+	%%not((length(Melody3RI,1),length(Melody4RI,1))),
 	melodyharmony(Forms3,CPT,Parts,N5,N2,Melody4,Melody2,
 		Harmony4,Harmony2).
 
 findmelody(Form,CPT,_Parts,N1,N2,Melody1,Melody2,Harmony1,Harmony2) :-
-	CPT=1451,
-	(CPT=1451->findall(A,note0(_,A),Notes);
-	findall(A,note0(_,A),Notes)),
+	CPT='1451',
+	%%(CPT=1451->findall(A,note0(_,A),Notes);
+	%%findall(A,note0(_,A),Notes)),
 	%% What note should the phrase end on?
+	%%repeat,
+	%%trialy2(Notes,R1),
+	%%findbest(R1,N2),
+	%%versechorussoloprogression1451(N1,N2,Progression),
+	%%trialy2(Progression,R2),
+	%%findbest(R2,Progression2),
 	repeat,
-	trialy2(Notes,R1),
-	findbest(R1,N2),
-	versechorussoloprogression1451(N1,N2,Progression),
-	trialy2(Progression,R2),
-	findbest(R2,Progression2),
-	not(Progression2=[]),
+	writeln(["Please enter melody line for form",Form,"in format e.g. [d,di,r,ri,m,f,fi,s,si,l,li,t]."]),
+	read_string(user_input, "\n", "\r", _End2, Progression2B),
+	atom_to_term(Progression2B,Progression2A,_),
+	solfatonotes(Progression2A,[],Progression2),
+not(Progression2=[]),
 	append(Melody1,[[Form,Progression2]],Melody2),
-	versechorussoloprogression1451(N1,N2,Progression3),
-	trialy2(Progression3,R3),
-	findbest(R3,Progression4),
+	%%versechorussoloprogression1451(N1,N2,Progression3),
+	%%trialy2(Progression3,R3),
+	%%findbest(R3,Progression4),
+	repeat,
+	writeln(["Please enter harmony line in format e.g. [C,E,G] for",Form,"."]),
+	read_string(user_input, "\n", "\r", _End2, Progression4A),
+	atom_to_term(Progression4A,Progression4,_),
+
 	harmony(Form,CPT,Progression4,Harmony1,Harmony2).	
 findmelody(Form,CPT,_Parts,N1,N2,Melody1,Melody2,Harmony1,Harmony2) :-
-	CPT=1564,
-	(CPT=1451->findall(A,note0(_,A),Notes);
-	findall(A,note0(_,A),Notes)),
-	%% What note should the phrase end on?
-	repeat, %% *1 see other *1
-	trialy2(Notes,R1),
-	findbest(R1,N2),
-	versechorussoloprogression1564(N1,N2,Progression),
-	trialy2(Progression,R2),
-	findbest(R2,Progression2),
-	not(Progression2=[]),
+	CPT='1564',
+	repeat,
+	writeln(["Please enter melody line for form",Form,"in format e.g. [d,di,r,ri,m,f,fi,s,si,l,li,t]."]),
+	read_string(user_input, "\n", "\r", _End2, Progression2B),
+	atom_to_term(Progression2B,Progression2A,_),
+	solfatonotes(Progression2A,[],Progression2),	not(Progression2=[]),
 	append(Melody1,[[Form,Progression2]],Melody2),
-	versechorussoloprogression1564(N1,N2,Progression3),
-	trialy2(Progression3,R3),
-	findbest(R3,Progression4),
+	%%versechorussoloprogression1451(N1,N2,Progression3),
+	%%trialy2(Progression3,R3),
+	%%findbest(R3,Progression4),
+	repeat,
+	writeln(["Please enter harmony line in format e.g. [C,E,G] for",Form,"."]),
+	read_string(user_input, "\n", "\r", _End2, Progression4A),
+	atom_to_term(Progression4A,Progression4,_),
 	harmony(Form,CPT,Progression4,Harmony1,Harmony2).
 findmelody(Form,CPT,_Parts,N1,N2,Melody1,Melody2,Harmony1,Harmony2) :-
-	CPT=1645,
-	(CPT=1451->findall(A,note0(_,A),Notes);
-	findall(A,note0(_,A),Notes)),
-	%% What note should the phrase end on?
+	CPT='1645',
 	repeat,
-	trialy2(Notes,R1),
-	findbest(R1,N2),
-	versechorussoloprogression1645(N1,N2,Progression),
-	trialy2(Progression,R2),
-	findbest(R2,Progression2),
-	not(Progression2=[]),
+	writeln(["Please enter melody line for form",Form,"in format e.g. [d,di,r,ri,m,f,fi,s,si,l,li,t]."]),
+	read_string(user_input, "\n", "\r", _End2, Progression2B),
+	atom_to_term(Progression2B,Progression2A,_),
+	solfatonotes(Progression2A,[],Progression2),	not(Progression2=[]),
 	append(Melody1,[[Form,Progression2]],Melody2),
-	versechorussoloprogression1645(N1,N2,Progression3),
-	trialy2(Progression3,R3),
-	findbest(R3,Progression4),
+	%%versechorussoloprogression1451(N1,N2,Progression3),
+	%%trialy2(Progression3,R3),
+	%%findbest(R3,Progression4),
+	repeat,
+	writeln(["Please enter harmony line in format e.g. [C,E,G] for",Form,"."]),
+	read_string(user_input, "\n", "\r", _End2, Progression4A),
+	atom_to_term(Progression4A,Progression4,_),
 	harmony(Form,CPT,Progression4,Harmony1,Harmony2).
 findmelody(Form,CPT,_Parts,N1,N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	CPT=classical,
-	(CPT=1451->findall(A,note0(_,A),Notes);
-	findall(A,note0(_,A),Notes)),
-	%% What note should the phrase end on?
 	repeat,
-	trialy2(Notes,R1),
-	findbest(R1,N2),
-	classicalcomposition(N1,N2,Progression),
-	trialy2(Progression,R2),
-	findbest(R2,Progression2),
-	not(Progression2=[]),
+	writeln(["Please enter melody line for form",Form,"in format e.g. [d,di,r,ri,m,f,fi,s,si,l,li,t]."]),
+	read_string(user_input, "\n", "\r", _End2, Progression2B),
+	atom_to_term(Progression2B,Progression2A,_),
+	solfatonotes(Progression2A,[],Progression2),	not(Progression2=[]),
 	append(Melody1,[[Form,Progression2]],Melody2),
-	classicalcomposition(N1,N2,Progression3),
-	trialy2(Progression3,R3),
-	findbest(R3,Progression4),
+	%%versechorussoloprogression1451(N1,N2,Progression3),
+	%%trialy2(Progression3,R3),
+	%%findbest(R3,Progression4),
+	repeat,
+	writeln(["Please enter harmony line in format e.g. [C,E,G] for",Form,"."]),
+	read_string(user_input, "\n", "\r", _End2, Progression4A),
+	atom_to_term(Progression4A,Progression4,_),
 	harmony(Form,CPT,Progression4,Harmony1,Harmony2).
 findmelody(Form,CPT,_Parts,N1,N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	CPT=classicalpop,
-	(CPT=1451->findall(A,note0(_,A),Notes);
-	findall(A,note0(_,A),Notes)),
-	%% What note should the phrase end on?
 	repeat,
-	trialy2(Notes,R1),
-	findbest(R1,N2),
-	popclassicalcomposition(N1,N2,Progression),
-	trialy2(Progression,R2),
-	findbest(R2,Progression2),
-	not(Progression2=[]),
+	writeln(["Please enter melody line for form",Form,"in format e.g. [d,di,r,ri,m,f,fi,s,si,l,li,t]."]),
+	read_string(user_input, "\n", "\r", _End2, Progression2B),
+	atom_to_term(Progression2B,Progression2A,_),
+	solfatonotes(Progression2A,[],Progression2),	not(Progression2=[]),
 	append(Melody1,[[Form,Progression2]],Melody2),
-	popclassicalcomposition(N1,N2,Progression3),
-	trialy2(Progression3,R3),
-	findbest(R3,Progression4),
+	%%versechorussoloprogression1451(N1,N2,Progression3),
+	%%trialy2(Progression3,R3),
+	%%findbest(R3,Progression4),
+	repeat,
+	writeln(["Please enter harmony line in format e.g. [C,E,G] for",Form,"."]),
+	read_string(user_input, "\n", "\r", _End2, Progression4A),
+	atom_to_term(Progression4A,Progression4,_),
 	harmony(Form,CPT,Progression4,Harmony1,Harmony2).
 
 harmony(Form,CPT,Progression,Harmony1,Harmony2) :-
@@ -288,7 +310,7 @@ harmony(Form,CPT,Progression,Harmony1,Harmony2) :-
 harmony1(_Form,_CPT,[],Harmony,Harmony) :- !.
 harmony1(Form,CPT,Progression1,Harmony1,Harmony2) :-
 	Progression1=[Note1|Progression2],
-	(CPT=1451->(harmony1451(Note1,2,Note2),harmony1451(Note1,4,Note3));
+	(CPT='1451'->(harmony1451(Note1,2,Note2),harmony1451(Note1,4,Note3));
 	(harmonyr(Note1,4,Note2),harmonyr(Note1,7,Note3))),
 	Harmony30=[Note2,Note3],
 	findall(B1,(member(A1,Harmony30),string_concat(B,_C,A1),string_length(B,1),atom_string(B1,B)),Harmony31),
@@ -301,9 +323,31 @@ harmony1451(Note1,Value2,Note2) :-
 harmonyr(Note1,Value2,Note2) :-
 	note(Value1,Note1),Value3 is Value1+Value2,Value4 is Value3 mod 12,note(Value4,Note2).
 
+
+solfatonotes([],Progression1,Progression1) :- !.
+solfatonotes(Progression2A,Progression1,Progression2) :-
+	Progression2A=[N1|Ns],
+	solfegenotetonote(N1,N2),
+	append(Progression1,[N2],Progression3),
+	solfatonotes(Ns,Progression3,Progression2).
+
+solfegenotetonote(d,'C').
+solfegenotetonote(di,'C#').
+solfegenotetonote(r,'D').
+solfegenotetonote(ri,'D#').
+solfegenotetonote(m,'E').
+solfegenotetonote(f,'F').
+solfegenotetonote(fi,'F#').
+solfegenotetonote(s,'G').
+solfegenotetonote(si,'G#').
+solfegenotetonote(l,'A').
+solfegenotetonote(li,'A#').
+solfegenotetonote(t,'B').
+
+
 instruments(Form1,MelodyInstruments,HarmonyInstruments,MelodyParts,HarmonyParts,Vocalstubinstrument) :-
-	instrumentnumber(MelodyInstrumentNumber),
-	instrumentnumber(HarmonyInstrumentNumber),
+	melodyinstrumentnumber(MelodyInstrumentNumber),
+	harmonyinstrumentnumber(HarmonyInstrumentNumber),
 	instrumentlist(MelodyInstrumentNumber,MelodyInstruments),
 	instrumentlist(HarmonyInstrumentNumber,HarmonyInstruments),
 	Vocalstubinstrument=[0,"Acoustic Grand Piano"],
@@ -314,9 +358,14 @@ instruments(Form1,MelodyInstruments,HarmonyInstruments,MelodyParts,HarmonyParts,
 	aggregate_all(count, (member(A2,HarmonyParts),not(A2=[_,_,0])), Count2),
 	not(Count2=0).	
 	
-instrumentnumber(NumberofInstruments) :-
+melodyinstrumentnumber(NumberofInstruments) :-
 	%% Number of melody instruments
-	trialy2([1,2,3],R1),
+	trialy2("Number of melody instruments?",[1,2,3,4,5,6,7,8,9,10],R1),
+	findbest(R1,NumberofInstruments).
+
+harmonyinstrumentnumber(NumberofInstruments) :-
+	%% Number of harmony instruments
+	trialy2("Number of harmony instruments?",[1,2,3,4,5,6,7,8,9,10],R1),
 	findbest(R1,NumberofInstruments).
 	
 instrumentlist(NumberofInstruments,Instruments) :-
@@ -326,7 +375,8 @@ instrumentlist(0,Instruments,Instruments) :- !.
 instrumentlist(NumberofInstruments1,Instruments1,Instruments2) :-
 	Instruments=[[0,"Acoustic Grand Piano"],[1,"Bright Acoustic Piano"],[2,"Electric Grand Piano"],[3,"Honky-Tonk Piano"],[4,"Electric Piano 1"],[5,"Electric Piano 2"],[6,"Harpsichord"],[7,"Clavinet"],[8,"Celesta"],[9,"Glockenspiel"],[10,"Music Box"],[11,"Vibraphone"],[12,"Marimba"],[13,"Xylophone"],[14,"Tubular Bells"],[15,"Dulcimer"],[16,"Drawbar Organ"],[17,"Percussive Organ"],[18,"Rock Organ"],[19,"Church Organ"],[20,"Reed Organ"],[21,"Accordian"],[22,"Harmonica"],[23,"Tango Accordian"],[24,"Nylon Acoustic Guitar"],[25,"Steel Acoustic Guitar"],[26,"Jazz Electric Guitar"],[27,"Clean Electric Guitar"],[28,"Muted Electric Guitar"],[29,"Overdriven Guitar"],[30,"Distortion Guitar"],[31,"Guitar Harmonics"],[32,"Acoustic Bass"],[33,"Electric Bass (finger)"],[34,"Electric Bass (pick)"],[35,"Fretless Bass"],[36,"Slap Bass 1"],[37,"Slap Bass 2"],[38,"Synth Bass 1"],[39,"Synth Bass 2"],[40,"Violin"],[41,"Viola"],[42,"Cello"],[43,"Contrabass"],[44,"Tremolo Strings"],[45,"Pizzicato Strings"],[46,"Orchestral Harp"],[47,"Timpani"],[48,"String Ensemble 1"],[49,"String Ensemble 2"],[50,"Synth Strings 1"],[51,"Synth Strings 2"],[52,"Choir Aahs"],[53,"Voice Oohs"],[54,"Synth Choir"],[55,"Orchestra Hit"],[56,"Trumpet"],[57,"Trombone"],[58,"Tuba"],[59,"Muted Trumpet"],[60,"French Horn"],[61,"Brass Section"],[62,"Synth Brass 1"],[63,"Synth Brass 2"],[64,"Soprano Sax"],[65,"Alto Sax"],[66,"Tenor Sax"],[67,"Baritone Sax"],[68,"Oboe"],[69,"English Horn"],[70,"Bassoon"],[71,"Clarinet"],[72,"Piccolo"],[73,"Flute"],[74,"Recorder"],[75,"Pan Flute"],[76,"Blown Bottle"],[77,"Shakuhachi"],[78,"Whistle"],[79,"Ocarina"],[80,"Lead 1 (square)"],[81,"Lead 2 (sawtooth)"],[82,"Lead 3 (calliope)"],[83,"Lead 4 (chiff)"],[84,"Lead 5 (charang)"],[85,"Lead 6 (voice)"],[86,"Lead 7 (fifths)"],[87,"Lead 8 (bass + lead)"],[88,"Pad 1 (new age)"],[89,"Pad 2 (warm)"],[90,"Pad 3 (polysynth)"],[91,"Pad 4 (choir)"],[92,"Pad 5 (bowed)"],[93,"Pad 6 (metallic)"],[94,"Pad 7 (halo)"],[95,"Pad 8 (sweep)"],[96,"FX 1 (rain)"],[97,"FX 2 (soundtrack)"],[98,"FX 3 (crystal)"],[99,"FX 4 (atmosphere)"],[100,"FX 5 (brightness)"],[101,"FX 6 (goblins)"],[102,"FX 7 (echoes)"],[103,"FX 8 (sci-fi)"],[104,"Sitar"],[105,"Banjo"],[106,"Shamisen"],[107,"Koto"],[108,"Kalimba"],[109,"Bagpipe"],[110,"Fiddle"],[111,"Shanai"],[112,"Tinkle Bell"],[113,"Agogo"],[114,"Steel Drums"],[115,"Woodblock"],[116,"Taiko Drum"],[117,"Melodic Tom"],[118,"Synth Drum"],[119,"Reverse Cymbal"],[120,"Guitar Fret Noise"],[121,"Breath Noise"],[122,"Seashore"]],
 	%% ,[123,"Bird Tweet"],[124,"Telephone Ring"],[125,"Helicopter"],[126,"Applause"],[127,"Gunshot"]
-	trialy2(Instruments,R1),
+	
+	trialy2("Please select an instrument from:",Instruments,R1),
 	findbest(R1,Instrument),
 	append(Instruments1,[Instrument],Instruments3),
 	NumberofInstruments2 is NumberofInstruments1-1,
@@ -347,7 +397,9 @@ parts2(Form1,Instrument,Part1,Part2) :-
 	Form1=[Section|Form2],
 	(member([Section,Instrument,Playing],Part1)->true;
 	%% Is the instrument playing in the section?
-	(trialy2([0,1],R1),
+	term_to_atom(Instrument,Instrument1),
+	concat_list("Is ",[Instrument1," playing in ",Section,"?"],Question),
+	(trialy2(Question,[0,1],R1),
 	findbest(R1,Playing))),
 	append(Part1,[[Section,Instrument,Playing]],Part3),
 	parts2(Form2,Instrument,Part3,Part2),!.
@@ -774,9 +826,9 @@ outputlyrics(File1,Lyrics1) :-
 	concat_list(File1,["lyrics.txt"],File2),
 	open_s(File2,write,Stream),
 	write(Stream,Lyrics8),
- 	close(Stream),
+ 	close(Stream).
 %%texttobr2(u,File2,u,u),texttobr(u,File2,u,u).
- 	writeln(["Texttobr, Texttobr2 not working.  Please manually breason out ",File2]).
+ 	%%writeln(["Texttobr, Texttobr2 not working.  Please manually breason out ",File2]).
 
 outputlyrics1([],Lyrics,Lyrics) :- !.
 outputlyrics1(Lyrics1,Lyrics5,Lyrics6) :-
@@ -948,8 +1000,16 @@ removenotrhyming2(Rhymes3,Verbs1,Verbs2,Verbs3) :-
 trialy2([],R) :-
 	R=[[_,['C']]].
 	%%writeln([[],in,trialy2]),abort.
-trialy2(List,R) :-
-	random_member(A,List),
+trialy2(Question,List,R) :-
+	%%random_member(A,List),
+	term_to_atom(List,List1),
+	repeat,
+	writeln([Question,%%"Please enter an item from:",
+		List1]),
+	read_string(user_input, "\n", "\r", _End2, A1),
+	atom_to_term(A1,A,_),
+	%%((number_string(A,A1)->true;atom_string(A,A1))->true;,
+	member(A,List),
 	R=[[_,A]].
 	
 	/**
@@ -1066,6 +1126,12 @@ list([L|Ls]) --> [L], list(Ls).
 comment(fiftyastest).
 comment(turnoffas).
 **/
+
+concat_list(A,[],A):-!.
+concat_list(A,List,B) :-
+	List=[Item|Items],
+	string_concat(A,Item,C),
+	concat_list(C,Items,B).
 
 remove_dups([],List,List) :- !.
 remove_dups(List1,List2,List3) :-
