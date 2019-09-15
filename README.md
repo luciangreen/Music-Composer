@@ -1,12 +1,12 @@
 # Music Composer
 
-Music Composer can help automate writing pop songs in three modes.  It outputs lyrics, asc2mid text file and MIDI music files.  Please don't close the window after running, to save the lyrics if randomly generated.
+Music Composer can help automate writing pop songs in three modes.  It outputs the lyrics text file, the asc2mid text file and a MIDI music file.
 
-1. In Mind Reading Mode (currently untested and switched off), because it can be done using option 2.
+1. Mind Reading Mode (currently untested and switched off because it can be done using option 2).
 
-2. By manually entering the creative choices.
+2. Manually entering the creative choices.
 
-3. Randomly generating form, lyrics, melody, harmony, parts that melody plays in, parts that harmony plays in and vocal stub instrument.
+3. Randomly generating form, lyrics, melody, harmony, parts that the melody plays in, parts that the harmony plays in and the vocal stub instrument.
 
 # Getting Started
 
