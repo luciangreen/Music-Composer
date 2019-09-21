@@ -233,7 +233,7 @@ not(Progression2=[]),
 	%%trialy2(Progression3,R3),
 	%%findbest(R3,Progression4),
 	repeat,
-	writeln(["Please enter harmony line in format e.g. [C,E,G] for",Form,"."]),
+	writeln(["Please enter harmony line in format e.g. ['C','E','G'] for",Form,"."]),
 	read_string(user_input, "\n", "\r", _End2, Progression4A),
 	atom_to_term(Progression4A,Progression4,_),
 
@@ -250,7 +250,7 @@ findmelody(Form,CPT,_Parts,N1,N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	%%trialy2(Progression3,R3),
 	%%findbest(R3,Progression4),
 	repeat,
-	writeln(["Please enter harmony line in format e.g. [C,E,G] for",Form,"."]),
+	writeln(["Please enter harmony line in format e.g. ['C','E','G'] for",Form,"."]),
 	read_string(user_input, "\n", "\r", _End2, Progression4A),
 	atom_to_term(Progression4A,Progression4,_),
 	harmony(Form,CPT,Progression4,Harmony1,Harmony2).
@@ -266,7 +266,7 @@ findmelody(Form,CPT,_Parts,N1,N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	%%trialy2(Progression3,R3),
 	%%findbest(R3,Progression4),
 	repeat,
-	writeln(["Please enter harmony line in format e.g. [C,E,G] for",Form,"."]),
+	writeln(["Please enter harmony line in format e.g. ['C','E','G'] for",Form,"."]),
 	read_string(user_input, "\n", "\r", _End2, Progression4A),
 	atom_to_term(Progression4A,Progression4,_),
 	harmony(Form,CPT,Progression4,Harmony1,Harmony2).
@@ -282,7 +282,7 @@ findmelody(Form,CPT,_Parts,N1,N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	%%trialy2(Progression3,R3),
 	%%findbest(R3,Progression4),
 	repeat,
-	writeln(["Please enter harmony line in format e.g. [C,E,G] for",Form,"."]),
+	writeln(["Please enter harmony line in format e.g. ['C','E','G'] for",Form,"."]),
 	read_string(user_input, "\n", "\r", _End2, Progression4A),
 	atom_to_term(Progression4A,Progression4,_),
 	harmony(Form,CPT,Progression4,Harmony1,Harmony2).
@@ -298,7 +298,7 @@ findmelody(Form,CPT,_Parts,N1,N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	%%trialy2(Progression3,R3),
 	%%findbest(R3,Progression4),
 	repeat,
-	writeln(["Please enter harmony line in format e.g. [C,E,G] for",Form,"."]),
+	writeln(["Please enter harmony line in format e.g. ['C','E','G'] for",Form,"."]),
 	read_string(user_input, "\n", "\r", _End2, Progression4A),
 	atom_to_term(Progression4A,Progression4,_),
 	harmony(Form,CPT,Progression4,Harmony1,Harmony2).
