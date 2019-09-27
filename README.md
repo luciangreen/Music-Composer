@@ -34,6 +34,10 @@ In the SWI-Prolog environment, enter the following to manually enter creative ch
 * Enter the following to randomly generate 4-note progressions:
 `['mindreadtestmusiccomposer-unusual-4'].`    
 
+* Follow instructions in https://github.com/luciangreen/listprologinterpreter/blob/master/Instructions_for_Using_texttobr(2).pl.txt when using texttobr, texttobr2 or mind reader to avoid medical problems.
+
+* Please follow instructions in init.txt to initialise any new mind-reading algorithms.
+
 * Enter the following to mind read songs with 4-note progressions:
 `['mindreadtestmusiccomposer-unusual-4-mr'].`    
 
