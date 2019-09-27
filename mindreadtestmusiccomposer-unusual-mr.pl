@@ -21,7 +21,7 @@ use_module(library(pio)).
 %%:- include('texttobr2qbmusic').
 
 :- include('musiclibrary').
-:- include('la_strings').
+:- include('la_strings_music').
 
 sectest(0) :- !.
 sectest(N1) :-
@@ -949,6 +949,8 @@ trialy2([],R) :-
 	R=[[_,['C']]].
 	%%writeln([[],in,trialy2]),abort.
 trialy2(List,R) :-
+%%writeln([list,List]),
+%%notrace,
 	length(List,Length),
 	((Length=<9->
 		findr4(R4),
@@ -966,7 +968,9 @@ trialy2(List,R) :-
 		findr4(R43),
 		formr5([R41,R42,R43],999,Length,R5),
 		findr(R5,List,R));
-	fail).
+	fail),
+	%%writeln([r,R]),trace.
+	true.
 
 findr4(R4) :-
 		List1=[0,1,2,3,4,5,6,7,8,9],
@@ -976,7 +980,7 @@ findr4(R4) :-
 		%%number_string(R3,R2),
 formr5(RList,Upper,Length,R5) :-
 		%%findall(D,(member(C,RList),floor(C,D)),RList2),
-		concat_list2(RList,R5A),
+		concat_list2A(RList,R5A),
 		number_string(R5B,R5A),
 		R5 is floor((R5B/Upper)*Length).
 findr(R4,List,R) :-
@@ -1122,12 +1126,12 @@ bash_command(Command, Output) :-
         read_string(Out, _, Output),
         close(Out)).
 
-concat_list2(A1,B):-
+concat_list2A(A1,B):-
 	A1=[A|List],
-	concat_list2(A,List,B),!.
+	concat_list2A(A,List,B),!.
 
-concat_list2(A,[],A):-!.
-concat_list2(A,List,B) :-
+concat_list2A(A,[],A):-!.
+concat_list2A(A,List,B) :-
 	List=[Item|Items],
 	string_concat(A,Item,C),
-	concat_list2(C,Items,B).
+	concat_list2A(C,Items,B).

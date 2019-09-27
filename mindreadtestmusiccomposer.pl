@@ -23,7 +23,7 @@
 :- include('1645').
 :- include('popclassical').
 :- include('classical').
-:- include('la_strings').
+:- include('la_strings_music').
 
 sectest0(Form1,Lyrics,Melody,Harmony,MelodyParts,HarmonyParts,Vocalstubinstrument,Song1) :-
 	form(Form1),
