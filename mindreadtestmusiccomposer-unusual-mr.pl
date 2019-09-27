@@ -976,7 +976,7 @@ findr4(R4) :-
 		%%number_string(R3,R2),
 formr5(RList,Upper,Length,R5) :-
 		%%findall(D,(member(C,RList),floor(C,D)),RList2),
-		concat_list(RList,R5A),
+		concat_list2(RList,R5A),
 		number_string(R5B,R5A),
 		R5 is floor((R5B/Upper)*Length).
 findr(R4,List,R) :-
@@ -1122,3 +1122,12 @@ bash_command(Command, Output) :-
         read_string(Out, _, Output),
         close(Out)).
 
+concat_list2(A1,B):-
+	A1=[A|List],
+	concat_list2(A,List,B),!.
+
+concat_list2(A,[],A):-!.
+concat_list2(A,List,B) :-
+	List=[Item|Items],
+	string_concat(A,Item,C),
+	concat_list2(C,Items,B).
