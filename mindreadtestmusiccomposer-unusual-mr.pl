@@ -982,7 +982,8 @@ formr5(RList,Upper,Length,R5) :-
 		%%findall(D,(member(C,RList),floor(C,D)),RList2),
 		concat_list2A(RList,R5A),
 		number_string(R5B,R5A),
-		R5 is floor((R5B/Upper)*Length).
+		R51 is floor((R5B/Upper)*Length),
+		(R5B=Upper->R5 is R51-1;R5=R51).
 findr(R4,List,R) :-
 		%%floor(R4,R4A),		
 		length(A,R4),
