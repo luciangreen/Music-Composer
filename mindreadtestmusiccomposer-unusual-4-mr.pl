@@ -4,4 +4,4 @@
 :- include('1645-4').
 :- include('popclassical-4').
 :- include('classical-4').
-:- include('la_strings').
+%%:- include('la_strings').
