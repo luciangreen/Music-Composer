@@ -6,7 +6,7 @@ Music Composer can help automate writing pop songs in three modes.  It outputs t
 
 2. Random generation of the creative choices.
 
-3. Mind reading mode (currently untested and switched off because it can be done using option 1).
+3. Mind reading mode.
 
 # Getting Started
 
@@ -33,6 +33,9 @@ In the SWI-Prolog environment, enter the following to manually enter creative ch
 
 * Enter the following to randomly generate 4-note progressions:
 `['mindreadtestmusiccomposer-unusual-4'].`    
+
+* Enter the following to mind read songs with 4-note progressions:
+`['mindreadtestmusiccomposer-unusual-4-mr'].`    
 
 * Running the algorithm
 To generate the song:
