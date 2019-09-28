@@ -1,0 +1,10 @@
+EQ
+
+Bass and guitar sound better separated by EQ (Arts College Song 30/12/13)
+See http://www.guitarplayer.com/article/7-eq-tips-for-mixing-guitar/150906
+
+Keep instruments in middle third of volume.
+
+Acoustic guitar – low 500, high 1.5 K
+Piano – high 400, low 2K
+Voice – high 2K
