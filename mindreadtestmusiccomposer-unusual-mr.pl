@@ -945,8 +945,13 @@ removenotrhyming2(Rhymes3,Verbs1,Verbs2,Verbs3) :-
 	removenotrhyming2(Rhymes3,Verbs5,
 	Verbs2,Verbs3)).
 	**/
-trialy2([],R) :-
+	
+/**
+trialy2a([],R) :-
 	R=[[_,['C']]].
+trialy2a(A,B) :-
+	trialy2(A,B).
+**/
 	%%writeln([[],in,trialy2]),abort.
 trialy2(List,R) :-
 %%writeln([list,List]),
