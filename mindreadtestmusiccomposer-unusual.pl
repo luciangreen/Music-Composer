@@ -952,6 +952,7 @@ trialy2a(A,B) :-
 	trialy2(A,B).
 **/
 	%%writeln([[],in,trialy2]),abort.
+trialy2([],[]).
 trialy2(List,R) :-
 	random_member(A,List),
 	R=[[_,A]].
