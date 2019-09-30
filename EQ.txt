@@ -5,6 +5,6 @@ See http://www.guitarplayer.com/article/7-eq-tips-for-mixing-guitar/150906
 
 Keep instruments in middle third of volume.
 
-Acoustic guitar – low 500, high 1.5 K
-Piano – high 400, low 2K
-Voice – high 2K
+Acoustic guitar - low 500, high 1.5 K
+Piano - high 400, low 2K
+Voice - high 2K
