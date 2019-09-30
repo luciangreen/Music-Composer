@@ -945,14 +945,9 @@ removenotrhyming2(Rhymes3,Verbs1,Verbs2,Verbs3) :-
 	removenotrhyming2(Rhymes3,Verbs5,
 	Verbs2,Verbs3)).
 	**/
-/**
-trialy2a([],R) :-
+trialy2([],R) :-
 	R=[[_,['C']]].
-trialy2a(A,B) :-
-	trialy2(A,B).
-**/
 	%%writeln([[],in,trialy2]),abort.
-trialy2([],[]).
 trialy2(List,R) :-
 	random_member(A,List),
 	R=[[_,A]].
