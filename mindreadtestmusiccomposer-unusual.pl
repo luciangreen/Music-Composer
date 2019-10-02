@@ -362,15 +362,18 @@ concat_list(A,List,B) :-
 
 concat_list(A,[],A) :-!.
 concat_list(A,List,B) :-
+writeln(here),
 	List=[Item|Items],
-	concat_list2(A,[Item],C),
-	concat_list(C,Items,B).
+	((Item=[_,Item3],Item3='C')->Item2=Item3;Item2=Item),
+	concat_list2(A,[Item2],C),
+	concat_list(C,Items,B),!.
 concat_list2(A,List,C) :-
 	((List=[[Item]]->true;List=[Item])->
 	string_concat(A,Item,C);
 	fail),!.
 concat_list2(A,Item,C) :-
 	concat_list(A,Item,C),!.
+	
 	
 sentencewithspaces(Sentence1,Sentence2) :-
 	Sentence1=[Item|Items],
