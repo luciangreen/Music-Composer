@@ -362,7 +362,6 @@ concat_list(A,List,B) :-
 
 concat_list(A,[],A) :-!.
 concat_list(A,List,B) :-
-writeln(here),
 	List=[Item|Items],
 	((Item=[_,Item3],Item3='C')->Item2=Item3;Item2=Item),
 	concat_list2(A,[Item2],C),
