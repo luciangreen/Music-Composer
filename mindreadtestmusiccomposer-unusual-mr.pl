@@ -93,10 +93,10 @@ form(Form) :-
 	)).
 
 makename(N3) :-
-	trialy2(["Ack","Luc","Add","All","Brae","Skye","Whist","Dix","Wilb","Duk","Le","Ven",
+	trialy2A(["Ack","Luc","Add","All","Brae","Skye","Whist","Dix","Wilb","Duk","Le","Ven",
 	"Syd","Don","Count","Black","Nei"],R1),
 	findbest(R1,N1),
-	trialy2(["an","ae","ye","ler","ee","ur","ard","ice","ney","ald","ess","el"],R2),
+	trialy2A(["an","ae","ye","ler","ee","ur","ard","ice","ney","ald","ess","el"],R2),
 	findbest(R2,N2),
 	append([N1],[N2],N3).
 
@@ -113,10 +113,10 @@ makenames(Num1,N1,N2) :-
 findsentence(Sentence,Names1,Names2) :-
 	makename(N1),readv(Vs),reado(Os),
 	makenames(5,[],N2s1),append(N2s1,Names1,N2s),
-	trialy2(Vs,R1),
+	trialy2A(Vs,R1),
 	findbest(R1,R11),
 	append(Os,N2s,Os2),
-	trialy2(Os2,R2),
+	trialy2A(Os2,R2),
 	findbest(R2,R21),
 	append_list(N1,[R11,R21],Sentence),
 	(member(R21,N2s1)->
@@ -129,12 +129,12 @@ findrhyme(Phrase1,Phrase2,Names1,Names2) :-
 	readv(Vs),reado(Os),makenames(5,[],N2s1),
 	append(N2s1,Names1,N2s),
 	append(Os,N2s,Os2),
-	trialy2(Os2,R2),
+	trialy2A(Os2,R2),
 	findbest(R2,R21),
-	trialy2(Vs,R1),
+	trialy2A(Vs,R1),
 	findbest(R1,R11),
 	findall(C,(member(C,N2s),reverse(C,B),B=[E|_],rhymes2(E,Lastsyllable)),Phrases22),
-	trialy2(Phrases22,R3),
+	trialy2A(Phrases22,R3),
 	findbest(R3,R31),
 	append_list(R21,[R11,R31],Phrase2),
 	(member(R21,N2s1)->
@@ -950,8 +950,14 @@ trialy2([],R) :-
 	R=[[_,['C']]].
 	%%writeln([[],in,trialy2]),abort.
 trialy2(List,R) :-
+	trialy2B(List,R).
 %%writeln([list,List]),
 %%notrace,
+trialy2A([],R) :-
+	R=[[_,'A']].
+trialy2A(List,R) :-
+	trialy2B(List,R).
+trialy2B(List,R) :-
 	length(List,Length),
 	((Length=<9->
 		findr4(R4),
