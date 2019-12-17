@@ -956,7 +956,7 @@ trialy2(List,R) :-
 %%writeln([list,List]),
 %%notrace,
 trialy2A([],R) :-
-	R=[[_,'A']].
+	R="A".%%R=[[_,'A']].
 trialy2A(List,R) :-
 	trialy2B(List,R).
 trialy2B(List,R) :-
