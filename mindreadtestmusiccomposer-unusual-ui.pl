@@ -69,7 +69,7 @@ findall(DH,(member(C1H,Lyrics),C1H=[_|C2H],member(CH,C2H),length(CH,DH)),EH),sor
 	%%	MelodyInstruments,HarmonyInstruments,MelodyParts,
 	%%	HarmonyParts,Lyrics,
 	%%	Vocalstubinstrument,Song1)), %%,
-
+%%trace,
 	rendersong(Form1,Voiceparts2,Maxlength,Melody,Harmony,
 		MelodyInstruments,HarmonyInstruments,MelodyParts,
 		HarmonyParts,Lyrics,
@@ -414,18 +414,15 @@ concat_list(A,List,B) :-
 
 concat_list(A,[],A) :-!.
 concat_list(A,List,B) :-
-writeln(here),
 	List=[Item|Items],
-	((Item=[_,Item3],Item3='C')->Item2=Item3;Item2=Item),
-	concat_list2(A,[Item2],C),
-	concat_list(C,Items,B),!.
+	concat_list2(A,[Item],C),
+	concat_list(C,Items,B).
 concat_list2(A,List,C) :-
 	((List=[[Item]]->true;List=[Item])->
 	string_concat(A,Item,C);
 	fail),!.
 concat_list2(A,Item,C) :-
 	concat_list(A,Item,C),!.
-	
 	
 sentencewithspaces(Sentence1,Sentence2) :-
 	Sentence1=[Item|Items],
@@ -452,7 +449,7 @@ rendersong(Form1,Voiceparts,_Maxlength,Melody,
 	length(HarmonyInstruments,HarmonyInstrumentsLength),
 	TracksNumber is MelodyInstrumentsLength+HarmonyInstrumentsLength+2,
 	Lyrics=[[_,Sentence1|_]|_],sentencewithspaces(Sentence1,Sentence2),
-	concat_list("format=1 tracks=", [TracksNumber, " division=384\n\nBA    1   CR         0   TR  0   CH 16   Text type 2: \"Produced by Mind Reading Music Composer by Lucian Academy (Manual Entry Mode)\"\nBA    1   CR         0   TR  0   CH 16   Text type 3: \"", Sentence2, "\"\nBA    1   CR         0   TR  0   CH  1   Channel volume 127\nBA    1   CR         0   TR  0   CH 16   Tempo 63.00009\n"], Song2),
+	concat_list("format=1 tracks=", [TracksNumber, " division=384\n\nBA    1   CR         0   TR  0   CH 16   Text type 2: \"Produced by Mind Reading Music Composer by Lucian Academy\"\nBA    1   CR         0   TR  0   CH 16   Text type 3: \"", Sentence2, "\"\nBA    1   CR         0   TR  0   CH  1   Channel volume 127\nBA    1   CR         0   TR  0   CH 16   Tempo 63.00009\n"], Song2),
 	printheader(Voicetrack,Vocalstubinstrument,Song2,Song3),
 	%%writeln(renderv1(Form1,Voiceparts,_,Lyrics,Melody,
 	%%	Totallength,Voicetrack,1,_,Song3,Song4)), %% ****
@@ -543,7 +540,9 @@ renderv2(Section1,Lyrics1,Melody1,_Totallength0,Track,Bar1,Bar2,Voice1,Voice2) :
 	atom_string(Section2,Section2A),
 	findall(Melody2,(member(Melody2,Melody1),
 	Melody2=[Section2|_]),Melody3),
-		Lyrics3=[[_, Lyrics1A,Lyrics2A,Lyrics3A,Lyrics4A]],
+		Lyrics3=[Lyrics3A1|Lyrics5],
+		%%trace,
+		Lyrics3A1=[_,Lyrics1A,Lyrics2A,Lyrics3A,Lyrics4A],
 	Melody3=[[_, Melody1A], [_, Melody2A]],
 	renderline1(Lyrics1A,Melody1A,_Totallength1,Track,Bar1,Voice1,Voice3),
 	Bar3 is Bar1+1,
@@ -553,8 +552,8 @@ renderv2(Section1,Lyrics1,Melody1,_Totallength0,Track,Bar1,Bar2,Voice1,Voice2) :
 	Bar5 is Bar4+1,
 	renderline1(Lyrics4A,Melody2A,_Totallength4,Track,Bar5,Voice5,Voice6),
 	Bar6 is Bar5+1,
-	delete(Lyrics1,[Section1|_],Lyrics5),
-	renderv2(Section1,Lyrics5,Melody1,_Totallength,Track,Bar6,Bar2,Voice6,Voice2).
+	delete(Lyrics1,[Section1|_],Lyrics51),
+	renderv2(Section1,Lyrics51,Melody1,_Totallength,Track,Bar6,Bar2,Voice6,Voice2).
 	
 renderline1(Lyrics2,Melody1,_Totallength,Track,Bar1,Voice1,Voice2) :-
 	%%Lyrics1=[_,Lyrics2],
