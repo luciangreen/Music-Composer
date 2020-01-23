@@ -54,6 +54,10 @@ To output the possible chord progressions from one note to another:
 `classicalcomposition('C','D',Progression).`
 `popclassicalcomposition('C','D',Progression).`
 
+# Note on Mind Reader
+
+Mind Reader is currently not configured to display screens and accurately mind read decisions.  It detects vague, not exact thoughts.
+
 # Versioning
 
 We will use SemVer for versioning.
