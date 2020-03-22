@@ -22,6 +22,11 @@ Requires asc2mid (http://www.archduke.org/midi/, compile with a C compiler befor
 
 Optional: Search for and download backdated version 6.0.5 of GarageBand and AlterEgo singing voice synthesis plug-in for old GarageBand for Mac or on Windows (https://www.plogue.com/downloads.html).
 
+
+# Installation from List Prolog Package Manager (LPPM)
+
+* Optionally, you can install from LPPM by installing <a href="https://www.swi-prolog.org/build/">SWI-Prolog</a> for your machine, downloading the <a href="https://github.com/luciangreen/List-Prolog-Package-Manager">LPPM Repository</a>, loading LPPM with `['lppm'].` then installing the package by running `lppm_install("luciangreen","Music-Composer").`.  Requires additional part below.
+
 # Installing
 
 * Download the repository to your machine.
