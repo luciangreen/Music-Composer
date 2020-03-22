@@ -21,7 +21,7 @@ use_module(library(pio)).
 %%:- include('texttobr2qbmusic').
 
 :- include('musiclibrary').
-:- include('la_strings_music').
+:- include('la_strings').
 
 sectest(0) :- !.
 sectest(N1) :-
