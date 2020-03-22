@@ -21,7 +21,7 @@ use_module(library(pio)).
 %%:- include('texttobr2qbmusic').
 
 :- include('musiclibrary').
-:- include('la_strings_music').
+:- include('../listprologinterpreter/la_strings').
 
 sectest(0) :- !.
 sectest(N1) :-
@@ -93,10 +93,10 @@ form(Form) :-
 	)).
 
 makename(N3) :-
-	trialy2A(["Ack","Luc","Add","All","Brae","Skye","Whist","Dix","Wilb","Duk","Le","Ven",
+	trialy2(["Ack","Luc","Add","All","Brae","Skye","Whist","Dix","Wilb","Duk","Le","Ven",
 	"Syd","Don","Count","Black","Nei"],R1),
 	findbest(R1,N1),
-	trialy2A(["an","ae","ye","ler","ee","ur","ard","ice","ney","ald","ess","el"],R2),
+	trialy2(["an","ae","ye","ler","ee","ur","ard","ice","ney","ald","ess","el"],R2),
 	findbest(R2,N2),
 	append([N1],[N2],N3).
 
@@ -113,10 +113,10 @@ makenames(Num1,N1,N2) :-
 findsentence(Sentence,Names1,Names2) :-
 	makename(N1),readv(Vs),reado(Os),
 	makenames(5,[],N2s1),append(N2s1,Names1,N2s),
-	trialy2A(Vs,R1),
+	trialy2(Vs,R1),
 	findbest(R1,R11),
 	append(Os,N2s,Os2),
-	trialy2A(Os2,R2),
+	trialy2(Os2,R2),
 	findbest(R2,R21),
 	append_list(N1,[R11,R21],Sentence),
 	(member(R21,N2s1)->
@@ -129,12 +129,12 @@ findrhyme(Phrase1,Phrase2,Names1,Names2) :-
 	readv(Vs),reado(Os),makenames(5,[],N2s1),
 	append(N2s1,Names1,N2s),
 	append(Os,N2s,Os2),
-	trialy2A(Os2,R2),
+	trialy2(Os2,R2),
 	findbest(R2,R21),
-	trialy2A(Vs,R1),
+	trialy2(Vs,R1),
 	findbest(R1,R11),
 	findall(C,(member(C,N2s),reverse(C,B),B=[E|_],rhymes2(E,Lastsyllable)),Phrases22),
-	trialy2A(Phrases22,R3),
+	trialy2(Phrases22,R3),
 	findbest(R3,R31),
 	append_list(R21,[R11,R31],Phrase2),
 	(member(R21,N2s1)->
@@ -324,9 +324,7 @@ instrumentlist(NumberofInstruments,Instruments) :-
 
 instrumentlist(0,Instruments,Instruments) :- !.
 instrumentlist(NumberofInstruments1,Instruments1,Instruments2) :-
-	Instruments=[[0,"Acoustic Grand Piano"],[1,"Bright Acoustic Piano"],[2,"Electric Grand Piano"],[3,"Honky-Tonk Piano"],[4,"Electric Piano 1"],[5,"Electric Piano 2"],[6,"Harpsichord"],[7,"Clavinet"],[8,"Celesta"],[9,"Glockenspiel"],[10,"Music Box"],[11,"Vibraphone"],[12,"Marimba"],[13,"Xylophone"],[14,"Tubular Bells"],[15,"Dulcimer"],[16,"Drawbar Organ"],[17,"Percussive Organ"],[18,"Rock Organ"],[19,"Church Organ"],[20,"Reed Organ"],[21,"Accordian"],[22,"Harmonica"],[23,"Tango Accordian"],[24,"Nylon Acoustic Guitar"],[25,"Steel Acoustic Guitar"],[26,"Jazz Electric Guitar"],[27,"Clean Electric Guitar"],[28,"Muted Electric Guitar"],[29,"Overdriven Guitar"],[30,"Distortion Guitar"],[31,"Guitar Harmonics"],[32,"Acoustic Bass"],[33,"Electric Bass (finger)"],[34,"Electric Bass (pick)"],[35,"Fretless Bass"],[36,"Slap Bass 1"],[37,"Slap Bass 2"],[38,"Synth Bass 1"],[39,"Synth Bass 2"],[40,"Violin"],[41,"Viola"],[42,"Cello"],[43,"Contrabass"],[44,"Tremolo Strings"],[45,"Pizzicato Strings"],[46,"Orchestral Harp"],[47,"Timpani"],[48,"String Ensemble 1"],[49,"String Ensemble 2"],[50,"Synth Strings 1"],[51,"Synth Strings 2"],[52,"Choir Aahs"],[53,"Voice Oohs"],[54,"Synth Choir"],[55,"Orchestra Hit"],[56,"Trumpet"],[57,"Trombone"],[58,"Tuba"],[59,"Muted Trumpet"],[60,"French Horn"],[61,"Brass Section"],[62,"Synth Brass 1"],[63,"Synth Brass 2"],[64,"Soprano Sax"],[65,"Alto Sax"],[66,"Tenor Sax"],[67,"Baritone Sax"],[68,"Oboe"],[69,"English Horn"],[70,"Bassoon"],[71,"Clarinet"],[72,"Piccolo"],[73,"Flute"],[74,"Recorder"],[75,"Pan Flute"],[76,"Blown Bottle"],[77,"Shakuhachi"],[78,"Whistle"],[79,"Ocarina"],[80,"Lead 1 (square)"],[81,"Lead 2 (sawtooth)"],[82,"Lead 3 (calliope)"],[83,"Lead 4 (chiff)"],[84,"Lead 5 (charang)"],[85,"Lead 6 (voice)"],[86,"Lead 7 (fifths)"],[87,"Lead 8 (bass + lead)"],[88,"Pad 1 (new age)"],[89,"Pad 2 (warm)"],[90,"Pad 3 (polysynth)"],[91,"Pad 4 (choir)"],[92,"Pad 5 (bowed)"],[93,"Pad 6 (metallic)"],[94,"Pad 7 (halo)"],[95,"Pad 8 (sweep)"],[96,"FX 1 (rain)"],[97,"FX 2 (soundtrack)"],[98,"FX 3 (crystal)"],[99,"FX 4 (atmosphere)"],[100,"FX 5 (brightness)"],[101,"FX 6 (goblins)"],[102,"FX 7 (echoes)"],[103,"FX 8 (sci-fi)"],[104,"Sitar"],[105,"Banjo"],[106,"Shamisen"],[107,"Koto"],[108,"Kalimba"],[109,"Bagpipe"],[110,"Fiddle"],[111,"Shanai"],[112,"Tinkle Bell"],[113,"Agogo"],[114,"Steel Drums"],[115,"Woodblock"],[116,"Taiko Drum"],[117,"Melodic Tom"],
-	[118,"Synth Drum"],
-	[119,"Reverse Cymbal"],[120,"Guitar Fret Noise"],[121,"Breath Noise"],[122,"Seashore"]],
+	Instruments=[[0,"Acoustic Grand Piano"],[1,"Bright Acoustic Piano"],[2,"Electric Grand Piano"],[3,"Honky-Tonk Piano"],[4,"Electric Piano 1"],[5,"Electric Piano 2"],[6,"Harpsichord"],[7,"Clavinet"],[8,"Celesta"],[9,"Glockenspiel"],[10,"Music Box"],[11,"Vibraphone"],[12,"Marimba"],[13,"Xylophone"],[14,"Tubular Bells"],[15,"Dulcimer"],[16,"Drawbar Organ"],[17,"Percussive Organ"],[18,"Rock Organ"],[19,"Church Organ"],[20,"Reed Organ"],[21,"Accordian"],[22,"Harmonica"],[23,"Tango Accordian"],[24,"Nylon Acoustic Guitar"],[25,"Steel Acoustic Guitar"],[26,"Jazz Electric Guitar"],[27,"Clean Electric Guitar"],[28,"Muted Electric Guitar"],[29,"Overdriven Guitar"],[30,"Distortion Guitar"],[31,"Guitar Harmonics"],[32,"Acoustic Bass"],[33,"Electric Bass (finger)"],[34,"Electric Bass (pick)"],[35,"Fretless Bass"],[36,"Slap Bass 1"],[37,"Slap Bass 2"],[38,"Synth Bass 1"],[39,"Synth Bass 2"],[40,"Violin"],[41,"Viola"],[42,"Cello"],[43,"Contrabass"],[44,"Tremolo Strings"],[45,"Pizzicato Strings"],[46,"Orchestral Harp"],[47,"Timpani"],[48,"String Ensemble 1"],[49,"String Ensemble 2"],[50,"Synth Strings 1"],[51,"Synth Strings 2"],[52,"Choir Aahs"],[53,"Voice Oohs"],[54,"Synth Choir"],[55,"Orchestra Hit"],[56,"Trumpet"],[57,"Trombone"],[58,"Tuba"],[59,"Muted Trumpet"],[60,"French Horn"],[61,"Brass Section"],[62,"Synth Brass 1"],[63,"Synth Brass 2"],[64,"Soprano Sax"],[65,"Alto Sax"],[66,"Tenor Sax"],[67,"Baritone Sax"],[68,"Oboe"],[69,"English Horn"],[70,"Bassoon"],[71,"Clarinet"],[72,"Piccolo"],[73,"Flute"],[74,"Recorder"],[75,"Pan Flute"],[76,"Blown Bottle"],[77,"Shakuhachi"],[78,"Whistle"],[79,"Ocarina"],[80,"Lead 1 (square)"],[81,"Lead 2 (sawtooth)"],[82,"Lead 3 (calliope)"],[83,"Lead 4 (chiff)"],[84,"Lead 5 (charang)"],[85,"Lead 6 (voice)"],[86,"Lead 7 (fifths)"],[87,"Lead 8 (bass + lead)"],[88,"Pad 1 (new age)"],[89,"Pad 2 (warm)"],[90,"Pad 3 (polysynth)"],[91,"Pad 4 (choir)"],[92,"Pad 5 (bowed)"],[93,"Pad 6 (metallic)"],[94,"Pad 7 (halo)"],[95,"Pad 8 (sweep)"],[96,"FX 1 (rain)"],[97,"FX 2 (soundtrack)"],[98,"FX 3 (crystal)"],[99,"FX 4 (atmosphere)"],[100,"FX 5 (brightness)"],[101,"FX 6 (goblins)"],[102,"FX 7 (echoes)"],[103,"FX 8 (sci-fi)"],[104,"Sitar"],[105,"Banjo"],[106,"Shamisen"],[107,"Koto"],[108,"Kalimba"],[109,"Bagpipe"],[110,"Fiddle"],[111,"Shanai"],[112,"Tinkle Bell"],[113,"Agogo"],[114,"Steel Drums"],[115,"Woodblock"],[116,"Taiko Drum"],[117,"Melodic Tom"],[118,"Synth Drum"],[119,"Reverse Cymbal"],[120,"Guitar Fret Noise"],[121,"Breath Noise"],[122,"Seashore"]],
 	%% ,[123,"Bird Tweet"],[124,"Telephone Ring"],[125,"Helicopter"],[126,"Applause"],[127,"Gunshot"]
 	trialy2(Instruments,R1),
 	findbest(R1,Instrument),
@@ -365,9 +363,8 @@ concat_list(A,List,B) :-
 concat_list(A,[],A) :-!.
 concat_list(A,List,B) :-
 	List=[Item|Items],
-	((Item=[_,Item3],Item3='C')->Item2=Item3;Item2=Item),
-	concat_list2(A,[Item2],C),
-	concat_list(C,Items,B),!.
+	concat_list2(A,[Item],C),
+	concat_list(C,Items,B).
 concat_list2(A,List,C) :-
 	((List=[[Item]]->true;List=[Item])->
 	string_concat(A,Item,C);
@@ -400,7 +397,7 @@ rendersong(Form1,Voiceparts,_Maxlength,Melody,
 	length(HarmonyInstruments,HarmonyInstrumentsLength),
 	TracksNumber is MelodyInstrumentsLength+HarmonyInstrumentsLength+2,
 	Lyrics=[[_,Sentence1|_]|_],sentencewithspaces(Sentence1,Sentence2),
-	concat_list("format=1 tracks=", [TracksNumber, " division=384\n\nBA    1   CR         0   TR  0   CH 16   Text type 2: \"Produced by Mind Reading Music Composer by Lucian Academy (Mind Reading Mode)\"\nBA    1   CR         0   TR  0   CH 16   Text type 3: \"", Sentence2, "\"\nBA    1   CR         0   TR  0   CH  1   Channel volume 127\nBA    1   CR         0   TR  0   CH 16   Tempo 63.00009\n"], Song2),
+	concat_list("format=1 tracks=", [TracksNumber, " division=384\n\nBA    1   CR         0   TR  0   CH 16   Text type 2: \"Produced by Mind Reading Music Composer by Lucian Academy\"\nBA    1   CR         0   TR  0   CH 16   Text type 3: \"", Sentence2, "\"\nBA    1   CR         0   TR  0   CH  1   Channel volume 127\nBA    1   CR         0   TR  0   CH 16   Tempo 63.00009\n"], Song2),
 	printheader(Voicetrack,Vocalstubinstrument,Song2,Song3),
 	%%writeln(renderv1(Form1,Voiceparts,_,Lyrics,Melody,
 	%%	Totallength,Voicetrack,1,_,Song3,Song4)), %% ****
@@ -952,14 +949,8 @@ trialy2([],R) :-
 	R=[[_,['C']]].
 	%%writeln([[],in,trialy2]),abort.
 trialy2(List,R) :-
-	trialy2B(List,R).
 %%writeln([list,List]),
 %%notrace,
-trialy2A([],R) :-
-	R=[[_,'A']].
-trialy2A(List,R) :-
-	trialy2B(List,R).
-trialy2B(List,R) :-
 	length(List,Length),
 	((Length=<9->
 		findr4(R4),
