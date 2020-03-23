@@ -397,7 +397,7 @@ rendersong(Form1,Voiceparts,_Maxlength,Melody,
 	length(HarmonyInstruments,HarmonyInstrumentsLength),
 	TracksNumber is MelodyInstrumentsLength+HarmonyInstrumentsLength+2,
 	Lyrics=[[_,Sentence1|_]|_],sentencewithspaces(Sentence1,Sentence2),
-	concat_list("format=1 tracks=", [TracksNumber, " division=384\n\nBA    1   CR         0   TR  0   CH 16   Text type 2: \"Produced by Mind Reading Music Composer by Lucian Academy\"\nBA    1   CR         0   TR  0   CH 16   Text type 3: \"", Sentence2, "\"\nBA    1   CR         0   TR  0   CH  1   Channel volume 127\nBA    1   CR         0   TR  0   CH 16   Tempo 63.00009\n"], Song2),
+	concat_list("format=1 tracks=", [TracksNumber, " division=384\n\nBA    1   CR         0   TR  0   CH 16   Text type 2: \"Produced by Mind Reading Music Composer by Lucian Academy (Mind Reading Mode)\"\nBA    1   CR         0   TR  0   CH 16   Text type 3: \"", Sentence2, "\"\nBA    1   CR         0   TR  0   CH  1   Channel volume 127\nBA    1   CR         0   TR  0   CH 16   Tempo 63.00009\n"], Song2),
 	printheader(Voicetrack,Vocalstubinstrument,Song2,Song3),
 	%%writeln(renderv1(Form1,Voiceparts,_,Lyrics,Melody,
 	%%	Totallength,Voicetrack,1,_,Song3,Song4)), %% ****
