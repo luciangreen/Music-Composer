@@ -29,8 +29,6 @@ Optional: Search for and download backdated version 6.0.5 of GarageBand and Alte
 
 # Installing
 
-Install List Prolog Interpreter Repository (https://github.com/luciangreen/listprologinterpreter).
-
 * Download the repository to your machine.
 In the SWI-Prolog environment, enter the following to manually enter creative choices:
 `['mindreadtestmusiccomposer-unusual-4-userinput'].`    
