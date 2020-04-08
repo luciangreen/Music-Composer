@@ -63,6 +63,8 @@ To output the possible chord progressions from one note to another:
 
 Mind Reader is currently not configured to display screens and accurately mind read decisions.  It detects vague, not exact thoughts.
 
+* If necessary, repeat the "arem" mantra all the time while the mind reading computation is running to ensure the best results.
+
 # Versioning
 
 We will use SemVer for versioning.
