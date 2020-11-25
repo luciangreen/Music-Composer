@@ -975,8 +975,14 @@ trialy2(List,R) :-
 findr4(R4) :-
 		List1=[0,1,2,3,4,5,6,7,8,9],
 		Trials is 30,
-		trialy22(List1,Trials,[],R1),
-		findbest2(R1,R4).
+catch(
+	(trialy22(List1,Trials,[],R1),
+	findbest2(R1,R4)
+	%writeln1([item,Item])
+	),
+   _,
+	findr4(R4)
+	).
 		%%number_string(R3,R2),
 formr5(RList,Upper,Length,R5) :-
 		%%findall(D,(member(C,RList),floor(C,D)),RList2),
