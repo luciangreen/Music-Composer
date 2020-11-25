@@ -975,14 +975,15 @@ trialy2(List,R) :-
 findr4(R4) :-
 		List1=[0,1,2,3,4,5,6,7,8,9],
 		Trials is 30,
-catch(
+%catch(
 	(trialy22(List1,Trials,[],R1),
 	findbest2(R1,R4)
 	%writeln1([item,Item])
-	),
-   _,
-	findr4(R4)
-	).
+	)
+   %_,
+	%findr4(R4)
+	%)
+	.
 		%%number_string(R3,R2),
 formr5(RList,Upper,Length,R5) :-
 		%%findall(D,(member(C,RList),floor(C,D)),RList2),
@@ -1033,7 +1034,11 @@ trialy1(R1) :-
 	mean(S02,A2),
 	(A1>A2->R1=true;R1=fail).
 
-trial0(S3) :- N is 10, trial1(N,[],S),trial01(S,S3).
+trial0(S3) :- N is 10, 
+catch(
+	(trial1(N,[],S),trial01(S,S3)),
+   _,
+	trial0(S3)).
 trial01(S1,S3) :-
 	sort(S1,S),
 	%%midpoint(S,MP),
