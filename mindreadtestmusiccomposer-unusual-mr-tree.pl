@@ -22,6 +22,8 @@ use_module(library(pio)).
 
 :- include('musiclibrary').
 :- include('la_strings').
+:- include('../mindreader/make_mind_reading_tree4 working1.pl').
+:- include('instruments_mr-tree.pl').
 
 sectest(0) :- !.
 sectest(N1) :-
@@ -93,11 +95,9 @@ form(Form) :-
 	)).
 
 makename(N3) :-
-	trialy2(["Ack","Luc","Add","All","Brae","Skye","Whist","Dix","Wilb","Duk","Le","Ven",
-	"Syd","Don","Count","Black","Nei"],R1),
-	findbest(R1,N1),
-	trialy2(["an","ae","ye","ler","ee","ur","ard","ice","ney","ald","ess","el"],R2),
-	findbest(R2,N2),
+	mind_read(N1,["Ack","Luc","Add","All","Brae","Skye","Whist","Dix","Wilb","Duk","Le","Ven",
+	"Syd","Don","Count","Black","Nei"]),
+	mind_read(N2,["an","ae","ye","ler","ee","ur","ard","ice","ney","ald","ess","el"]),
 	append([N1],[N2],N3).
 
 makenames(0,Ns,Ns) :- !.
@@ -113,11 +113,9 @@ makenames(Num1,N1,N2) :-
 findsentence(Sentence,Names1,Names2) :-
 	makename(N1),readv(Vs),reado(Os),
 	makenames(5,[],N2s1),append(N2s1,Names1,N2s),
-	trialy2(Vs,R1),
-	findbest(R1,R11),
+	mind_read(R11,Vs),
 	append(Os,N2s,Os2),
-	trialy2(Os2,R2),
-	findbest(R2,R21),
+	mind_read(R21,Os2),
 	append_list(N1,[R11,R21],Sentence),
 	(member(R21,N2s1)->
 		append(Names1,[R21],Names2);
@@ -129,13 +127,10 @@ findrhyme(Phrase1,Phrase2,Names1,Names2) :-
 	readv(Vs),reado(Os),makenames(5,[],N2s1),
 	append(N2s1,Names1,N2s),
 	append(Os,N2s,Os2),
-	trialy2(Os2,R2),
-	findbest(R2,R21),
-	trialy2(Vs,R1),
-	findbest(R1,R11),
+	mind_read(R21,Os2),
+	mind_read(R11,Vs),
 	findall(C,(member(C,N2s),reverse(C,B),B=[E|_],rhymes2(E,Lastsyllable)),Phrases22),
-	trialy2(Phrases22,R3),
-	findbest(R3,R31),
+	mind_read(R31,Phrases22),
 	append_list(R21,[R11,R31],Phrase2),
 	(member(R21,N2s1)->
 		append(Names1,[R21],Names3);
@@ -201,16 +196,13 @@ findmelody(Form,CPT,_Parts,N1,N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	findall(A,note0(_,A),Notes)),
 	%% What note should the phrase end on?
 	repeat,
-	trialy2(Notes,R1),
-	findbest(R1,N2),
+	mind_read(N2,Notes),
 	versechorussoloprogression1451(N1,N2,Progression),
-	trialy2(Progression,R2),
-	findbest(R2,Progression2),
+	mind_read(Progression2,Progression),
 	not(Progression2=[]),
 	append(Melody1,[[Form,Progression2]],Melody2),
 	versechorussoloprogression1451(N1,N2,Progression3),
-	trialy2(Progression3,R3),
-	findbest(R3,Progression4),
+	mind_read(Progression4,Progression3),
 	harmony(Form,CPT,Progression4,Harmony1,Harmony2).	
 findmelody(Form,CPT,_Parts,N1,N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	CPT=1564,
@@ -218,16 +210,13 @@ findmelody(Form,CPT,_Parts,N1,N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	findall(A,note0(_,A),Notes)),
 	%% What note should the phrase end on?
 	repeat, %% *1 see other *1
-	trialy2(Notes,R1),
-	findbest(R1,N2),
+	mind_read(N2,Notes),
 	versechorussoloprogression1564(N1,N2,Progression),
-	trialy2(Progression,R2),
-	findbest(R2,Progression2),
+	mind_read(Progression2,Progression),
 	not(Progression2=[]),
 	append(Melody1,[[Form,Progression2]],Melody2),
 	versechorussoloprogression1564(N1,N2,Progression3),
-	trialy2(Progression3,R3),
-	findbest(R3,Progression4),
+	mind_read(Progression4,Progression3),
 	harmony(Form,CPT,Progression4,Harmony1,Harmony2).
 findmelody(Form,CPT,_Parts,N1,N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	CPT=1645,
@@ -235,16 +224,13 @@ findmelody(Form,CPT,_Parts,N1,N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	findall(A,note0(_,A),Notes)),
 	%% What note should the phrase end on?
 	repeat,
-	trialy2(Notes,R1),
-	findbest(R1,N2),
+	mind_read(N2,Notes),
 	versechorussoloprogression1645(N1,N2,Progression),
-	trialy2(Progression,R2),
-	findbest(R2,Progression2),
+	mind_read(Progression2,Progression),
 	not(Progression2=[]),
 	append(Melody1,[[Form,Progression2]],Melody2),
 	versechorussoloprogression1645(N1,N2,Progression3),
-	trialy2(Progression3,R3),
-	findbest(R3,Progression4),
+	mind_read(Progression4,Progression3),
 	harmony(Form,CPT,Progression4,Harmony1,Harmony2).
 findmelody(Form,CPT,_Parts,N1,N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	CPT=classical,
@@ -252,16 +238,13 @@ findmelody(Form,CPT,_Parts,N1,N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	findall(A,note0(_,A),Notes)),
 	%% What note should the phrase end on?
 	repeat,
-	trialy2(Notes,R1),
-	findbest(R1,N2),
+	mind_read(N2,Notes),
 	classicalcomposition(N1,N2,Progression),
-	trialy2(Progression,R2),
-	findbest(R2,Progression2),
+	mind_read(Progression2,Progression),
 	not(Progression2=[]),
 	append(Melody1,[[Form,Progression2]],Melody2),
 	classicalcomposition(N1,N2,Progression3),
-	trialy2(Progression3,R3),
-	findbest(R3,Progression4),
+	mind_read(Progression4,Progression3),
 	harmony(Form,CPT,Progression4,Harmony1,Harmony2).
 findmelody(Form,CPT,_Parts,N1,N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	CPT=classicalpop,
@@ -269,16 +252,13 @@ findmelody(Form,CPT,_Parts,N1,N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	findall(A,note0(_,A),Notes)),
 	%% What note should the phrase end on?
 	repeat,
-	trialy2(Notes,R1),
-	findbest(R1,N2),
+	mind_read(N2,Notes),
 	popclassicalcomposition(N1,N2,Progression),
-	trialy2(Progression,R2),
-	findbest(R2,Progression2),
+	mind_read(Progression2,Progression),
 	not(Progression2=[]),
 	append(Melody1,[[Form,Progression2]],Melody2),
 	popclassicalcomposition(N1,N2,Progression3),
-	trialy2(Progression3,R3),
-	findbest(R3,Progression4),
+	mind_read(Progression4,Progression3),
 	harmony(Form,CPT,Progression4,Harmony1,Harmony2).
 
 harmony(Form,CPT,Progression,Harmony1,Harmony2) :-
@@ -316,8 +296,7 @@ instruments(Form1,MelodyInstruments,HarmonyInstruments,MelodyParts,HarmonyParts,
 	
 instrumentnumber(NumberofInstruments) :-
 	%% Number of melody instruments
-	trialy2([1,2,3],R1),
-	findbest(R1,NumberofInstruments).
+	mind_read(NumberofInstruments,[1,2,3]).
 	
 instrumentlist(NumberofInstruments,Instruments) :-
 	instrumentlist(NumberofInstruments,[],Instruments),!.
@@ -326,8 +305,7 @@ instrumentlist(0,Instruments,Instruments) :- !.
 instrumentlist(NumberofInstruments1,Instruments1,Instruments2) :-
 	Instruments=[[0,"Acoustic Grand Piano"],[1,"Bright Acoustic Piano"],[2,"Electric Grand Piano"],[3,"Honky-Tonk Piano"],[4,"Electric Piano 1"],[5,"Electric Piano 2"],[6,"Harpsichord"],[7,"Clavinet"],[8,"Celesta"],[9,"Glockenspiel"],[10,"Music Box"],[11,"Vibraphone"],[12,"Marimba"],[13,"Xylophone"],[14,"Tubular Bells"],[15,"Dulcimer"],[16,"Drawbar Organ"],[17,"Percussive Organ"],[18,"Rock Organ"],[19,"Church Organ"],[20,"Reed Organ"],[21,"Accordian"],[22,"Harmonica"],[23,"Tango Accordian"],[24,"Nylon Acoustic Guitar"],[25,"Steel Acoustic Guitar"],[26,"Jazz Electric Guitar"],[27,"Clean Electric Guitar"],[28,"Muted Electric Guitar"],[29,"Overdriven Guitar"],[30,"Distortion Guitar"],[31,"Guitar Harmonics"],[32,"Acoustic Bass"],[33,"Electric Bass (finger)"],[34,"Electric Bass (pick)"],[35,"Fretless Bass"],[36,"Slap Bass 1"],[37,"Slap Bass 2"],[38,"Synth Bass 1"],[39,"Synth Bass 2"],[40,"Violin"],[41,"Viola"],[42,"Cello"],[43,"Contrabass"],[44,"Tremolo Strings"],[45,"Pizzicato Strings"],[46,"Orchestral Harp"],[47,"Timpani"],[48,"String Ensemble 1"],[49,"String Ensemble 2"],[50,"Synth Strings 1"],[51,"Synth Strings 2"],[52,"Choir Aahs"],[53,"Voice Oohs"],[54,"Synth Choir"],[55,"Orchestra Hit"],[56,"Trumpet"],[57,"Trombone"],[58,"Tuba"],[59,"Muted Trumpet"],[60,"French Horn"],[61,"Brass Section"],[62,"Synth Brass 1"],[63,"Synth Brass 2"],[64,"Soprano Sax"],[65,"Alto Sax"],[66,"Tenor Sax"],[67,"Baritone Sax"],[68,"Oboe"],[69,"English Horn"],[70,"Bassoon"],[71,"Clarinet"],[72,"Piccolo"],[73,"Flute"],[74,"Recorder"],[75,"Pan Flute"],[76,"Blown Bottle"],[77,"Shakuhachi"],[78,"Whistle"],[79,"Ocarina"],[80,"Lead 1 (square)"],[81,"Lead 2 (sawtooth)"],[82,"Lead 3 (calliope)"],[83,"Lead 4 (chiff)"],[84,"Lead 5 (charang)"],[85,"Lead 6 (voice)"],[86,"Lead 7 (fifths)"],[87,"Lead 8 (bass + lead)"],[88,"Pad 1 (new age)"],[89,"Pad 2 (warm)"],[90,"Pad 3 (polysynth)"],[91,"Pad 4 (choir)"],[92,"Pad 5 (bowed)"],[93,"Pad 6 (metallic)"],[94,"Pad 7 (halo)"],[95,"Pad 8 (sweep)"],[96,"FX 1 (rain)"],[97,"FX 2 (soundtrack)"],[98,"FX 3 (crystal)"],[99,"FX 4 (atmosphere)"],[100,"FX 5 (brightness)"],[101,"FX 6 (goblins)"],[102,"FX 7 (echoes)"],[103,"FX 8 (sci-fi)"],[104,"Sitar"],[105,"Banjo"],[106,"Shamisen"],[107,"Koto"],[108,"Kalimba"],[109,"Bagpipe"],[110,"Fiddle"],[111,"Shanai"],[112,"Tinkle Bell"],[113,"Agogo"],[114,"Steel Drums"],[115,"Woodblock"],[116,"Taiko Drum"],[117,"Melodic Tom"],[118,"Synth Drum"],[119,"Reverse Cymbal"],[120,"Guitar Fret Noise"],[121,"Breath Noise"],[122,"Seashore"]],
 	%% ,[123,"Bird Tweet"],[124,"Telephone Ring"],[125,"Helicopter"],[126,"Applause"],[127,"Gunshot"]
-	trialy2(Instruments,R1),
-	findbest(R1,Instrument),
+	mind_read_instruments(Instrument,Instruments),
 	append(Instruments1,[Instrument],Instruments3),
 	NumberofInstruments2 is NumberofInstruments1-1,
 	instrumentlist(NumberofInstruments2,Instruments3,Instruments2),!.
@@ -347,8 +325,7 @@ parts2(Form1,Instrument,Part1,Part2) :-
 	Form1=[Section|Form2],
 	(member([Section,Instrument,Playing],Part1)->true;
 	%% Is the instrument playing in the section?
-	(trialy2([0,1],R1),
-	findbest(R1,Playing))),
+	(mind_read(Playing,[0,1]))),
 	append(Part1,[[Section,Instrument,Playing]],Part3),
 	parts2(Form2,Instrument,Part3,Part2),!.
 	
@@ -360,42 +337,31 @@ concat_list(A,List,B) :-
 	concat_list(C,Items,B).
 **/
 
-concat_list(A,[],A) :-!.
-concat_list(A,List,B) :-
+concat_list3(A,[],A) :-!.
+concat_list3(A,List,B) :-
 	List=[Item|Items],
 	concat_list2(A,[Item],C),
-	concat_list(C,Items,B).
+	concat_list3(C,Items,B).
 concat_list2(A,List,C) :-
 	((List=[[Item|Items]]->true;List=[Item])->
-	concat_list0(A,[" ",Item," "|Items],C);
+	concat_list(A,[" ",Item," "|Items],C);
 	fail),!.
 concat_list2(A,Item,C) :-
-	concat_list(A,Item,C),!.
+	concat_list3(A,Item,C),!.
 	
-concat_list0([],""):-!.
-concat_list0(A1,B):-
-	A1=[A|List],
-	concat_list0(A,List,B),!.
-
-concat_list0(A,[],A):-!.
-concat_list0(A,List,B) :-
-	List=[Item|Items],
-	string_concat(A,Item,C),
-	concat_list0(C,Items,B).
-
 sentencewithspaces(Sentence1,Sentence2) :-
 	Sentence1=[Item|Items],
 	string_concat(Firstletter1,Rest,Item),
 	string_length(Firstletter1,1),
 	upcase_atom(Firstletter1,Firstletter2),
-	concat_list(Firstletter2,[Rest,""],Item2),
+	concat_list3(Firstletter2,[Rest,""],Item2),
 	sentencewithspaces(Items,Item2,Sentence3),
 	string_concat(Sentence3,".",Sentence2).
 
 sentencewithspaces([],Sentence,Sentence) :- !.
 sentencewithspaces(Sentence1,Sentence2,Sentence3) :-
 	Sentence1=[Word|Sentence4],
-	concat_list("",[Sentence2," ",Word],Item2),
+	concat_list3("",[Sentence2," ",Word],Item2),
 	sentencewithspaces(Sentence4,Item2,Sentence3),!.
 
 rendersong(Form1,Voiceparts,_Maxlength,Melody,
@@ -408,7 +374,7 @@ rendersong(Form1,Voiceparts,_Maxlength,Melody,
 	length(HarmonyInstruments,HarmonyInstrumentsLength),
 	TracksNumber is MelodyInstrumentsLength+HarmonyInstrumentsLength+2,
 	Lyrics=[[_,Sentence1|_]|_],sentencewithspaces(Sentence1,Sentence2),
-	concat_list("format=1 tracks=", [TracksNumber, " division=384\n\nBA    1   CR         0   TR  0   CH 16   Text type 2: \"Produced by Mind Reading Music Composer by Lucian Academy (Mind Reading Mode)\"\nBA    1   CR         0   TR  0   CH 16   Text type 3: \"", Sentence2, "\"\nBA    1   CR         0   TR  0   CH  1   Channel volume 127\nBA    1   CR         0   TR  0   CH 16   Tempo 63.00009\n"], Song2),
+	concat_list3("format=1 tracks=", [TracksNumber, " division=384\n\nBA    1   CR         0   TR  0   CH 16   Text type 2: \"Produced by Mind Reading Music Composer by Lucian Academy (Mind Reading Mode)\"\nBA    1   CR         0   TR  0   CH 16   Text type 3: \"", Sentence2, "\"\nBA    1   CR         0   TR  0   CH  1   Channel volume 127\nBA    1   CR         0   TR  0   CH 16   Tempo 63.00009\n"], Song2),
 	printheader(Voicetrack,Vocalstubinstrument,Song2,Song3),
 	%%writeln(renderv1(Form1,Voiceparts,_,Lyrics,Melody,
 	%%	Totallength,Voicetrack,1,_,Song3,Song4)), %% ****
@@ -422,15 +388,15 @@ rendersong(Form1,Voiceparts,_Maxlength,Melody,
 	Track4,_Track5,Song5,Song6),
 	length(Form1,FormLength),
 	TotalBars is 4*FormLength+1,
-	concat_list(Song6,["BA    ",TotalBars,"   CR         0   TR  0   CH 16   End of track"],Song1),
+	concat_list3(Song6,["BA    ",TotalBars,"   CR         0   TR  0   CH 16   End of track"],Song1),
 		get_time(TS),stamp_date_time(TS,date(Year,Month,Day,Hour1,Minute1,Seconda,_A,_TZ,_False),local),
-	concat_list("song",[Year,Month,Day,Hour1,Minute1,Seconda],File1),
-	concat_list(File1,[".txt"],File2),
-	concat_list(File1,[".mid"],File3),
+	concat_list3("song",[Year,Month,Day,Hour1,Minute1,Seconda],File1),
+	concat_list3(File1,[".txt"],File2),
+	concat_list3(File1,[".mid"],File3),
 	open_s(File2,write,Stream),
 	write(Stream,Song1),
  	close(Stream),
- 	concat_list("./asc2mid ",[File2," > ",File3],Command),
+ 	concat_list3("./asc2mid ",[File2," > ",File3],Command),
  	shell1_s(Command),
  	%%writeln(["Texttobr, Texttobr2 not working.  Please manually breason out ",File2]),
  	%%N is 4, M is 4000,  texttobr2(N,File2,u,M),texttobr(N,File2,u,M),
@@ -468,7 +434,7 @@ rendersong(Form1,Voiceparts,_Maxlength,Melody,
 printheader(Voicetrack,Vocalstubinstrument,Song1,Song2) :-
 	Vocalstubinstrument=[N1,_],
 	N2 is N1+1,
-	concat_list("BA    1   CR         0   TR  ",[Voicetrack,"   CH  ",Voicetrack,"   Instrument ",N2,"\nBA    1   CR         0   TR  ",Voicetrack,"   CH  ",Voicetrack,"   NT  R            0   von=127   voff=0\n"],Song3),
+	concat_list3("BA    1   CR         0   TR  ",[Voicetrack,"   CH  ",Voicetrack,"   Instrument ",N2,"\nBA    1   CR         0   TR  ",Voicetrack,"   CH  ",Voicetrack,"   NT  R            0   von=127   voff=0\n"],Song3),
 	string_concat(Song1,Song3,Song2).
 
 renderv1([],_Voiceparts,_Vocalstubinstrument,_Lyrics,_Melody,_Totallength,_Track,_Bar,_Bar2,Voice,Voice) :- !.
@@ -559,14 +525,14 @@ renderline2(BarTimes,BarTimes,[],_Track,_Bar1,Voice,Voice) :- !.
 renderline2(BarTimes1,BarTimes4,Melody1,Track,Bar,Voice1,Voice2) :-
 	Melody1=[Melody2|Melody3],
 	BarTimes1=[BarTimes2|BarTimes3],
-	concat_list("BA    ",[Bar,"   CR         ",BarTimes2,"   TR  ",Track,"   CH  ",Track,"   NT  ",Melody2,"-           1/2   voff=0\n"],Song),	
+	concat_list3("BA    ",[Bar,"   CR         ",BarTimes2,"   TR  ",Track,"   CH  ",Track,"   NT  ",Melody2,"-           1/2   voff=0\n"],Song),	
 	string_concat(Voice1,Song,Voice3),
 	renderline2(BarTimes3,BarTimes4,Melody3,Track,Bar,Voice3,Voice2).
 
 renderlinerests(BarTimes,BarTimes,_Track,_Bar1,Voice,Voice) :- !.
 renderlinerests(BarTimes1,BarTimes2,Track,Bar,Voice1,Voice2) :-
 	BarTimes1=[BarTimes2|BarTimes3],
-	concat_list("BA    ",[Bar,"   CR         ",BarTimes2,"   TR  ",Track,"   CH  ",Track,"   NT  R            1/2   voff=0\n"],Song),
+	concat_list3("BA    ",[Bar,"   CR         ",BarTimes2,"   TR  ",Track,"   CH  ",Track,"   NT  R            1/2   voff=0\n"],Song),
 	string_concat(Voice1,Song,Voice3),
 	renderlinerests(BarTimes3,BarTimes2,Track,Bar,Voice3,Voice2).
 	
@@ -769,10 +735,10 @@ renderlineh2(BarTimes1,BarTimes4,Melody1,Track,Bar,Voice1,Voice2) :-
 	Melody1=[Melody2|Melody3],
 	Melody2=[_,[Melody21,Melody22,Melody23]],
 	BarTimes1=[BarTimes2|BarTimes3],
-	concat_list("BA    ",[Bar,"   CR         ",BarTimes2,"   TR  ",Track,"   CH  ",Track,"   NT  ",Melody21,"-           1/2   voff=0\n"],Song1),	
-	concat_list("BA    ",[Bar,"   CR         ",BarTimes2,"   TR  ",Track,"   CH  ",Track,"   NT  ",Melody22,"-           1/2   voff=0\n"],Song2),	
-	concat_list("BA    ",[Bar,"   CR         ",BarTimes2,"   TR  ",Track,"   CH  ",Track,"   NT  ",Melody23,"-           1/2   voff=0\n"],Song3),	
-	concat_list(Voice1,[Song1,Song2,Song3],Voice3),
+	concat_list3("BA    ",[Bar,"   CR         ",BarTimes2,"   TR  ",Track,"   CH  ",Track,"   NT  ",Melody21,"-           1/2   voff=0\n"],Song1),	
+	concat_list3("BA    ",[Bar,"   CR         ",BarTimes2,"   TR  ",Track,"   CH  ",Track,"   NT  ",Melody22,"-           1/2   voff=0\n"],Song2),	
+	concat_list3("BA    ",[Bar,"   CR         ",BarTimes2,"   TR  ",Track,"   CH  ",Track,"   NT  ",Melody23,"-           1/2   voff=0\n"],Song3),	
+	concat_list3(Voice1,[Song1,Song2,Song3],Voice3),
 	renderlineh2(BarTimes3,BarTimes4,Melody3,Track,Bar,Voice3,Voice2).
 
 outputlyrics(File1,Lyrics1) :-
@@ -782,7 +748,7 @@ outputlyrics(File1,Lyrics1) :-
 	sentencewithspaces(Lyrics5,Lyrics7A),
 	string_concat(Lyrics7A,"\n\n",Lyrics7),
 	outputlyrics1(Lyrics1,Lyrics7,Lyrics8),
-	concat_list(File1,["lyrics.txt"],File2),
+	concat_list3(File1,["lyrics.txt"],File2),
 	open_s(File2,write,Stream),
 	write(Stream,Lyrics8),
  	close(Stream),
@@ -802,7 +768,7 @@ outputlyrics2(Lyrics1,Lyrics5,Lyrics6) :-
 	Lyrics1=[Lyrics2|Lyrics3],
 	sentencewithspaces(Lyrics2,Lyrics4),
 	%%writeln(Lyrics4),
-	concat_list(Lyrics5,[Lyrics4,"\n"],Lyrics7),
+	concat_list3(Lyrics5,[Lyrics4,"\n"],Lyrics7),
 	outputlyrics2(Lyrics3,Lyrics7,Lyrics6).
 
 max([],M,M) :- !.
@@ -822,31 +788,27 @@ findbest2(R,Item):-
 	RB=[[_,Item]|_Rest].
 
 find("decimal",Item1) :-
-	trialy2([0,1,2,3,4,5,6,7,8,9],R), %% 0 is 0->1 etc.
-	findbest(R,Item1).
+	mind_read(Item1,[0,1,2,3,4,5,6,7,8,9]).
 
 find("Should a chorus or instrumental come after the first verse?",CorI) :-
-	trialy2([c,i1],R),
-	findbest(R,CorI).
+	mind_read(CorI,[c,i1]).
 
 find(["Should a chorus and outro or two solos come after the first solo?",1],COorSS) :-
 	trialy2([[c,o],[s,s]],R),
 	findbest(R,COorSS).
 
 find(["Should a chorus and outro or two solos come after the first solo?",2],COorSS) :-
-	trialy2([[c,o],[s,s]],R),
-	findbest(R,COorSS).
+	mind_read(COorSS,[[c,o],[s,s]]).
 
 %%find("Who is the song about?",Character) :-
 %%	trialy2(["Ma","til","da"],["Jo","se","phine"],["Hap","py"],["Ha","rold"],R),
 %%	findbest(R,Character).
 
 find("Should the chord progression type be 1451, 1564, 1645, Classical or Classical Pop?",CPT) :-
-	trialy2([1451, 1564, 1645
+	mind_read(CPT,[1451, 1564, 1645
 	%%
 	, classical, classicalpop
-	],R),
-	findbest(R,CPT).
+	]).
 
 /**generatelyricslistsverse(Character,Lyrics1,Lyrics2):-
 %% read c, o, v
@@ -956,8 +918,8 @@ removenotrhyming2(Rhymes3,Verbs1,Verbs2,Verbs3) :-
 	removenotrhyming2(Rhymes3,Verbs5,
 	Verbs2,Verbs3)).
 	**/
-%trialy2([],R) :-
-%	R=[[_,['C']]].
+trialy2([],R) :-
+	R=[[_,['C']]].
 	%%writeln([[],in,trialy2]),abort.
 trialy2(List,R) :-
 %%writeln([list,List]),
@@ -1158,3 +1120,78 @@ concat_list2A(A,List,B) :-
 	List=[Item|Items],
 	string_concat(A,Item,C),
 	concat_list2A(C,Items,B).
+
+
+%mind_read(R,[]) :-
+%	R=[[_,['C']]].
+/**
+mind_read(Item,List0) :-
+random_member(Item,List0).
+**/
+mind_read(Item,List0) :-
+	findall(D1,(member(D2,List0),term_to_atom(D2,D3),string_atom(D1,D3)),List1),
+%trace,
+	List1=A,
+	findall(B,(member(C,A),(number(C)->number_string(C,B)->true;((atom(C)->atom_string(C,B))->true;(string(C),C=B)))),List2),
+	
+	findall(B,(member(C,List2),string_concat(C," 01",B)),List),
+	
+		%notrace,
+		writeln1(make_mind_reading_tree4(List,Tree)),
+	make_mind_reading_tree4(List,Tree),
+		writeln1(make_mind_reading_tree4-here1(List,Tree)),
+
+writeln1(mind_read2(1,Tree,Item1)),
+	mind_read2(1,Tree,Item1),
+writeln1(mind_read2-here2(1,Tree,Item1)),
+	%trace,
+	string_concat(Item2," 01",Item1),
+	term_to_atom(Item,Item2).
+mind_read2(N1,Tree1,Item1) :-
+	findall(Option,member([N1,Option,N2],Tree1),Options),
+	findall([N1,Option,N2],member([N1,Option,N2],Tree1),Options2),
+	%subtract(Tree1,Options,Tree2),
+	mind_read10(Item2,Options),
+	mind_read3(Options2,Options,Tree1,Item2,Item1).
+
+
+mind_read3(_,_,Tree1,Item2,Item1) :-
+	member([_,Item2,[-,Item1]],Tree1),!.
+mind_read3(Options2,_Options,Tree1,Item2,Item1) :-
+%trace,
+	%subtract2(Tree1,Options,[],Tree2),
+	member([_,Item2,N2],Options2),
+	mind_read2(N2,Tree1,Item1).
+	
+mind_read10("",[]) :- !.
+mind_read10(Item,List) :-
+writeln1([list,List]),
+%trace,
+%%catch(
+	(trialy2(List,R1),
+	findbest(R1,Item),
+	writeln1([item,Item]))
+   %_,
+	%mind_read10(Item,List)
+	%)
+	,
+!.
+	%%random_member(Item,List),!.
+	
+mind_read100(Item,List) :-
+	length(List,L),
+	Trials is 3*L,
+	trialy22(List,Trials,[],R1),
+	findbest(R1,Item),!.
+
+mind_read_instruments(Instrument,_) :-
+	instruments_a(Instruments),
+		%notrace,
+		writeln1(mind_read2(1,Instruments,Item1)),
+
+	mind_read2(1,Instruments,Item1),%->trace;trace),
+			writeln1(mind_read2-here3(1,Instruments,Item1)),
+
+	%trace,
+	string_concat(Item2," 01",Item1),
+	term_to_atom(Instrument,Item2).
