@@ -18,6 +18,9 @@ Please download and install SWI-Prolog for your machine at https://www.swi-prolo
 
 Please download Lucian Green's List Prolog Interpreter Repository at https://github.com/luciangreen/listprologinterpreter.
 
+Please install Mind Reader Repository (https://github.com/luciangreen/mindreader).
+
+
 Requires asc2mid (http://www.archduke.org/midi/, compile with a C compiler before running, call application "asc2mid").
 
 Optional: Search for and download backdated version 6.0.5 of GarageBand and AlterEgo singing voice synthesis plug-in for old GarageBand for Mac or on Windows (https://www.plogue.com/downloads.html).
