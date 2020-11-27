@@ -154,7 +154,8 @@ rhymes2(Syllable1,Syllable2) :-
 lyrics(Form1,Lyrics,Maxlength) :-
 	%%find("Who is the song about?",Character),
 	%%lyrics1(Form,Character,[],Lyrics).
-	lyrics2(Form1,[],Lyrics,[],_Names,0,Maxlength).
+	catch((lyrics2(Form1,[],Lyrics,[],_Names,0,Maxlength)),_,
+	lyrics(Form1,Lyrics,Maxlength)).
 
 lyrics2([],Lyrics,Lyrics,Names,Names,Maxlength,Maxlength) :- !.
 lyrics2(Form1,Lyrics1,Lyrics2,Names1,Names2,Maxlength1,Maxlength2) :-
@@ -371,13 +372,23 @@ concat_list(A,List,B) :-
 	concat_list2(A,[Item2],C),
 	concat_list(C,Items,B),!.
 concat_list2(A,List,C) :-
-	((List=[[Item]]->true;List=[Item])->
-	string_concat(A,Item,C);
+	((List=[[Item|Items]]->true;List=[Item])->
+	concat_list0(A,[Item|Items],C);
 	fail),!.
 concat_list2(A,Item,C) :-
 	concat_list(A,Item,C),!.
 	
-	
+concat_list0([],""):-!.
+concat_list0(A1,B):-
+	A1=[A|List],
+	concat_list0(A,List,B),!.
+
+concat_list0(A,[],A):-!.
+concat_list0(A,List,B) :-
+	List=[Item|Items],
+	string_concat(A,Item,C),
+	concat_list0(C,Items,B).
+
 sentencewithspaces(Sentence1,Sentence2) :-
 	Sentence1=[Item|Items],
 	string_concat(Firstletter1,Rest,Item),
@@ -958,8 +969,8 @@ trialy2(List,R) :-
 	trialy2B(List,R).
 %%writeln([list,List]),
 %%notrace,
-trialy2A([],R) :-
-	R=[[_,'A']].
+%trialy2A([],R) :-
+%	R=[[_,'A']].
 trialy2A(List,R) :-
 	trialy2B(List,R).
 trialy2B(List,R) :-

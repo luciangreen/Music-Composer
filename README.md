@@ -69,6 +69,14 @@ To output the possible chord progressions from one note to another:
 `classicalcomposition('C','D',Progression).`
 `popclassicalcomposition('C','D',Progression).`
 
+# Rescuing Format Files with asc2mid
+
+If the file `song***.txt` is produced but the `.mid` file is not, you may use asc2mid to produce the `.mid` file. In Shell:
+
+```
+./asc2mid song***.txt > song***.mid
+```
+
 # Note on Mind Reader
 
 Mind Reader is currently not configured to display screens and accurately mind read decisions.  It detects vague, not exact thoughts.

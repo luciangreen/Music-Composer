@@ -155,7 +155,8 @@ rhymes2(Syllable1,Syllable2) :-
 lyrics(Form1,Lyrics,Maxlength) :-
 	%%find("Who is the song about?",Character),
 	%%lyrics1(Form,Character,[],Lyrics).
-	lyrics2(Form1,[],Lyrics,[],_Names,0,Maxlength).
+	catch((lyrics2(Form1,[],Lyrics,[],_Names,0,Maxlength)),_,
+	lyrics(Form1,Lyrics,Maxlength)).
 
 lyrics2([],Lyrics,Lyrics,Names,Names,Maxlength,Maxlength) :- !.
 lyrics2(Form1,Lyrics1,Lyrics2,Names1,Names2,Maxlength1,Maxlength2) :-
@@ -369,7 +370,7 @@ concat_list(A,List,B) :-
 	concat_list(C,Items,B).
 concat_list2(A,List,C) :-
 	((List=[[Item|Items]]->true;List=[Item])->
-	concat_list0(A,[" ",Item," "|Items],C);
+	concat_list0(A,[Item|Items],C);
 	fail),!.
 concat_list2(A,Item,C) :-
 	concat_list(A,Item,C),!.

@@ -149,7 +149,8 @@ rhymes2(Syllable1,Syllable2) :-
 lyrics(Form1,Lyrics,Maxlength) :-
 	%%find("Who is the song about?",Character),
 	%%lyrics1(Form,Character,[],Lyrics).
-	lyrics2(Form1,[],Lyrics,[],_Names,0,Maxlength).
+	catch((lyrics2(Form1,[],Lyrics,[],_Names,0,Maxlength)),_,
+	lyrics(Form1,Lyrics,Maxlength)).
 
 lyrics2([],Lyrics,Lyrics,Names,Names,Maxlength,Maxlength) :- !.
 lyrics2(Form1,Lyrics1,Lyrics2,Names1,Names2,Maxlength1,Maxlength2) :-
@@ -345,7 +346,7 @@ concat_list3(A,List,B) :-
 	concat_list3(C,Items,B).
 concat_list2(A,List,C) :-
 	((List=[[Item|Items]]->true;List=[Item])->
-	concat_list(A,[" ",Item," "|Items],C);
+	concat_list(A,[Item|Items],C);
 	fail),!.
 concat_list2(A,Item,C) :-
 	concat_list3(A,Item,C),!.
@@ -1138,13 +1139,14 @@ mind_read(Item,List0) :-
 	findall(B,(member(C,List2),string_concat(C," 01",B)),List),
 	
 		%notrace,
-		writeln1(make_mind_reading_tree4(List,Tree)),
+		%writeln1(make_mind_reading_tree4(List,Tree)),
 	make_mind_reading_tree4(List,Tree),
-		writeln1(make_mind_reading_tree4-here1(List,Tree)),
+		%writeln1(make_mind_reading_tree4-here1(List,Tree)),
 
-writeln1(mind_read2(1,Tree,Item1)),
+%writeln1(mind_read2(1,Tree,Item1)),
 	mind_read2(1,Tree,Item1),
-writeln1(mind_read2-here2(1,Tree,Item1)),
+writeln1(mind_read2(1,Tree,Item1)),
+writeln(""),
 	%trace,
 	string_concat(Item2," 01",Item1),
 	term_to_atom(Item,Item2).
@@ -1188,10 +1190,10 @@ mind_read100(Item,List) :-
 mind_read_instruments(Instrument,_) :-
 	instruments_a(Instruments),
 		%notrace,
-		writeln1(mind_read2(1,Instruments,Item1)),
+		%writeln1(mind_read2(1,Instruments,Item1)),
 
 	mind_read2(1,Instruments,Item1),%->trace;trace),
-			writeln1(mind_read2-here3(1,Instruments,Item1)),
+			%writeln1(mind_read2-here3(1,Instruments,Item1)),
 
 	%trace,
 	string_concat(Item2," 01",Item1),
