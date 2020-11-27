@@ -8,25 +8,64 @@
 %% Once per day
 
 %% Load texttobr2, texttobr
-[../Text-to-Breasonings/texttobr2].
-[../Text-to-Breasonings/texttobr].
+
+%% In shell
+cd Text-to-Breasonings
+swipl
+['text_to_breasonings.pl'].
 
 %%	texttobr2(2). %% Head of State to enable mind reading
 
 %% 50 done up As for training, 50 done up As on my side
-time((N is 100*4, M is 4000,  texttobr2(N,u,u,M),texttobr(N,u,u,M))).
+F="../mindreader/file.txt",time((N is 100*4, M is 4000,  texttobr2(N,F,u,M,false,false,false,false,false,false),texttobr(N,F,u,M))).
 
+%% Important: please switch off algorithm after each use with Head of State with
+%%	texttobr2(2).
 
 %% Once per algorithm
 
-%% Load 250 breasonings texttobr2qb.
+%% Load 250 breasonings texttobr2qb - already done
 
-[../Text-to-Breasonings/texttobr2qb].
 
 texttobr2(3). %% indicates training radio button, radio button to graciously give and graciously give 250 breasonings for training
 texttobr2(3). %% indicates training on our side radio button, radio button to graciously give and graciously give 250 breasonings for training on our side
 
+%% FOR OBJECTS:
 
+%% 250s for dotting yourself on speaking and dotting yourself receiving, and yourself speaking and yourself receiving
+
+texttobr2(2).
+
+%% Do 250 breasonings for binary oppositions for front, behind, above and below object being recognised, and protection and off for each one
+
+texttobr2(1).
+texttobr2(1).
+texttobr2(1).
+texttobr2(1).
+
+texttobr2(4).
+texttobr2(4).
+
+%% Do 250s for quarter master and object binary oppositions x's for left, right, front, back, top, and bottom object being recognised, with protection and off for each one
+
+texttobr2(1).
+texttobr2(1).
+texttobr2(1).
+texttobr2(1).
+texttobr2(1).
+texttobr2(1).
+
+texttobr2(6).
+texttobr2(6).
+
+%% 100 As for 1 (turned on)*2 (to and from computer)*3 (rb, itself (already done), graciously give or blame, radio button for graciously give or blame)*5 (5 letters to recognise)
+
+texttobr2(3). %% * 5
+
+%% 100 As for 2 (protections and turned off)*2 (to and from computer)*3 (rb, itself (already done), graciously give or blame, radio button for graciously give or blame)*5 (5 objects to recognise)
+
+N is 3*5,texttobr2(N).
+N is 3*5,texttobr2(N).
 
 %% FOR CHARACTERS:
 
@@ -56,19 +95,17 @@ texttobr2(1).
 texttobr2(6).
 texttobr2(6).
 
-%% 100 As for 1 (turned on)*2 (to and from computer)*3 (rb, itself (already done), graciously give or blame, radio button for graciously give or blame)*10 (10 numbers to recognise)
+%% 100 As for 1 (turned on)*2 (to and from computer)*3 (rb, itself (already done), graciously give or blame, radio button for graciously give or blame)*26 (26 letters to recognise)
 %% Breason out pixels in e.g. https://www.fontspace.com/lucian-academy/lucianshandbitmap
 
-texttobr2(3). %% * 10
+texttobr2(3). %% * 26
 
-%% 100 As for 2 (protections and turned off)*2 (to and from computer)*3 (rb, itself (already done), graciously give or blame, radio button for graciously give or blame)*10 (10 numbers to recognise)
+%% 100 As for 2 (protections and turned off)*2 (to and from computer)*3 (rb, itself (already done), graciously give or blame, radio button for graciously give or blame)*26 (26 letters to recognise)
 
-N is 3*10,texttobr2(N).
-N is 3*10,texttobr2(N).
+N is 3*26,texttobr2(N).
+N is 3*26,texttobr2(N).
 
 %% also breason out and dot on (parts of) characters before line above and breason out and dot on when recognising and saying object (with all objects having different breasonings)
-
-%% 0123456789 - their squares and bars
 
 %% to recognise, think of stream of consciousness breasonings, the appearance of an object, words appearing and tricky appearances that mean something else
 
@@ -82,3 +119,43 @@ N is 3*10,texttobr2(N).
 
 
 
+%%**
+
+%% FOR PROJECTING VOXELS:
+
+%% 250s for dotting yourself on projecting and dotting yourself seeing, and yourself projecting and yourself seeing
+
+texttobr2(2).
+
+%% Do 250 breasonings for binary oppositions for front, behind, above and below object being projected, and protection and off for each one
+
+texttobr2(1).
+texttobr2(1).
+texttobr2(1).
+texttobr2(1).
+
+texttobr2(4).
+texttobr2(4).
+
+%% Do 250s for quarter master and object binary oppositions x's for left, right, front, back, top, and bottom object being projected, with protection and off for each one
+
+texttobr2(1).
+texttobr2(1).
+texttobr2(1).
+texttobr2(1).
+texttobr2(1).
+texttobr2(1).
+
+texttobr2(6).
+texttobr2(6).
+
+%% 100 As for 1 (turned on)*2 (to and from computer)*3 (rb, itself (already done), graciously give or blame, radio button for graciously give or blame)*10 (10 colours to project)
+
+%% black, white, red, orange, yellow, green, blue, purple, brown, grey
+
+texttobr2(3). %% * 10
+
+%% 100 As for 2 (protections and turned off)*2 (to and from computer)*3 (rb, itself (already done), graciously give or blame, radio button for graciously give or blame)*5 (5 objects to recognise)
+
+N is 3*10,texttobr2(N).
+N is 3*10,texttobr2(N).
