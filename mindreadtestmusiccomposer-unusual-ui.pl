@@ -32,6 +32,7 @@ sectest(N1) :-
 	sectest(N2),!.
 
 sectest0(Form1,Lyrics,Melody,Harmony,MelodyParts,HarmonyParts,Vocalstubinstrument,Song1) :-
+	check_asc2mid,
  	%%texttobr2qb(2), %%Imagine song
 	%%form(Form1),
 	writeln("Please enter form in format e.g. [n,v1,i1,v2,c,t2,s,s,s]."),

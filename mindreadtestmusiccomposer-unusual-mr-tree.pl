@@ -34,6 +34,7 @@ sectest(N1) :-
 	sectest(N2),!.
 
 sectest0(Form1,Lyrics,Melody,Harmony,MelodyParts,HarmonyParts,Vocalstubinstrument,Song1) :-
+	check_asc2mid,
  	%%texttobr2qb(2), %%Imagine song
 	form(Form1),
 	%%Form1=[v2,o],

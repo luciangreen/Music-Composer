@@ -26,6 +26,7 @@
 :- include('la_strings').
 
 sectest0(Form1,Lyrics,Melody,Harmony,MelodyParts,HarmonyParts,Vocalstubinstrument,Song1) :-
+	check_asc2mid,
 	form(Form1),
 	%%Form1=[v2,o],
 	find("Should the chord progression type be 1451, 1564, 1645, Classical or Classical Pop?",CPT),
