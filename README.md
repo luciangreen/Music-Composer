@@ -55,7 +55,7 @@ In the SWI-Prolog environment, enter the following to manually enter creative ch
 * Enter the following to mind read songs with 4-note progressions:
 `['mindreadtestmusiccomposer-unusual-4-mr'].`    
 
-* Enter the following to *detailedly* mind read songs with 4-note progressions (takes much longer):
+* Enter the following to *detailedly* mind read songs with 4-note progressions (takes 15 minutes per song on a MacBook Air 2019):
 `['mindreadtestmusiccomposer-unusual-4-mr-tree.pl'].`
 
 * Running the algorithm
