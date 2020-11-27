@@ -50,7 +50,7 @@ In the SWI-Prolog environment, enter the following to manually enter creative ch
 
 * Follow instructions in https://github.com/luciangreen/listprologinterpreter/blob/master/Instructions_for_Using_texttobr(2).pl.txt when using texttobr, texttobr2 or mind reader to avoid medical problems.
 
-* Please follow instructions in init.txt to initialise any new mind-reading algorithms.
+* Please follow instructions in <a href="https://github.com/luciangreen/mindreader/blob/master/init.txt">init.txt</a> to initialise any new mind-reading algorithms.
 
 * Enter the following to mind read songs with 4-note progressions:
 `['mindreadtestmusiccomposer-unusual-4-mr'].`    
