@@ -44,7 +44,7 @@ note(11,'B').
 
 check_asc2mid :-
 	directory_files("./",F),delete_invisibles_etc(F,G),%writeln1(G),
-	(member("asc2mid",G)->true;(writeln1("Error: asc2mid not found."),fail)).
+	(member("asc2mid",G)->true;(writeln1("Error: asc2mid not found."),abort)).
 	
 delete_invisibles_etc(F,G) :-
 	findall(J,(member(H,F),atom_string(H,J),not(J="."),not(J=".."),not(string_concat(".",_,J))),G).
