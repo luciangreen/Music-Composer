@@ -36,7 +36,7 @@ sectest0(Form1,Lyrics,Melody,Harmony,MelodyParts,HarmonyParts,Vocalstubinstrumen
  	%%texttobr2qb(2), %%Imagine song
 	%%form(Form1),
 	writeln("Please enter form in format e.g. [n,v1,i1,v2,c,t2,s,s,s]."),
-	read_string(user_input, "\n", "\r", _End2, Form1A),
+	read_string(user_input, "\n", "\r", _End21, Form1A),
 	atom_to_term(Form1A,Form1,_),
 	
 	%%Form1=[v2,o],
@@ -213,7 +213,7 @@ melodyharmony(Form1,CPT,Parts,N1,N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	melodyharmony(Forms3,CPT,Parts,N5,N2,Melody4,Melody2,
 		Harmony4,Harmony2).
 
-findmelody(Form,CPT,_Parts,N1,N2,Melody1,Melody2,Harmony1,Harmony2) :-
+findmelody(Form,CPT,_Parts,_N1,_N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	CPT='1451',
 	%%(CPT=1451->findall(A,note0(_,A),Notes);
 	%%findall(A,note0(_,A),Notes)),
@@ -226,7 +226,7 @@ findmelody(Form,CPT,_Parts,N1,N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	%%findbest(R2,Progression2),
 	repeat,
 	writeln(["Please enter melody line for form",Form,"in format e.g. four notes from [d,di,r,ri,m,f,fi,s,si,l,li,t]."]),
-	read_string(user_input, "\n", "\r", _End2, Progression2B),
+	read_string(user_input, "\n", "\r", _End21, Progression2B),
 	atom_to_term(Progression2B,Progression2A,_),
 	solfatonotes(Progression2A,[],Progression2),
 not(Progression2=[]),
@@ -240,7 +240,7 @@ not(Progression2=[]),
 	atom_to_term(Progression4A,Progression4,_),
 
 	harmony(Form,CPT,Progression4,Harmony1,Harmony2).	
-findmelody(Form,CPT,_Parts,N1,N2,Melody1,Melody2,Harmony1,Harmony2) :-
+findmelody(Form,CPT,_Parts,_N1,_N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	CPT='1564',
 	repeat,
 	writeln(["Please enter melody line for form",Form,"in format e.g. four notes from [d,di,r,ri,m,f,fi,s,si,l,li,t]."]),
@@ -256,11 +256,11 @@ findmelody(Form,CPT,_Parts,N1,N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	read_string(user_input, "\n", "\r", _End2, Progression4A),
 	atom_to_term(Progression4A,Progression4,_),
 	harmony(Form,CPT,Progression4,Harmony1,Harmony2).
-findmelody(Form,CPT,_Parts,N1,N2,Melody1,Melody2,Harmony1,Harmony2) :-
+findmelody(Form,CPT,_Parts,_N1,_N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	CPT='1645',
 	repeat,
 	writeln(["Please enter melody line for form",Form,"in format e.g. four notes from [d,di,r,ri,m,f,fi,s,si,l,li,t]."]),
-	read_string(user_input, "\n", "\r", _End2, Progression2B),
+	read_string(user_input, "\n", "\r", _End21, Progression2B),
 	atom_to_term(Progression2B,Progression2A,_),
 	solfatonotes(Progression2A,[],Progression2),	not(Progression2=[]),
 	append(Melody1,[[Form,Progression2]],Melody2),
@@ -272,11 +272,11 @@ findmelody(Form,CPT,_Parts,N1,N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	read_string(user_input, "\n", "\r", _End2, Progression4A),
 	atom_to_term(Progression4A,Progression4,_),
 	harmony(Form,CPT,Progression4,Harmony1,Harmony2).
-findmelody(Form,CPT,_Parts,N1,N2,Melody1,Melody2,Harmony1,Harmony2) :-
+findmelody(Form,CPT,_Parts,_N1,_N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	CPT=classical,
 	repeat,
 	writeln(["Please enter melody line for form",Form,"in format e.g. four notes from [d,di,r,ri,m,f,fi,s,si,l,li,t]."]),
-	read_string(user_input, "\n", "\r", _End2, Progression2B),
+	read_string(user_input, "\n", "\r", _End21, Progression2B),
 	atom_to_term(Progression2B,Progression2A,_),
 	solfatonotes(Progression2A,[],Progression2),	not(Progression2=[]),
 	append(Melody1,[[Form,Progression2]],Melody2),
@@ -288,11 +288,11 @@ findmelody(Form,CPT,_Parts,N1,N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	read_string(user_input, "\n", "\r", _End2, Progression4A),
 	atom_to_term(Progression4A,Progression4,_),
 	harmony(Form,CPT,Progression4,Harmony1,Harmony2).
-findmelody(Form,CPT,_Parts,N1,N2,Melody1,Melody2,Harmony1,Harmony2) :-
+findmelody(Form,CPT,_Parts,_N1,_N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	CPT=classicalpop,
 	repeat,
 	writeln(["Please enter melody line for form",Form,"in format e.g. four notes from [d,di,r,ri,m,f,fi,s,si,l,li,t]."]),
-	read_string(user_input, "\n", "\r", _End2, Progression2B),
+	read_string(user_input, "\n", "\r", _End21, Progression2B),
 	atom_to_term(Progression2B,Progression2A,_),
 	solfatonotes(Progression2A,[],Progression2),	not(Progression2=[]),
 	append(Melody1,[[Form,Progression2]],Melody2),
@@ -553,7 +553,7 @@ renderv2(Section1,Lyrics1,Melody1,_Totallength0,Track,Bar1,Bar2,Voice1,Voice2) :
 	atom_string(Section2,Section2A),
 	findall(Melody2,(member(Melody2,Melody1),
 	Melody2=[Section2|_]),Melody3),
-		Lyrics3=[Lyrics3A1|Lyrics5],
+		Lyrics3=[Lyrics3A1|_Lyrics5],
 		%%trace,
 		Lyrics3A1=[_,Lyrics1A,Lyrics2A,Lyrics3A,Lyrics4A],
 	Melody3=[[_, Melody1A], [_, Melody2A]],
