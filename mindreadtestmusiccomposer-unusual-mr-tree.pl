@@ -1130,6 +1130,7 @@ concat_list2A(A,List,B) :-
 mind_read(Item,List0) :-
 random_member(Item,List0).
 **/
+mind_read(Item,[Item]) :- !.
 mind_read(Item,List0) :-
 	findall(D1,(member(D2,List0),term_to_atom(D2,D3),string_atom(D1,D3)),List1),
 %trace,
