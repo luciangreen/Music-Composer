@@ -172,8 +172,8 @@ melodyharmony(Form1,CPT,Maxlength,Melody,Harmony) :-
 	Extra is Maxlength mod 3,
 	Total is Partlength+Extra,
 	_Parts=[Partlength,Partlength,Partlength,Total],
-	(CPT=1451->findall(A,note0(_,A),Notes);
-	findall(A,note0(_,A),Notes)),
+	(CPT=1451->findall(A,note0(_,A),_Notes);
+	findall(A,note0(_,A),_Notes2)),
 	%% What note should the song start on?
 	%%trialy2(Notes,R1),
 	%%findbest(R1,R11),
@@ -1133,14 +1133,20 @@ random_member(Item,List0).
 mind_read(Item,List0) :-
 	findall(D1,(member(D2,List0),term_to_atom(D2,D3),string_atom(D1,D3)),List1),
 %trace,
-	List1=A,
-	findall(B,(member(C,A),(number(C)->number_string(C,B)->true;((atom(C)->atom_string(C,B))->true;(string(C),C=B)))),List2),
 	
-	findall(B,(member(C,List2),string_concat(C," 01",B)),List),
+	%List1=A,
+	findall(B,(member(C,List1),string_concat(C," 01",B)),List2),
+	findall(B,(member(C,List2),(number(C)->number_string(C,B)->true;((atom(C)->atom_string(C,B))->true;(string(C),C=B)))),List3),
 	
+	
+	minimise_strings1(List3,List4,Map),
+	
+	% findall(B,(member(C,List13),string_concat(C," 01",B)),List),
+
 		%notrace,
+		%trace,
 		%writeln1(make_mind_reading_tree4(List,Tree)),
-	make_mind_reading_tree4(List,Tree),
+	make_mind_reading_tree4(List4,Tree),
 		%writeln1(make_mind_reading_tree4-here1(List,Tree)),
 
 %writeln1(mind_read2(1,Tree,Item1)),
@@ -1148,22 +1154,30 @@ mind_read(Item,List0) :-
 writeln1(mind_read2(1,Tree,Item1)),
 writeln(""),
 	%trace,
-	string_concat(Item2," 01",Item1),
+	%string_concat(Item3," 01",Item1),
+	find_mapped_item(Item1,Item2,Map),
 	term_to_atom(Item,Item2).
 mind_read2(N1,Tree1,Item1) :-
 	findall(Option,member([N1,Option,N2],Tree1),Options),
 	findall([N1,Option,N2],member([N1,Option,N2],Tree1),Options2),
 	%subtract(Tree1,Options,Tree2),
 	mind_read10(Item2,Options),
-	mind_read3(Options2,Options,Tree1,Item2,Item1).
+	mind_read3(N1,Options2,Options,Tree1,Item2,Item1).
 
 
-mind_read3(_,_,Tree1,Item2,Item1) :-
-	member([_,Item2,[-,Item1]],Tree1),!.
-mind_read3(Options2,_Options,Tree1,Item2,Item1) :-
+numbers(N2,N1,Numbers,Numbers) :-
+	N2 is N1-1,!.
+numbers(N2,N1,Numbers1,Numbers2) :-
+	N3 is N1+1,
+	append(Numbers1,[N1],Numbers3),
+	numbers(N2,N3,Numbers3,Numbers2).
+	
+mind_read3(N1,_,_,Tree1,Item2,Item1) :-
+	member([N1,Item2,[-,Item1]],Tree1),!.
+mind_read3(N1,Options2,_Options,Tree1,Item2,Item1) :-
 %trace,
 	%subtract2(Tree1,Options,[],Tree2),
-	member([_,Item2,N2],Options2),
+	member([N1,Item2,N2],Options2),
 	mind_read2(N2,Tree1,Item1).
 	
 mind_read10("",[]) :- !.
