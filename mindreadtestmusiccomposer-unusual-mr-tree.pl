@@ -1132,6 +1132,73 @@ random_member(Item,List0).
 **/
 mind_read(Item,[Item]) :- !.
 mind_read(Item,List0) :-
+
+(lists_of_same_length1(List0)->mind_read_a(Item,List0); 
+%% segment decision trees
+
+mind_read_b(Item,List0)). 
+%% 1 decision tree
+
+
+mind_read_a(Item,List0) :-
+
+/**
+	findall(L,(member(Item,List0),string_length(Item,L)),Ls1),
+	sort(Ls1,Ls2),
+	reverse(Ls2,Ls3),
+	Ls3=[Maximum_length|_],
+	numbers(Maximum_length,1,[],Numbers1),
+**/
+
+	mind_read_a_1(List0,[],Item).
+
+%mind_read_a_1([List0],Item1_a,Item1_a2) :-
+%	append(Item1_a,[List0],Item1_a2),!.
+mind_read_a_1(List0,Item1_a,Item1_a2) :-
+	%List0=[List0_1|_Rest],
+	(maplist(equals_empty_list,List0)->(%trace,%append(Item1_a,[Item],Item1_a2));
+	Item1_a=Item1_a2);
+(
+	%trace,	
+findall(Item2_a,(member(List0_1,List0),get_item_n(List0_1,1,Item2_a)),Item2_a1),
+	sort(Item2_a1,Item2_a2),
+
+	findall(D1,(member(D2,Item2_a2),
+	term_to_atom(D2,D3),string_atom(D1,D3)),List1),
+%trace,
+	
+	%List1=A,
+	findall(B,(member(C,List1),string_concat(C," 01",B)),List2),
+	findall(B,(member(C,List2),(number(C)->number_string(C,B)->true;((atom(C)->atom_string(C,B))->true;(string(C),C=B)))),List3),
+	
+	%trace,
+	
+	minimise_strings1(List3,List4,Map),
+
+%writeln1(minimise_strings1(List3,List4,Map)),	
+	% findall(B,(member(C,List13),string_concat(C," 01",B)),List),
+
+		%notrace,
+		%trace,
+		%writeln1(make_mind_reading_tree4(List,Tree)),
+	make_mind_reading_tree4(List4,Tree),
+		%writeln1(make_mind_reading_tree4-here1(List,Tree)),
+
+%writeln1(mind_read2(1,Tree,Item1)),
+	mind_read2(1,Tree,Item1),
+writeln1(mind_read2(1,Tree,Item1)),
+writeln(""),
+	%trace,
+	%string_concat(Item3," 01",Item1),
+	find_mapped_item(Item1,Item2,Map),
+	term_to_atom(Item,Item2),
+	
+	(findall(Rest1,(member(Item1_b,List0),%get_item_b(Item1_b,Number,Item1_b1),%Number2 is Number+1,get_item_b(Item1_b,Number2,Item1_b2)
+	Item1_b=[_|Rest1]),Item1_b2),
+	append(Item1_a,[Item],Item1_a3),
+	mind_read_a_1(Item1_b2,Item1_a3,Item1_a2)))).
+
+mind_read_b(Item,List0) :-
 	findall(D1,(member(D2,List0),term_to_atom(D2,D3),string_atom(D1,D3)),List1),
 %trace,
 	
@@ -1139,9 +1206,11 @@ mind_read(Item,List0) :-
 	findall(B,(member(C,List1),string_concat(C," 01",B)),List2),
 	findall(B,(member(C,List2),(number(C)->number_string(C,B)->true;((atom(C)->atom_string(C,B))->true;(string(C),C=B)))),List3),
 	
+	%trace,
 	
 	minimise_strings1(List3,List4,Map),
-	
+
+%writeln1(minimise_strings1(List3,List4,Map)),	
 	% findall(B,(member(C,List13),string_concat(C," 01",B)),List),
 
 		%notrace,
@@ -1158,6 +1227,7 @@ writeln(""),
 	%string_concat(Item3," 01",Item1),
 	find_mapped_item(Item1,Item2,Map),
 	term_to_atom(Item,Item2).
+
 mind_read2(N1,Tree1,Item1) :-
 	findall(Option,member([N1,Option,N2],Tree1),Options),
 	findall([N1,Option,N2],member([N1,Option,N2],Tree1),Options2),
