@@ -1252,6 +1252,8 @@ mind_read3(N1,Options2,_Options,Tree1,Item2,Item1) :-
 	mind_read2(N2,Tree1,Item1).
 	
 mind_read10("",[]) :- !.
+mind_read10(Item,[Item]) :-
+	writeln1([item,Item]),!.
 mind_read10(Item,List) :-
 writeln1([list,List]),
 %trace,
