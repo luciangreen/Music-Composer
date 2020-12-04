@@ -1194,7 +1194,7 @@ writeln(""),
 	term_to_atom(Item,Item2),
 	
 	(findall(Rest1,(member(Item1_b,List0),%get_item_b(Item1_b,Number,Item1_b1),%Number2 is Number+1,get_item_b(Item1_b,Number2,Item1_b2)
-	Item1_b=[_|Rest1]),Item1_b2),
+	Item1_b=[Item|Rest1]),Item1_b2),
 	append(Item1_a,[Item],Item1_a3),
 	mind_read_a_1(Item1_b2,Item1_a3,Item1_a2)))).
 
