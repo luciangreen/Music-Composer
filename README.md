@@ -36,6 +36,7 @@ Optional: Search for and download backdated version 6.0.5 of GarageBand and Alte
 ```
 git clone https://github.com/luciangreen/List-Prolog-Package-Manager.git
 cd List-Prolog-Package-Manager
+swipl
 ```
 loading LPPM with `['lppm'].` then installing the package by running `lppm_install("luciangreen","Music-Composer").`.  Requires additional part below.
 
