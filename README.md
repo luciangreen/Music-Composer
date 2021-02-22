@@ -69,11 +69,11 @@ To generate the song:
 `sectest0(Form1,Lyrics,Melody,Harmony,MelodyParts,HarmonyParts,Vocalstubinstrument,Song1).`
 
 To output the possible chord progressions from one note to another:
-`versechorussoloprogression1451('C','D',Progression).`
-`versechorussoloprogression1564('C','D',Progression).`
-`versechorussoloprogression1645('C','D',Progression).`
-`classicalcomposition('C','D',Progression).`
-`popclassicalcomposition('C','D',Progression).`
+`versechorussoloprogression1451('C','D',Progression),writeln1(Progression).`
+`versechorussoloprogression1564('C','D',Progression),writeln1(Progression).`
+`versechorussoloprogression1645('C','D',Progression),writeln1(Progression).`
+`classicalcomposition('C','D',Progression),writeln1(Progression).`
+`popclassicalcomposition('C','D',Progression),writeln1(Progression).`
 
 # Rescuing Format Files with asc2mid
 
