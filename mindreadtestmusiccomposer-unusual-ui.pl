@@ -555,7 +555,8 @@ renderv2(Section1,Lyrics1,Melody1,_Totallength0,Track,Bar1,Bar2,Voice1,Voice2) :
 	Melody2=[Section2|_]),Melody3),
 		Lyrics3=[Lyrics3A1|_Lyrics5],
 		%%trace,
-		Lyrics3A1=[_,Lyrics1A,Lyrics2A,Lyrics3A,Lyrics4A],
+		(Lyrics3A1=[_,Lyrics1A,Lyrics2A,Lyrics3A,Lyrics4A]->true;
+		(writeln(["Error:",Lyrics3A1,"does not have 4 lines"]),abort)),
 	Melody3=[[_, Melody1A], [_, Melody2A]],
 	renderline1(Lyrics1A,Melody1A,_Totallength1,Track,Bar1,Voice1,Voice3),
 	Bar3 is Bar1+1,
