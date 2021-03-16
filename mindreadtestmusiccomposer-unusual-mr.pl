@@ -61,8 +61,21 @@ sectest0(Form1,Lyrics,Melody,Harmony,MelodyParts,HarmonyParts,Vocalstubinstrumen
 	rendersong(Form1,Voiceparts2,Maxlength,Melody,Harmony,
 		MelodyInstruments,HarmonyInstruments,MelodyParts,
 		HarmonyParts,Lyrics,
-		Vocalstubinstrument,Song1), %%,
-	!.
+		Vocalstubinstrument,Song1,File1), %%,
+
+Meta_file=[[form,Form1],[chord_progressions,CPT],[voice_part,Voiceparts2],[melody,Melody],[harmony,Harmony],[melody_instruments,
+		MelodyInstruments],[harmony_instruments,HarmonyInstruments],[melody_parts,MelodyParts],[harmony_parts,
+		HarmonyParts],[lyrics,Lyrics],
+		[genre,["anthem"]]],
+		
+	term_to_atom(Meta_file,Meta_file1),
+	string_atom(Meta_file2,Meta_file1),
+
+	concat_list("",[File1,"_meta.txt"],File2),
+	(open_s(File2,write,Stream1),
+	write(Stream1,Meta_file2),
+	close(Stream1)),!
+	.
 	
 %% n intro, vn verse, c chorus, i1 instrumental1, t2, instrumental 2, s solo, o outro
 
@@ -404,7 +417,7 @@ sentencewithspaces(Sentence1,Sentence2,Sentence3) :-
 rendersong(Form1,Voiceparts,_Maxlength,Melody,
 	Harmony,MelodyInstruments,
 	HarmonyInstruments,MelodyParts1,
-	HarmonyParts,Lyrics,Vocalstubinstrument,Song1) :-
+	HarmonyParts,Lyrics,Vocalstubinstrument,Song1,File1) :-
 	Totallength=8,
 	Voicetrack=1,
 	length(MelodyInstruments,MelodyInstrumentsLength),
