@@ -14,36 +14,40 @@ Please read the following instructions on how to install the project on your com
 
 # Prerequisites
 
-Please download and install SWI-Prolog for your machine at https://www.swi-prolog.org/build/.
+* Please download and install SWI-Prolog for your machine at `https://www.swi-prolog.org/build/`.
 
-Please download Lucian Green's List Prolog Interpreter Repository at https://github.com/luciangreen/listprologinterpreter.
-
-Please install Mind Reader Repository (https://github.com/luciangreen/mindreader).
-
-
-Requires asc2mid (http://www.archduke.org/midi/, compile with a C compiler before running.
+* Requires asc2mid (http://www.archduke.org/midi/, compile with a C compiler before running.
 ```
 gcc asc2mid.c -o asc2mid
 ```
-Call application "asc2mid").
+* Call application "asc2mid").
 
-Optional: Search for and download backdated version 6.0.5 of GarageBand and AlterEgo singing voice synthesis plug-in for old GarageBand for Mac or on Windows (https://www.plogue.com/downloads.html).
+* Optional: Search for and download backdated version 6.0.5 of GarageBand and AlterEgo singing voice synthesis plug-in for old GarageBand for Mac or on Windows (https://www.plogue.com/downloads.html).
 
+# 1. Install manually
 
-# Installation from List Prolog Package Manager (LPPM)
+Download <a href="http://github.com/luciangreen/Music-Composer/">this repository</a>, the <a href="https://github.com/luciangreen/listprologinterpreter">List Prolog Interpreter Repository</a> and the <a href="https://github.com/luciangreen/mindreader">Mind Reader Repository</a>.
 
-* Optionally, you can install from LPPM by installing <a href="https://www.swi-prolog.org/build/">SWI-Prolog</a> for your machine, downloading the <a href="https://github.com/luciangreen/List-Prolog-Package-Manager">LPPM Repository</a>,
+# 2. Or Install from List Prolog Package Manager (LPPM)
+
+* Download the <a href="https://github.com/luciangreen/List-Prolog-Package-Manager">LPPM Repository</a>:
+
 ```
 git clone https://github.com/luciangreen/List-Prolog-Package-Manager.git
 cd List-Prolog-Package-Manager
 swipl
+['lppm'].
+lppm_install("luciangreen","Music-Composer")
+halt
 ```
-loading LPPM with `['lppm'].` then installing the package by running `lppm_install("luciangreen","Music-Composer").`.  Requires additional part below.
 
-# Installing
+# Running
 
-* Download the repository to your machine.
-In the SWI-Prolog environment, enter the following to manually enter creative choices:
+* In Shell:
+`cd Music-Composer`
+`swipl`
+
+* Enter the following to manually enter creative choices:
 `['mindreadtestmusiccomposer-unusual-4-userinput'].`    
 
 * Enter the following to randomly generate 3-note progressions:
