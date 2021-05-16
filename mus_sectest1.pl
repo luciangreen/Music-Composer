@@ -11,21 +11,21 @@
 
 %% later: react to periods
 
-sectest0(N) :-
+sectest01(N) :-
 	write("*** Please indicate "),
 	write(N),
 	writeln(" number 1 songs. ***"),
 	sleep(5),
-	sectest1(N).
+	sectest11(N).
 
-sectest1(0) :- !.
-sectest1(N1) :-
+sectest11(0) :- !.
+sectest11(N1) :-
 	catch(
 	(sectest0(_Form1,_Lyrics,_Melody,_Harmony,_MelodyParts,
 	_HarmonyParts,_Vocalstubinstrument,_Song1),
 	writeln([song,N1,done]),
 	N2 is N1-1,
-	sectest1(N2)),
+	sectest11(N2)),
    _,
-	sectest1(N1)
+	sectest11(N1)
 ).
