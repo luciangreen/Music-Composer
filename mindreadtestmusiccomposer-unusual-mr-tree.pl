@@ -823,7 +823,7 @@ find(["Should a chorus and outro or two solos come after the first solo?",2],COo
 find("Should the chord progression type be 1451, 1564, 1645, Classical or Classical Pop?",CPT) :-
 	mind_read(CPT,[1451, 1564, 1645
 	%%
-	, classical, classicalpop
+	, classical%, classicalpop
 	]).
 
 /**generatelyricslistsverse(Character,Lyrics1,Lyrics2):-
