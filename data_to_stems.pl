@@ -161,7 +161,19 @@ split_on_instrument(Middle,Instruments1,Instruments2) :-
 	*/
 	split_on_instrument(Instrument1,Instruments31,Instruments2))),!.
 
+stems_to_mid :-
 
-foldr(Function,A,L,B) :-
-	reverse(A,C),
-	foldl(Function,C,L,B),!.
+	directory_files("stems/",F),
+	delete_invisibles_etc(F,G),
+
+	findall(_,(
+	
+	member(File,G),
+	
+	string_concat(File1,".txt",File),
+	
+	foldr(string_concat,["./asc2mid stems/",File," > mid/",File1,".mid"],Command),
+	
+	shell1_s(Command)
+
+	),_),!.
