@@ -79,13 +79,17 @@ To output the possible chord progressions from one note to another:
 `classicalcomposition('C','D',Progression),writeln1(Progression).`
 `popclassicalcomposition('C','D',Progression),writeln1(Progression).`
 
-# Rescuing Format Files with asc2mid
+# Data files to stems
 
-If the file `song***.txt` is produced but the `.mid` file is not, you may use asc2mid to produce the `.mid` file. In Shell:
+* Separate `song***.txt` files into stem files for each instrument (saved in the `stems` folder) by placing the data files in the `data_files` folder, and entering `['data_to_stems.pl'].` and `data_to_stems.`.
 
-```
-./asc2mid song***.txt > song***.mid
-```
+# Stems/data files to mid files
+
+If:
+- you have converted the data files to stem files and need `.mid` files, or
+- the file `song***.txt` is produced but the `.mid` file is not:
+
+* Place the data files or stems in the `stems` folder, enter `['data_to_stems.pl'].` and `stems_to_mid.` and the `.mid` files will be saved in the `mid` folder.
 
 # Note on Mind Reader
 
