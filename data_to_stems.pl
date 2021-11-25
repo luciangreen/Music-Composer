@@ -163,6 +163,8 @@ split_on_instrument(Middle,Instruments1,Instruments2) :-
 
 stems_to_mid :-
 
+	check_asc2mid,
+	
 	directory_files("stems/",F),
 	delete_invisibles_etc(F,G),
 
