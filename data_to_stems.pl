@@ -39,8 +39,8 @@ data_to_stems :-
 	findall(_,(member(N,Ns),get_item_n(Instruments,N,Instrument),
 	foldr(string_concat,[Header,Instrument,Footer],"",File1),
 	%trace,
-	File=File2,
-	%string_concat(File2,".txt",File),
+	%File=File2,
+	string_concat(File2,".txt",File),
 	foldr(string_concat,["stems/",File2,"-","stem",N,".txt"],"",File_name),
 	save_file_s(File_name,File1)),_)),_),!.
 
