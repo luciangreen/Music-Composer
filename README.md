@@ -93,6 +93,10 @@ If:
 
 * Place the data files or stems in the `stems` folder, enter `['data_to_stems.pl'].` and `stems_to_mid.` and the `.mid` files will be saved in the `mid` folder.
 
+# Convert meta to mid files
+
+* Place `*_meta.txt` files in the `meta` folder, enter `['meta2mid.pl'].` and `meta2mid.` and the `*lyrics.txt`, `*.mid` and `*.txt` files will be saved in the `Music-Composer` folder.
+
 # Note on Mind Reader
 
 Mind Reader is currently not configured to display screens and accurately mind read decisions.  It detects vague, not exact thoughts.
