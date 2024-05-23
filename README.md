@@ -52,6 +52,9 @@ halt
 * Enter the following to manually enter creative choices:
 `['mindreadtestmusiccomposer-unusual-4-userinput'].`    
 
+* Enter the following to manually enter creative choices with rhythm:
+`['mindreadtestmusiccomposer-unusual-4-userinput-rhythm'].`    
+
 * Enter the following to randomly generate 3-note progressions:
 `['mindreadtestmusiccomposer-unusual-3'].`    
 
@@ -64,7 +67,7 @@ halt
 
 * Please follow instructions in <a href="https://github.com/luciangreen/mindreader/blob/master/init.txt">init.txt</a> to initialise any new mind-reading algorithms.
 
-* Enter the following to mind read songs with 4-note progressions:
+* Enter the following to mind-read songs with 4-note progressions:
 `['mindreadtestmusiccomposer-unusual-4-mr'].`    
 
 * Enter the following to *detailedly* mind read songs with 4-note progressions:
@@ -96,6 +99,7 @@ If:
 # Convert meta to mid files
 
 * Place `*_meta.txt` files in the `meta` folder, enter `['meta2mid.pl'].` and `meta2mid.` and the `*lyrics.txt`, `*.mid` and `*.txt` files will be saved in the `Music-Composer` folder.
+* Run `meta2mid_r.` instead of `meta2mid.` to ask for a song-wide rhythm.
 
 # Note on Mind Reader
 

@@ -21,7 +21,7 @@ use_module(library(pio)).
 %%:- include('texttobr2qbmusic').
 
 :- include('musiclibrary').
-:- include('mindreadtestmusiccomposer-unusual-mr-tree.pl').
+:- include('mindreadtestmusiccomposer-unusual-ui-rhythm.pl').%mindreadtestmusiccomposer-unusual-mr-tree.pl').
 %:- include('../listprologinterpreter/la_strings.pl').
 %:- include('../listprologinterpreter/la_files.pl').
 %:- include('../mindreader/make_mind_reading_tree4 working1.pl').
@@ -32,19 +32,53 @@ use_module(library(pio)).
 %sectest(0) :- !.
 %sectest(N1) :-
 %	writeln(["\n",N1]),
-	
+:-dynamic ask_for_rhythm/1.
+
 
 meta2mid :-
+	retractall(ask_for_rhythm(_)),
+	assertz(ask_for_rhythm(false)),
+
+meta2mid1.
+
+meta2mid_r :-
+	retractall(ask_for_rhythm(_)),
+	assertz(ask_for_rhythm(true)),
+
+meta2mid1.
+meta2mid1 :-
 
 	check_asc2mid,
 
-open_file_s("meta/song202422921430.467365026474_meta.txt",Meta_file),	
+
+
+Folder="meta",
+foldr(string_concat,[Folder,"/"],Path),
+	directory_files(Path,F),
+	delete_invisibles_etc(F,G),
+
+findall(_,(member(Filex1,G),
+	string_concat(Path,Filex1,Filex),
+	% Additional_variables are [label,var]
+	open_file_s(Filex,Meta_file),
+
+%open_file_s("meta/song202422921430.467365026474_meta.txt",Meta_file),	
 
 Meta_file=[[form,Form1],[chord_progressions,_CPT],[voice_part,Voiceparts2],[melody,Melody],[harmony,Harmony],[melody_instruments,
 		MelodyInstruments],[harmony_instruments,HarmonyInstruments],[melody_parts,MelodyParts],[harmony_parts,
 		HarmonyParts],[lyrics,Lyrics],
-		[genre,["anthem"]]],
-		%sectest0(_Form1,_Lyrics,_Melody,_Harmony,_MelodyParts,
+		[genre,["anthem"]]|Rhythm1],
+		
+		(Rhythm1=[[rhythm,Rhythm]]->
+		(
+	retractall(rhythm(_)),
+	assertz(rhythm(Rhythm)));
+	
+	(ask_for_rhythm(true)->rhythm;
+	(retractall(rhythm(_)),
+	assertz(rhythm([["0","NT","1/2",1,80],["1/2","NT","1/2",1,80],["1","NT","1/2",2,80],["1+1/2","NT","1/2",2,80],["2","NT","1/2",3,80],["2+1/2","NT","1/2",3,80],["3","NT","1/2",4,80],["3+1/2","NT","1/2",4,80]]))))),
+	
+%sectest0(_Form1,_Lyrics,_Melody,_Harmony,_MelodyParts,
 	%_HarmonyParts,_Vocalstubinstrument,_Song1),
 	%N2 is N1-1,
 	%sectest(N2),!.
@@ -83,7 +117,7 @@ Meta_file=[[form,Form1],[chord_progressions,_CPT],[voice_part,Voiceparts2],[melo
 	rendersong(Form1,Voiceparts2,Maxlength,Melody,Harmony,
 		MelodyInstruments,HarmonyInstruments,MelodyParts,
 		HarmonyParts,Lyrics,
-		Vocalstubinstrument,_Song1,_File1), %%,
+		Vocalstubinstrument,_Song1,_File1)),_), %%,
 
 	%working_directory1(_,WD),
 
