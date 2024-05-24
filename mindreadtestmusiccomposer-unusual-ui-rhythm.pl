@@ -210,7 +210,7 @@ ff_frac(N1,S) :-
  floor(N1,N2),
  (N1 =:= N2->(N21=N2,N31="");
  (N3 is N1-N2,
- numbers(16,0,[],Ns),
+ numbers(4,0,[],Ns),
  member(N4,Ns),
  member(N5,Ns),
  catch(N3 is N4/N5,_,false),
