@@ -136,7 +136,7 @@ rhythm2(R10,R2) :-
 	reverse(R2,[[T,_,L,_,_]|_]),
 	term_to_atom(T1,T),term_to_atom(L1,L),
 	Total is T1+L1,
-	not(Total>=5))),
+	not(Total>4))),
 	!.
 	
 rhythm2(R10,R2) :-
