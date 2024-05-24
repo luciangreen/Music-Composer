@@ -108,7 +108,7 @@ rhythm:-%(MelodyParts,HarmonyParts) :-
 rhythm1(R2) :-
 	writeln("Please enter the song's bar rhythm in the format [[time,type=n/r,length,nth_note_from_mel_harm,velocity=0-127],...], e.g. [[0,n,1/2,1,80],[1/2,n,1/2,1,80],[1,n,1/2,2,80],[1+1/2,n,1/2,2,80],[2,n,1/2,3,80],[2+1/2,n,1/2,3,80],[3,n,1/2,4,80],[3+1/2,n,1/2,4,80]] or \"ta1 ta1 tityca ta.\" (note full stop) where \"1\" optionally denotes nth_note_from_mel_harm."),
 	read_string(user_input, "\n", "\r", _, R10),
-	
+	%trace,
 	rhythm2(R10,R2),!.
 
 string_compound(A,B) :- catch(number(B),_,false),number_string(B,A),!.
@@ -129,12 +129,20 @@ rhythm2(R10,R2) :-
 	foldr(string_concat,R12,R13),
 	process_rhythm(R13,R14),
 	split_on_substring1(R14,"bcdefghijklm",R15),
-	find_rhythm(0,1,R15,[],R2),!.
+	%trace,
+	find_rhythm(0,1,R15,[],R2),
+	(R2=[]->true;
+	(%trace,
+	reverse(R2,[[T,_,L,_,_]|_]),
+	term_to_atom(T1,T),term_to_atom(L1,L),
+	Total is T1+L1,
+	not(Total>=5))),
+	!.
 	
 rhythm2(R10,R2) :-
 %trace,
 	not(R10=""),
-	term_to_atom(R1,R10),
+	catch(term_to_atom(R1,R10),_,false),
 	%member([T,_,_,_],R1),not(T>=4),
 	forall(member([A,B,C,D,F],R1),(string_compound(_,A),(B=n->true;B=r),string_compound(_,C),
 	0=<F,F=<127)),
