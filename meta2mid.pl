@@ -20,14 +20,17 @@ use_module(library(pio)).
 %%:- include('texttobr').
 %%:- include('texttobr2qbmusic').
 
-:- include('musiclibrary').
+:- include('../listprologinterpreter/listprolog.pl').
+
 :- include('mindreadtestmusiccomposer-unusual-ui-rhythm.pl').%mindreadtestmusiccomposer-unusual-mr-tree.pl').
+
+%:- include('musiclibrary').
+%:- include('../listprologinterpreter/listprolog.pl').
 %:- include('../listprologinterpreter/la_strings.pl').
 %:- include('../listprologinterpreter/la_files.pl').
 %:- include('../mindreader/make_mind_reading_tree4 working1.pl').
 %:- include('../mindreader/mr_tree.pl').
 %:- include('instruments_mr-tree.pl').
-:- include('../listprologinterpreter/listprolog.pl').
 
 %sectest(0) :- !.
 %sectest(N1) :-
@@ -74,7 +77,7 @@ Meta_file=[[form,Form1],[chord_progressions,_CPT],[voice_part,Voiceparts2],[melo
 	retractall(rhythm(_)),
 	assertz(rhythm(Rhythm)));
 	
-	(ask_for_rhythm(true)->rhythm;
+	(ask_for_rhythm(true)->rhythm;%(MelodyParts,HarmonyParts);
 	(retractall(rhythm(_)),
 	assertz(rhythm([["0","NT","1/2",1,80],["1/2","NT","1/2",1,80],["1","NT","1/2",2,80],["1+1/2","NT","1/2",2,80],["2","NT","1/2",3,80],["2+1/2","NT","1/2",3,80],["3","NT","1/2",4,80],["3+1/2","NT","1/2",4,80]]))))),
 	

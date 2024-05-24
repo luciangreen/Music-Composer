@@ -1,3 +1,4 @@
+:- include('../listprologinterpreter/listprolog.pl').
 :- include('mindreadtestmusiccomposer-unusual-ui-rhythm').
 :- include('1451-4').
 :- include('1564-4').

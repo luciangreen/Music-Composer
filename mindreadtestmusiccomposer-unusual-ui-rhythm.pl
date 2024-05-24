@@ -11,7 +11,7 @@
 
 **/
 
-use_module(library(pio)).
+:-use_module(library(pio)).
 
 :- use_module(library(date)).
 %%:- include('texttobr2qb').
@@ -22,7 +22,6 @@ use_module(library(pio)).
 
 :- include('musiclibrary').
 :- include('la_strings').
-:- include('../listprologinterpreter/listprolog.pl').
 
 :-dynamic rhythm/1.
 
@@ -41,13 +40,13 @@ sectest0(Form1,Lyrics,Melody,Harmony,MelodyParts,HarmonyParts,Vocalstubinstrumen
  	%%texttobr2qb(2), %%Imagine song
 	%%form(Form1),
 	writeln("Please enter form in format e.g. [n,v1,i1,v2,c,t2,s,s,s]."),
-	read_string(user_input, "\n", "\r", _End21, Form1A),
+	read_string(user_input, "\n", "\r", _, Form1A),
 	atom_to_term(Form1A,Form1,_),
 	
 	%%Form1=[v2,o],
 	%%find("Should the chord progression type be 1451, 1564, 1645, Classical or Classical Pop?",CPT),
 	writeln("Should the chord progression type be 1451, 1564, 1645, classical or classicalpop?"),
-	read_string(user_input, "\n", "\r", _End2, CPT1),
+	read_string(user_input, "\n", "\r", _, CPT1),
 	atom_string(CPT,CPT1),
 
 	remove_dups(Form1,[],Form2),
@@ -69,7 +68,7 @@ findall(DH,(member(C1H,Lyrics),C1H=[_|C2H],member(CH,C2H),length(CH,DH)),EH),sor
 	instruments(Form1,MelodyInstruments,HarmonyInstruments,
 		MelodyParts,HarmonyParts,Vocalstubinstrument),
 		
-	rhythm,	
+	rhythm,%(MelodyParts,HarmonyParts),	
 	%%writeln(instruments(Form1,MelodyInstruments,HarmonyInstruments,
 %%		MelodyParts,HarmonyParts,
 %%		Vocalstubinstrument)),
@@ -97,23 +96,20 @@ Meta_file=[[form,Form1],[chord_progressions,CPT],[voice_part,Voiceparts2],[melod
 	write(Stream1,Meta_file2),
 	close(Stream1)),!
 	.
-	
-rhythm :-
+	%Section,Instrument,Playing
+rhythm:-%(MelodyParts,HarmonyParts) :-
 %trace,
+	%writeln("Please enter the vocal rhythms*")
+	%findall(R1,(member([Section,Instrument,1],MelodyParts)))
 	rhythm1(R),
 	retractall(rhythm(_)),
 	assertz(rhythm(R)),!.
 
 rhythm1(R2) :-
-	((writeln("Please enter the song's bar rhythm in the format [[time,type=n/r,length,nth_note_from_mel_harm,velocity=0-127],...], e.g. [[0,n,1/2,1,80],[1/2,n,1/2,1,80],[1,n,1/2,2,80],[1+1/2,n,1/2,2,80],[2,n,1/2,3,80],[2+1/2,n,1/2,3,80],[3,n,1/2,4,80],[3+1/2,n,1/2,4,80]] with no times >= 4."),
+	writeln("Please enter the song's bar rhythm in the format [[time,type=n/r,length,nth_note_from_mel_harm,velocity=0-127],...], e.g. [[0,n,1/2,1,80],[1/2,n,1/2,1,80],[1,n,1/2,2,80],[1+1/2,n,1/2,2,80],[2,n,1/2,3,80],[2+1/2,n,1/2,3,80],[3,n,1/2,4,80],[3+1/2,n,1/2,4,80]] or \"ta1 ta1 tityca ta.\" (note full stop) where \"1\" optionally denotes nth_note_from_mel_harm."),
 	read_string(user_input, "\n", "\r", _, R10),
-	term_to_atom(R1,R10),
-	%member([T,_,_,_],R1),not(T>=4),
-	forall(member([A,B,C,D,F],R1),(string_compound(_,A),(B=n->true;B=r),string_compound(_,C),
-	0=<F,F=<127)))->
-	findall([A1,B1,C1,D,F],(member([A,B,C,D,F],R1),string_compound(A1,A),(B=n->B1="NT";(B=r,B1="R")),string_compound(C1,C)
-	),R2);
-	rhythm1(R2)),!.
+	
+	rhythm2(R10,R2),!.
 
 string_compound(A,B) :- catch(number(B),_,false),number_string(B,A),!.
 string_compound(A,C/D) :- %catch(number(B),_,false),%number_string(B,A1),
@@ -123,6 +119,97 @@ frac_to_string(A/B,AB) :- foldr(string_concat,[A,"/",B],AB).
 
 %% n intro, vn verse, c chorus, i1 instrumental1, t2, instrumental 2, s solo, o outro
 
+rhythm2(R10,R2) :-
+	% ta a a a(n), ta a a, ta a, ta, ti( )ca ti, same for za
+	% delete space, replace with length
+	% simplify time, ff frac
+	string_concat(R101,".",R10),
+	string_strings(R101,R11),
+	delete(R11," ",R12),
+	foldr(string_concat,R12,R13),
+	process_rhythm(R13,R14),
+	split_on_substring1(R14,"bcdefghijklm",R15),
+	find_rhythm(0,1,R15,[],R2),!.
+	
+rhythm2(R10,R2) :-
+%trace,
+	not(R10=""),
+	term_to_atom(R1,R10),
+	%member([T,_,_,_],R1),not(T>=4),
+	forall(member([A,B,C,D,F],R1),(string_compound(_,A),(B=n->true;B=r),string_compound(_,C),
+	0=<F,F=<127)),
+	findall([A1,B1,C1,D,F],(member([A,B,C,D,F],R1),string_compound(A1,A),(B=n->B1="NT";(B=r,B1="R")),string_compound(C1,C)
+	),R2),!.
+	
+rhythm2(_R10,R2) :-
+	writeln("Error: Please re-input:"),
+	rhythm1(R2),!.
+
+process_rhythm(A,C) :-
+ process_rhythm1(Replacements),
+ atom_string(A1,A),
+ process_rhythm2(Replacements,A1,D1),
+ atom_string(D1,C),!.
+ 
+process_rhythm2([],A,A) :- !.
+process_rhythm2(Replacements,A,D) :-
+ Replacements=[[B,C]|G],
+ atomic_list_concat(E,B,A),
+ atomic_list_concat(E,C,F),
+ process_rhythm2(G,F,D),!.
+
+	process_rhythm1([['taaaa','b'],['taaa','c'],['taa','d'],['ta','e'],['ty','g'],['ca','g'],['ti','f'],['zaaaa','h'],['zaaa','i'],['zaa','j'],['za','k'],['zi','l'],['zy','m']]).
+		
+find_rhythm(_,_,[],B,B) :- !.
+find_rhythm(Time,Note_n,A,B,C) :-
+%writeln1(find_rhythm(Time,Note_n,A,B,C)),
+%trace,
+	A=[D|E],
+	atom_string(D2,D),
+	time(D2,Type,Length),
+	% ["1/2","NT","1/2",1,80]
+	ff_frac(Time,Time1),
+	(Type=n->Type1="NT";Type1="R"),
+	%Lengths=[Length1|Lengths2],
+	ff_frac(Length,Length1),
+	(E=[D1|E1]->
+	(catch(number_string(D3,D1),_,false)->(Note_n1=D3,A1=E1);(Note_n1=Note_n,A1=E));
+	(A1=E,Note_n1=Note_n)),
+	%writeln1(append(B,[[Time1,Type1,Length1,Note_n1,80]],B1)),
+	append(B,[[Time1,Type1,Length1,Note_n1,80]],B1),
+	
+	%catch(number_string(Length5,Length),_,false),
+	Time2 is Time+Length,
+	Note_n2 is Note_n1+1,
+	find_rhythm(Time2,Note_n2,A1,B1,C),!.
+
+	
+time(b,n,4).
+time(c,n,3).
+time(d,n,2).
+time(e,n,1).
+time(f,n,0.5).
+time(g,n,0.25).
+time(h,r,4).
+time(i,r,3).
+time(j,r,2).
+time(k,r,1).
+time(l,r,0.5).
+time(m,r,0.25).
+
+% 1, 1+1/2, 1/2
+ff_frac(N1,S) :-
+ floor(N1,N2),
+ (N1 =:= N2->(N21=N2,N31="");
+ (N3 is N1-N2,
+ numbers(16,0,[],Ns),
+ member(N4,Ns),
+ member(N5,Ns),
+ catch(N3 is N4/N5,_,false),
+ (N2=0->N21="";string_concat(N2,"+",N21)),
+ foldr(string_concat,[N4,"/",N5],N31))),
+ foldr(string_concat,[N21,N31],S),!.
+ 
 findall1(Form2,Form3) :-
 	findall(B,shorten(Form2,B),Form3).
 
@@ -280,7 +367,7 @@ not(Progression2=[]),
 	%%findbest(R3,Progression4),
 	repeat,
 	writeln(["Please enter harmony line in format e.g. four notes from ['C','E','G'] for",Form,"."]),
-	read_string(user_input, "\n", "\r", _End2, Progression4A),
+	read_string(user_input, "\n", "\r", _, Progression4A),
 	atom_to_term(Progression4A,Progression4,_),
 
 	harmony(Form,CPT,Progression4,Harmony1,Harmony2).	
@@ -288,7 +375,7 @@ findmelody(Form,CPT,_Parts,_N1,_N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	CPT='1564',
 	repeat,
 	writeln(["Please enter melody line for form",Form,"in format e.g. four notes from [d,di,r,ri,m,f,fi,s,si,l,li,t]."]),
-	read_string(user_input, "\n", "\r", _End2, Progression2B),
+	read_string(user_input, "\n", "\r", _, Progression2B),
 	atom_to_term(Progression2B,Progression2A,_),
 	solfatonotes(Progression2A,[],Progression2),	not(Progression2=[]),
 	append(Melody1,[[Form,Progression2]],Melody2),
@@ -297,14 +384,14 @@ findmelody(Form,CPT,_Parts,_N1,_N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	%%findbest(R3,Progression4),
 	repeat,
 	writeln(["Please enter harmony line in format e.g. four notes from ['C','E','G'] for",Form,"."]),
-	read_string(user_input, "\n", "\r", _End2, Progression4A),
+	read_string(user_input, "\n", "\r", _, Progression4A),
 	atom_to_term(Progression4A,Progression4,_),
 	harmony(Form,CPT,Progression4,Harmony1,Harmony2).
 findmelody(Form,CPT,_Parts,_N1,_N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	CPT='1645',
 	repeat,
 	writeln(["Please enter melody line for form",Form,"in format e.g. four notes from [d,di,r,ri,m,f,fi,s,si,l,li,t]."]),
-	read_string(user_input, "\n", "\r", _End21, Progression2B),
+	read_string(user_input, "\n", "\r", _, Progression2B),
 	atom_to_term(Progression2B,Progression2A,_),
 	solfatonotes(Progression2A,[],Progression2),	not(Progression2=[]),
 	append(Melody1,[[Form,Progression2]],Melody2),
@@ -313,14 +400,14 @@ findmelody(Form,CPT,_Parts,_N1,_N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	%%findbest(R3,Progression4),
 	repeat,
 	writeln(["Please enter harmony line in format e.g. four notes from ['C','E','G'] for",Form,"."]),
-	read_string(user_input, "\n", "\r", _End2, Progression4A),
+	read_string(user_input, "\n", "\r", _, Progression4A),
 	atom_to_term(Progression4A,Progression4,_),
 	harmony(Form,CPT,Progression4,Harmony1,Harmony2).
 findmelody(Form,CPT,_Parts,_N1,_N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	CPT=classical,
 	repeat,
 	writeln(["Please enter melody line for form",Form,"in format e.g. four notes from [d,di,r,ri,m,f,fi,s,si,l,li,t]."]),
-	read_string(user_input, "\n", "\r", _End21, Progression2B),
+	read_string(user_input, "\n", "\r", _, Progression2B),
 	atom_to_term(Progression2B,Progression2A,_),
 	solfatonotes(Progression2A,[],Progression2),	not(Progression2=[]),
 	append(Melody1,[[Form,Progression2]],Melody2),
@@ -329,14 +416,14 @@ findmelody(Form,CPT,_Parts,_N1,_N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	%%findbest(R3,Progression4),
 	repeat,
 	writeln(["Please enter harmony line in format e.g. four notes from ['C','E','G'] for",Form,"."]),
-	read_string(user_input, "\n", "\r", _End2, Progression4A),
+	read_string(user_input, "\n", "\r", _, Progression4A),
 	atom_to_term(Progression4A,Progression4,_),
 	harmony(Form,CPT,Progression4,Harmony1,Harmony2).
 findmelody(Form,CPT,_Parts,_N1,_N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	CPT=classicalpop,
 	repeat,
 	writeln(["Please enter melody line for form",Form,"in format e.g. four notes from [d,di,r,ri,m,f,fi,s,si,l,li,t]."]),
-	read_string(user_input, "\n", "\r", _End21, Progression2B),
+	read_string(user_input, "\n", "\r", _, Progression2B),
 	atom_to_term(Progression2B,Progression2A,_),
 	solfatonotes(Progression2A,[],Progression2),	not(Progression2=[]),
 	append(Melody1,[[Form,Progression2]],Melody2),
@@ -345,7 +432,7 @@ findmelody(Form,CPT,_Parts,_N1,_N2,Melody1,Melody2,Harmony1,Harmony2) :-
 	%%findbest(R3,Progression4),
 	repeat,
 	writeln(["Please enter harmony line in format e.g. four notes from ['C','E','G'] for",Form,"."]),
-	read_string(user_input, "\n", "\r", _End2, Progression4A),
+	read_string(user_input, "\n", "\r", _, Progression4A),
 	atom_to_term(Progression4A,Progression4,_),
 	harmony(Form,CPT,Progression4,Harmony1,Harmony2).
 
@@ -659,7 +746,7 @@ repeatlastnote2(Length1,Item,Melody1,Melody2) :-
 	repeatlastnote2(Length2,Item,Melody3,Melody2),!.
 
 renderline2([]%BarTimes
-,BarTimes,_,_Track,_Bar1,Voice,Voice) :- !.
+,_BarTimes,_,_Track,_Bar1,Voice,Voice) :- !.
 renderline2(BarTimes1,BarTimes4,Melody1,Track,Bar,Voice1,Voice2) :-
 	BarTimes1=[BarTimes2|BarTimes3],
 	BarTimes2=[Time,Type,Length,Nth_note_from_mel_harm,Velocity],
@@ -675,7 +762,7 @@ renderline2(BarTimes1,BarTimes4,Melody1,Track,Bar,Voice1,Voice2) :-
 	renderline2(BarTimes3,BarTimes4,Melody1,Track,Bar,Voice3,Voice2).
 
 renderlinerests([]%BarTimes
-,BarTimes,_Track,_Bar1,Voice,Voice) :- !.
+,_BarTimes,_Track,_Bar1,Voice,Voice) :- !.
 renderlinerests(BarTimes1,BarTimes2,Track,Bar,Voice1,Voice2) :-
 	BarTimes1=[BarTimes2|BarTimes3],
 	BarTimes2=[Time,_Type,Length,_Nth_note_from_mel_harm,_Velocity],
@@ -879,7 +966,7 @@ repeatlastnoteh2(Length1,Item,Melody1,Melody2) :-
 	repeatlastnoteh2(Length2,Item,Melody3,Melody2),!.
 
 renderlineh2([]%BarTimes
-,BarTimes,_%[]
+,_BarTimes,_%[]
 ,_Track,_Bar1,Voice,Voice) :- !.
 renderlineh2(BarTimes1,BarTimes4,Melody1,Track,Bar,Voice1,Voice2) :-
 	%Melody1=[Melody2|Melody3],
