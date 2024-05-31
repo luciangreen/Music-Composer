@@ -76,7 +76,8 @@ findall(DH,(member(C1H,Lyrics),C1H=[_|C2H],member(CH,C2H),length(CH,DH)),EH),sor
 	%%	MelodyInstruments,HarmonyInstruments,MelodyParts,
 	%%	HarmonyParts,Lyrics,
 	%%	Vocalstubinstrument,Song1)), %%,
-%%trace,
+%%
+%trace,
 	rendersong(Form1,Voiceparts2,Maxlength,Melody,Harmony,
 		MelodyInstruments,HarmonyInstruments,MelodyParts,
 		HarmonyParts,Lyrics,
@@ -763,7 +764,7 @@ renderline2(BarTimes1,BarTimes4,Melody1,Track,Bar,Voice1,Voice2) :-
 	get_item_n(Melody1,Nth_note_from_mel_harm,Melody2),
 	%Melody1=[Melody2|Melody3],
 	concat_list("BA    ",[Bar,"   CR         ",Time,"   TR  ",Track,"   CH  ",Track,"   NT  ",Melody2,"-           ",Length,"   von=",Velocity,"   voff=0\n"],Song))->true;
-	(Type="R",
+	(%Type="R",
 	concat_list("BA    ",[Bar,"   CR         ",Time,"   TR  ",Track,"   CH  ",Track,"   NT  R          ",Length,"      voff=0\n"],Song))),
 	
 	string_concat(Voice1,Song,Voice3),
@@ -994,7 +995,7 @@ renderlineh2(BarTimes1,BarTimes4,Melody1,Track,Bar,Voice1,Voice2) :-
 	concat_list("BA    ",[Bar,"   CR         ",Time,"   TR  ",Track,"   CH  ",Track,"   NT  ",Melody22,"-           ",Length,"   von=",Velocity," voff=0\n"],Song2),	
 	concat_list("BA    ",[Bar,"   CR         ",Time,"   TR  ",Track,"   CH  ",Track,"   NT  ",Melody23,"-           ",Length,"   von=",Velocity," voff=0\n"],Song3))->true;
 	
-	(Type="R",
+	(%Type="R",
 	%get_item_n(Melody1,Nth_note_from_mel_harm,Melody2),
 	%Melody2=[_,[Melody21,Melody22,Melody23]],
 	%Melody1=[Melody2|Melody3],
