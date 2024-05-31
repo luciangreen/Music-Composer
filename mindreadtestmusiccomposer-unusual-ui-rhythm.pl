@@ -189,7 +189,7 @@ find_rhythm(Time,Note_n,A,B,C) :-
 	
 	%catch(number_string(Length5,Length),_,false),
 	Time2 is Time+Length,
-	Note_n2 is Note_n1+1,
+	(Type1="NT"->Note_n2 is Note_n1+1;Note_n2=Note_n1),
 	find_rhythm(Time2,Note_n2,A1,B1,C),!.
 
 	
