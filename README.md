@@ -53,7 +53,8 @@ halt
 `['mindreadtestmusiccomposer-unusual-4-userinput'].`    
 
 * Enter the following to manually enter creative choices with rhythm:
-`['mindreadtestmusiccomposer-unusual-4-userinput-rhythm'].`    
+`['mindreadtestmusiccomposer-unusual-4-userinput-rhythm'].`
+* Note: In Rhythm entry mode, enter a maximum of n notes per lyric line, up to n melody notes, and n rhythm notes. If the number of rhythm notes is fewer than n, it will be truncated.
 
 * Enter the following to randomly generate 3-note progressions:
 `['mindreadtestmusiccomposer-unusual-3'].`    
