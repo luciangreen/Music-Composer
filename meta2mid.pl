@@ -120,14 +120,14 @@ Meta_file=[[form,Form1],[chord_progressions,CPT],[voice_part,Voiceparts2],[melod
 	rendersong(Form1,Voiceparts2,Maxlength,Melody,Harmony,
 		MelodyInstruments,HarmonyInstruments,MelodyParts,
 		HarmonyParts,Lyrics,
-		Vocalstubinstrument,_Song1,_File1),
+		Vocalstubinstrument,_Song1,File1),
 		
 		rhythm(Rhythm2),
 		
 		Meta_file3=[[form,Form1],[chord_progressions,CPT],[voice_part,Voiceparts2],[melody,Melody],[harmony,Harmony],[melody_instruments,
 		MelodyInstruments],[harmony_instruments,HarmonyInstruments],[melody_parts,MelodyParts],[harmony_parts,
 		HarmonyParts],[lyrics,Lyrics],
-		[genre,["anthem"]]|Rhythm2],
+		[genre,["anthem"]],[rhythm,Rhythm2]],
 		
 			term_to_atom(Meta_file3,Meta_file1),
 	string_atom(Meta_file2,Meta_file1),
@@ -136,11 +136,16 @@ Meta_file=[[form,Form1],[chord_progressions,CPT],[voice_part,Voiceparts2],[melod
 	% Additional_variables are [label,var]
 	%open_file_s(Filex,Meta_file),
 	
-	concat_list("",[Filex1],File2),
-	string_concat(Path,File2,Filex2),
+	%concat_list("",[Filex1],File2),
+	
+	concat_list("",[File1,"_meta.txt"],Filex2),
+	%string_concat(Path,File2,Filex2),
+	%working_directory1(WD,WD),
+	%working_directory1(_,"../"),	
 	(open_s(Filex2,write,Stream1),
 	write(Stream1,Meta_file2),
 	close(Stream1))
+	%working_directory1(_,WD)	
 
 ),_), %%,
 
