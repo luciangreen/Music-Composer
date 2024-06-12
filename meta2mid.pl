@@ -67,7 +67,7 @@ findall(_,(member(Filex1,G),
 
 %open_file_s("meta/song202422921430.467365026474_meta.txt",Meta_file),	
 
-Meta_file=[[form,Form1],[chord_progressions,_CPT],[voice_part,Voiceparts2],[melody,Melody],[harmony,Harmony],[melody_instruments,
+Meta_file=[[form,Form1],[chord_progressions,CPT],[voice_part,Voiceparts2],[melody,Melody],[harmony,Harmony],[melody_instruments,
 		MelodyInstruments],[harmony_instruments,HarmonyInstruments],[melody_parts,MelodyParts],[harmony_parts,
 		HarmonyParts],[lyrics,Lyrics],
 		[genre,["anthem"]]|Rhythm1],
@@ -120,22 +120,37 @@ Meta_file=[[form,Form1],[chord_progressions,_CPT],[voice_part,Voiceparts2],[melo
 	rendersong(Form1,Voiceparts2,Maxlength,Melody,Harmony,
 		MelodyInstruments,HarmonyInstruments,MelodyParts,
 		HarmonyParts,Lyrics,
-		Vocalstubinstrument,_Song1,_File1)),_), %%,
+		Vocalstubinstrument,_Song1,_File1),
+		
+		rhythm(Rhythm2),
+		
+		Meta_file3=[[form,Form1],[chord_progressions,CPT],[voice_part,Voiceparts2],[melody,Melody],[harmony,Harmony],[melody_instruments,
+		MelodyInstruments],[harmony_instruments,HarmonyInstruments],[melody_parts,MelodyParts],[harmony_parts,
+		HarmonyParts],[lyrics,Lyrics],
+		[genre,["anthem"]]|Rhythm2],
+		
+			term_to_atom(Meta_file3,Meta_file1),
+	string_atom(Meta_file2,Meta_file1),
+
+%member(Filex1,G),
+	% Additional_variables are [label,var]
+	%open_file_s(Filex,Meta_file),
+	
+	concat_list("",[Filex1],File2),
+	string_concat(Path,File2,Filex2),
+	(open_s(Filex2,write,Stream1),
+	write(Stream1,Meta_file2),
+	close(Stream1))
+
+),_), %%,
 
 	%working_directory1(_,WD),
-
-%Meta_file=[[form,Form1],[chord_progressions,CPT],[voice_part,Voiceparts2],[melody,Melody],[harmony,Harmony],[melody_instruments,
-		%MelodyInstruments],[harmony_instruments,HarmonyInstruments],[melody_parts,MelodyParts],[harmony_parts,
-%		HarmonyParts],[lyrics,Lyrics],
-%		[genre,["anthem"]]],
-		
-	%term_to_atom(Meta_file,Meta_file1),
-	%string_atom(Meta_file2,Meta_file1),
-
-	%concat_list("",[File1,"_meta.txt"],File2),
-	%(open_s(File2,write,Stream1),
-	%write(Stream1,Meta_file2),
-	%close(Stream1)),!
+/*
+Meta_file=[[form,Form1],[chord_progressions,CPT],[voice_part,Voiceparts2],[melody,Melody],[harmony,Harmony],[melody_instruments,
+		MelodyInstruments],[harmony_instruments,HarmonyInstruments],[melody_parts,MelodyParts],[harmony_parts,
+		HarmonyParts],[lyrics,Lyrics],
+		[genre,["anthem"]]],
+*/
 	!.
 
 %lyrics_m2m(Form1,Lyrics,Maxlength) :-
