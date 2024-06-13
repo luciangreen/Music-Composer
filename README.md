@@ -54,7 +54,7 @@ halt
 
 * Enter the following to enter creative choices with rhythm manually:
 `['mindreadtestmusiccomposer-unusual-4-userinput-rhythm'].`
-* Note: In Rhythm entry mode, enter a maximum of n notes per lyric line, up to n melody and harmony notes, and n rhythm notes. If the number of rhythm notes is fewer than n, it will be truncated, and the melody is truncated to the length of the vocal lyric line and the maximum vocal lyric line in vocal-less lines.
+* Note: In Rhythm entry mode, enter a maximum of n notes per lyric line, up to n melody and harmony notes, and n rhythm notes. The melody is truncated to the length of the vocal lyric line and the maximum vocal lyric line in vocal-less lines.
 
 * Enter the following to generate 3-note progressions randomly:
 `['mindreadtestmusiccomposer-unusual-3'].`    
