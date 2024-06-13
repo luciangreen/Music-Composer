@@ -1,6 +1,6 @@
 # Music Composer
 
-Music Composer can help automate writing pop songs in three modes.  It outputs the lyrics text file, the asc2mid text file and a MIDI music file.
+Music Composer can help automate writing pop songs in three modes.  It outputs the lyrics text file, the asc2mid text file, a meta music file and a MIDI music file.
 
 1. Manual entry of form, lyrics, melody, harmony, instruments, parts that the melody plays in and parts that the harmony plays in.
 
