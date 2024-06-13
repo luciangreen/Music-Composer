@@ -49,17 +49,17 @@ halt
 `cd Music-Composer`
 `swipl`
 
-* Enter the following to manually enter creative choices:
+* Enter the following to enter creative choices manually:
 `['mindreadtestmusiccomposer-unusual-4-userinput'].`    
 
-* Enter the following to manually enter creative choices with rhythm:
+* Enter the following to enter creative choices with rhythm manually:
 `['mindreadtestmusiccomposer-unusual-4-userinput-rhythm'].`
-* Note: In Rhythm entry mode, enter a maximum of n notes per lyric line, up to n melody and harmony notes, and n rhythm notes. If the number of rhythm notes is fewer than n, it will be truncated.
+* Note: In Rhythm entry mode, enter a maximum of n notes per lyric line, up to n melody and harmony notes, and n rhythm notes. If the number of rhythm notes is fewer than n, it will be truncated, and the melody is truncated to the length of the vocal lyric line and the maximum vocal lyric line in vocal-less lines.
 
-* Enter the following to randomly generate 3-note progressions:
+* Enter the following to generate 3-note progressions randomly:
 `['mindreadtestmusiccomposer-unusual-3'].`    
 
-* Enter the following to randomly generate 4-note progressions:
+* Enter the following to generate 4-note progressions randomly:
 `['mindreadtestmusiccomposer-unusual-4'].`    
 
 * Before running texttobr-based mind reader, think of two radio buttons put on recordings, put through with prayer, nut and bolt, quantum box prayer 1, 1, 0.5 cm and 1, 1, 0.5 cm.
@@ -71,7 +71,7 @@ halt
 * Enter the following to mind-read songs with 4-note progressions:
 `['mindreadtestmusiccomposer-unusual-4-mr'].`    
 
-* Enter the following to *detailedly* mind read songs with 4-note progressions:
+* Enter the following to *detailedly* mind-read songs with 4-note progressions:
 `['mindreadtestmusiccomposer-unusual-4-mr-tree.pl'].`
 
 * Running the algorithm
