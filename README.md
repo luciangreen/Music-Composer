@@ -40,7 +40,8 @@ cd List-Prolog-Package-Manager
 swipl
 ['lppm'].
 lppm_install("luciangreen","Music-Composer").
-halt
+../
+halt.
 ```
 
 # Running
