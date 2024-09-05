@@ -113,7 +113,7 @@ If:
 
 * And delete it:
 
-* <img width="1336" alt="Leave it as '[genre,["anthem"]]]" src="https://github.com/user-attachments/assets/b4bc2f1f-0be5-4e72-a918-150903a7b838">
+* <img width="1336" alt="Delete it." src="https://github.com/user-attachments/assets/b4bc2f1f-0be5-4e72-a918-150903a7b838">
 
 * `[genre,["anthem"]]]`
 
