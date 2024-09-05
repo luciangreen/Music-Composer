@@ -117,6 +117,8 @@ If:
 
 * `[genre,["anthem"]]]`
 
+* Then run `meta2mid_r` as described above.
+
 # Note on Mind Reader
 
 Mind Reader is currently not configured to display screens and accurately mind read decisions.  It detects vague, not exact thoughts.
