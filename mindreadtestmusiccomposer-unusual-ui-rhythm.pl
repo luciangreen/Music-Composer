@@ -129,7 +129,7 @@ rhythm2(R10,R2) :-
 	delete(R11," ",R12),
 	foldr(string_concat,R12,R13),
 	process_rhythm(R13,R14),
-	split_on_substring1(R14,"bcdefghijklm",R15),
+	split_on_substring1(R14,"bcdefghijklmno",R15),
 	%trace,
 	find_rhythm(0,1,R15,[],R2),
 	(R2=[]->true;
@@ -167,7 +167,7 @@ process_rhythm2(Replacements,A,D) :-
  atomic_list_concat(E,C,F),
  process_rhythm2(G,F,D),!.
 
-	process_rhythm1([['taaaa','b'],['taaa','c'],['taa','d'],['ta','e'],['ty','g'],['ca','g'],['ti','f'],['tim','ff'],['zaaaa','h'],['zaaa','i'],['zaa','j'],['za','k'],['zi','l'],['zim','ll'],['zy','m']]).
+	process_rhythm1([['taaaa','b'],['taaa','c'],['taa','d'],['ta','e'],['ty','g'],['ca','g'],['ti','f'],['tim','n'],['zaaaa','h'],['zaaa','i'],['zaa','j'],['za','k'],['zi','l'],['zim','o'],['zy','m']]).
 		
 find_rhythm(_,_,[],B,B) :- !.
 find_rhythm(Time,Note_n,A,B,C) :-
@@ -198,15 +198,15 @@ time(c,n,3).
 time(d,n,2).
 time(e,n,1).
 time(f,n,0.5).
-time(ff,n,0.75).
 time(g,n,0.25).
 time(h,r,4).
 time(i,r,3).
 time(j,r,2).
 time(k,r,1).
 time(l,r,0.5).
-time(ll,r,0.75).
 time(m,r,0.25).
+time(n,n,0.75).
+time(o,r,0.75).
 
 % 1, 1+1/2, 1/2
 ff_frac(N1,S) :-

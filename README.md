@@ -103,6 +103,20 @@ If:
 * Place `*_meta.txt` files in the `meta` folder, enter `['meta2mid.pl'].` and `meta2mid.` and the `*lyrics.txt`, `*.mid` and `*.txt` files will be saved in the `Music-Composer` folder.
 * Run `meta2mid_r.` instead of `meta2mid.` to ask for a song-wide rhythm.
 
+# Redefine a meta file's rhythm
+
+* To redefine a meta file's rhythm, select it at the end of the file...:
+
+* <img width="1337" alt="Select ',[rhythm...'" src="https://github.com/user-attachments/assets/97cbd5d0-3887-4883-a50e-cbdb2268e7c4">
+
+* `Wilb","ney",["writes","on"],["Ven","ess"]]]]],[genre,["anthem"]],[rhythm,[["0","NT","3/4",1,60],["3/4","NT","1/4",2,80],["1","NT","3/4",3,60],["1+3/4","NT","1/4",4,80],["2","NT","3/4",5,60],["2+3/4","NT","1/4",6,80],["3","NT","3/4",7,60],["3+3/4","NT","1/4",8,80]]]]`
+
+* And delete it:
+
+* <img width="1336" alt="Leave it as '[genre,[\"anthem\"]]]" src="https://github.com/user-attachments/assets/b4bc2f1f-0be5-4e72-a918-150903a7b838">
+
+* `[genre,["anthem"]]]`
+
 # Note on Mind Reader
 
 Mind Reader is currently not configured to display screens and accurately mind read decisions.  It detects vague, not exact thoughts.
