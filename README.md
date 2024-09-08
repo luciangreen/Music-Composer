@@ -69,11 +69,10 @@ halt.
 
 * Please follow instructions in <a href="https://github.com/luciangreen/mindreader/blob/master/init.txt">init.txt</a> to initialise any new mind-reading algorithms.
 
-* Enter the following to mind-read songs with 4-note progressions:
-`['mindreadtestmusiccomposer-unusual-4-mr'].`    
-
 * Enter the following to *detailedly* mind-read songs with 4-note progressions:
 `['mindreadtestmusiccomposer-unusual-4-mr-tree.pl'].`
+
+* Note: Please leave 1 hour between mind-reading songs for the best results.
 
 * Running the algorithm
 To generate the song:
