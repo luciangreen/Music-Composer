@@ -14,23 +14,23 @@
 use_module(library(pio)).
 
 :- use_module(library(date)).
-%%:- include('texttobr2qb').
-%%:- include('mindreadtestshared').
-%%:- include('texttobr2').
-%%:- include('texttobr').
-%%:- include('texttobr2qbmusic').
+%%:-include('texttobr2qb').
+%%:-include('mindreadtestshared').
+%%:-include('texttobr2').
+%%:-include('texttobr').
+%%:-include('texttobr2qbmusic').
 
-:- include('../listprologinterpreter/listprolog.pl').
+:-include('../listprologinterpreter/listprolog.pl').
 
-:- include('mindreadtestmusiccomposer-unusual-ui-rhythm.pl').%mindreadtestmusiccomposer-unusual-mr-tree.pl').
+:-include('mindreadtestmusiccomposer-unusual-ui-rhythm.pl').%mindreadtestmusiccomposer-unusual-mr-tree.pl').
 
-%:- include('musiclibrary').
-%:- include('../listprologinterpreter/listprolog.pl').
-%:- include('../listprologinterpreter/la_strings.pl').
-%:- include('../listprologinterpreter/la_files.pl').
-%:- include('../mindreader/make_mind_reading_tree4 working1.pl').
-%:- include('../mindreader/mr_tree.pl').
-%:- include('instruments_mr-tree.pl').
+%:-include('musiclibrary').
+%:-include('../listprologinterpreter/listprolog.pl').
+%:-include('../listprologinterpreter/la_strings.pl').
+%:-include('../listprologinterpreter/la_files.pl').
+%:-include('../mindreader/make_mind_reading_tree4 working1.pl').
+%:-include('../mindreader/mr_tree.pl').
+%:-include('instruments_mr-tree.pl').
 
 %sectest(0) :- !.
 %sectest(N1) :-

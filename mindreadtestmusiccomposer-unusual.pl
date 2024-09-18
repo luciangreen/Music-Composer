@@ -14,14 +14,14 @@
 use_module(library(pio)).
 
 :- use_module(library(date)).
-%%:- include('texttobr2qb').
-%%:- include('mindreadtestshared').
-%%:- include('texttobr2').
-%%:- include('texttobr').
-%%:- include('texttobr2qbmusic').
+%%:-include('texttobr2qb').
+%%:-include('mindreadtestshared').
+%%:-include('texttobr2').
+%%:-include('texttobr').
+%%:-include('texttobr2qbmusic').
 
-:- include('musiclibrary').
-:- include('la_strings').
+:-include('musiclibrary').
+:-include('la_strings').
 
 sectest(0) :- !.
 sectest(N1) :-

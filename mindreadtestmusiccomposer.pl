@@ -14,16 +14,16 @@
 %%use_module(library(pio)).
 
 :- use_module(library(date)).
-%%:- include('texttobr2qb').
-%%:- include('mindreadtestshared').
+%%:-include('texttobr2qb').
+%%:-include('mindreadtestshared').
 
-:- include('musiclibrary').
-:- include('1451').
-:- include('1564').
-:- include('1645').
-:- include('popclassical').
-:- include('classical').
-:- include('la_strings').
+:-include('musiclibrary').
+:-include('1451').
+:-include('1564').
+:-include('1645').
+:-include('popclassical').
+:-include('classical').
+:-include('la_strings').
 
 sectest0(Form1,Lyrics,Melody,Harmony,MelodyParts,HarmonyParts,Vocalstubinstrument,Song1) :-
 	check_asc2mid,

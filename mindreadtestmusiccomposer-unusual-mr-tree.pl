@@ -17,17 +17,17 @@ main_mc :- sectest0(Form1,Lyrics,Melody,Harmony,MelodyParts,HarmonyParts,Vocalst
 use_module(library(pio)).
 
 :- use_module(library(date)).
-%%:- include('texttobr2qb').
-%%:- include('mindreadtestshared').
-%%:- include('texttobr2').
-%%:- include('texttobr').
-%%:- include('texttobr2qbmusic').
+%%:-include('texttobr2qb').
+%%:-include('mindreadtestshared').
+%%:-include('texttobr2').
+%%:-include('texttobr').
+%%:-include('texttobr2qbmusic').
 
-:- include('musiclibrary').
-%:- include('la_strings').
-:- include('../mindreader/mind_read.pl').
-%:- include('../mindreader/mr_tree.pl').
-%:- include('instruments_mr-tree.pl').
+:-include('musiclibrary').
+%:-include('la_strings').
+:-include('../mindreader/mind_read.pl').
+%:-include('../mindreader/mr_tree.pl').
+%:-include('instruments_mr-tree.pl').
 
 /*sectest(0) :- !.
 sectest(N1) :-

@@ -1,6 +1,6 @@
 %% la_strings.pl
 
-:- include('texttobr2qb').
+:-include('texttobr2qb').
 
 use_module(library(pio)).
 use_module(library(dcg/basics)).
